@@ -55,8 +55,12 @@ const fallback = (app) => {
 
 const look = (app) => {
   const roomId = app.data.roomId;
-  // const arg = app.getArgument('arg');
-  app.ask(scure.getRoom(roomId).description);
+  const itemId = app.getArgument('arg');
+  if (itemId) {
+    app.ask(scure.getItem(itemId).description);
+  } else {
+    app.ask(scure.getRoom(roomId).description);
+  }
 };
 
 const walk = (app) => {

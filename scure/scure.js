@@ -25,6 +25,10 @@ class Scure {
     const destNames = destIds.map(rId => this.getRoom(rId).name);
     return joinMultipleStrings(destNames);
   }
+
+  getItem(id) {
+    return this.data.items.find(i => i.id === id);
+  }
 }
 
 const buildScureFor = data => new Scure(data);

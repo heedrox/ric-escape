@@ -16,6 +16,7 @@ describe('Ric Escape', () => {
     expect(getAogApp().lastAsk).to.contains('minutos y');
     expect(getAogApp().lastAsk).to.contains('segundos para estrellarnos.');
   });
+
   it('tells you the time when fallback', () => {
     const request = anAogRequestBuilder()
       .withIntent('input.unknown')
@@ -90,6 +91,18 @@ describe('Ric Escape', () => {
       ricEscape.ricEscape(request);
 
       expect(getAogApp().lastAsk).to.equal(scure.getRoom('sala-mandos').description);
+    });
+
+    it('looks the description of the object when argument is given', () => {
+      const request = anAogRequestBuilder()
+        .withIntent('look')
+        .withArgs({ arg: 'key' })
+        .withData({ roomId: 'sala-mandos' })
+        .build();
+
+      ricEscape.ricEscape(request);
+
+      expect(getAogApp().lastAsk).to.equal(scure.getItem('key').description);
     });
   });
 });

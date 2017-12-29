@@ -1,4 +1,5 @@
 const aRoom = (id, name, description) => ({ id, name, description });
+const anItem = (id, name, description) => ({ id, name, description });
 
 exports.data = {
   init: {
@@ -22,4 +23,7 @@ exports.data = {
     comedor: ['pasillo-norte'],
     'habitacion-108': ['pasillo-sur'],
   },
+  items: [
+    anItem('key', 'Llave', 'Es una bonita llave'),
+  ],
 };
