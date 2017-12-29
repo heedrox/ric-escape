@@ -1,0 +1,41 @@
+{
+  "name": "appFunctions",
+  "description": "Cloud Functions for Firebase with actions on google",
+  "scripts": {
+    "serve": "firebase serve --only functions",
+    "shell": "firebase experimental:functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "test": "mocha --require ./test/common.js --compilers js:babel-register --require source-map-support/register '*.spec.js' *.spec.js",
+    "tdd": "npm run test -- -w"
+  },
+  "dependencies": {
+    "actions-on-google": "^1.6.1",
+    "firebase-admin": "~5.5.0",
+    "firebase-functions": "^0.7.5"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-friendly-formatter": "^2.0.7",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-chai-friendly": "^0.4.0",
+    "eslint-plugin-html": "^2.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "mocha": "^3.2.0",
+    "phantomjs-prebuilt": "^2.1.14",
+    "sinon": "^2.1.0",
+    "sinon-chai": "^2.8.0"
+  },
+  "private": true
+}
