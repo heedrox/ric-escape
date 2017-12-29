@@ -17,7 +17,7 @@ exports.data = {
     'sala-mandos': ['pasillo-norte'],
     'pasillo-norte': ['sala-mandos', 'comedor', 'pasillo-central'],
     'pasillo-central': ['biblioteca', 'pasillo-norte', 'pasillo-sur'],
-    'pasillo-sur': ['HIDDEN_habitacion-108', 'pasillo-central'],
+    'pasillo-sur': ['habitacion-108', 'pasillo-central'],
     biblioteca: ['pasillo-central'],
     comedor: ['pasillo-norte'],
     'habitacion-108': ['pasillo-sur'],

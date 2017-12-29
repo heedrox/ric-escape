@@ -12,7 +12,7 @@ const scure = require('./scure/scure').buildScureFor(ricEscapeData);
 
 const initializeStartTime = (app) => {
   const newApp = app;
-  newApp.data.startTime = newApp.data.startTime || new Date();
+  newApp.data.startTime = newApp.data.startTime || JSON.stringify(new Date());
   return newApp;
 };
 
@@ -32,8 +32,15 @@ const initialize = (app) => {
 
 const getLeftTimeFrom = (app) => {
   console.log(app.data.startTime);
-  const remainingTime = TOTAL_SECS - ((new Date().getTime() - app.data.startTime.getTime()) / 1000);
+  const startTime = new Date(JSON.parse(app.data.startTime));
+  const remainingTime = TOTAL_SECS - ((new Date().getTime() - startTime.getTime()) / 1000);
   return `${Math.floor(remainingTime / 60)} minutos y ${Math.floor(remainingTime % 60)} segundos`;
+};
+
+const changeRoom = (app, roomId) => {
+  const newApp = app;
+  newApp.data.roomId = roomId;
+  return newApp;
 };
 
 const fallback = (app) => {
@@ -47,6 +54,22 @@ const look = (app) => {
   app.ask(scure.getRoom(roomId).description);
 };
 
+const walk = (app) => {
+  const arg = app.getArgument('arg');
+  if (!arg) {
+    const destinations = scure.getDestinationsFrom(app.data.roomId);
+    app.ask(`Desde aquí puedo ir a: ${destinations}`);
+    return;
+  }
+  const newRoom = scure.getRoomByName(arg);
+  if (!newRoom) {
+    app.ask(`No sé ir al sitio ${arg}.`);
+    return;
+  }
+  changeRoom(app, newRoom.id);
+  app.ask(newRoom.description);
+};
+
 exports.ricEscape = functions.https.onRequest((request, response) => {
   const appInit = new App({ request, response });
   const app = initialize(appInit);
@@ -57,6 +80,7 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
 
   const actionMap = new Map();
   actionMap.set('look', look);
+  actionMap.set('walk', walk);
   actionMap.set('input.unknown', fallback);
 
   app.handleRequest(actionMap);
