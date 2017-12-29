@@ -43,6 +43,11 @@ const changeRoom = (app, roomId) => {
   return newApp;
 };
 
+const help = (app) => {
+  const leftTime = getLeftTimeFrom(app);
+  app.ask(`El único que puede ayudarte soy yo, RIC. Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario. Nos quedan ${leftTime} para estrellarnos.`);
+};
+
 const fallback = (app) => {
   const leftTime = getLeftTimeFrom(app);
   app.ask(`No te entiendo. Di Ayuda si necesitas ayuda. Nos quedan ${leftTime} para estrellarnos.`);
@@ -79,9 +84,10 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
   console.log(`Intent: ${app.getIntent()}`);
 
   const actionMap = new Map();
+  actionMap.set('help', help);
+  actionMap.set('input.unknown', fallback);
   actionMap.set('look', look);
   actionMap.set('walk', walk);
-  actionMap.set('input.unknown', fallback);
 
   app.handleRequest(actionMap);
 });

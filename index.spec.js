@@ -4,6 +4,18 @@ const scure = require('./scure/scure').buildScureFor(ricEscapeData);
 
 
 describe('Ric Escape', () => {
+  it('tells you the time when help', () => {
+    const request = anAogRequestBuilder()
+      .withIntent('help')
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getAogApp().lastAsk).to.contains('El único que puede ayudarte soy yo, RIC. Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario.');
+    expect(getAogApp().lastAsk).to.contains('Nos quedan');
+    expect(getAogApp().lastAsk).to.contains('minutos y');
+    expect(getAogApp().lastAsk).to.contains('segundos para estrellarnos.');
+  });
   it('tells you the time when fallback', () => {
     const request = anAogRequestBuilder()
       .withIntent('input.unknown')
