@@ -1,8 +1,7 @@
-# Skeleton for Firebase Functions App with Actions On Google and TDD
+# RIC Escape
 
-I have started working with actions on google, and firebase functions. 
-To do so, I installed a TDD framework.
+A game for Google Assistant. In Spanish.
 
-This is the first skeleton I'm using for these kind of apps.
+Developed with Firebase Functions, Actions on Google and through TDD with Mocha.
 
-Probably it will be improved in future versions.
+Hope you like it!
