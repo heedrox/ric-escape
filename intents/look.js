@@ -1,19 +1,14 @@
 const getArgument = require('../lib/common').getArgument;
-const isEmptyArg = require('../lib/common').isEmptyArg;
+const overwriteDataFrom = require('../lib/common').overwriteDataFrom;
+const scureLook = require('../scure/scure-look').scureLook;
 
 const look = scure => (app) => {
-  const roomId = app.data.roomId;
   const itemName = getArgument(app, 'arg');
-  const item = scure.items.getItemByName(itemName);
-  if (isEmptyArg(itemName)) {
-    app.ask(scure.rooms.getRoom(roomId).description);
-  } else if (!item) {
-    app.ask(scure.sentences.get('item-not-in-location'));
-  } else if (roomId !== item.location) {
-    app.ask(scure.sentences.get('item-not-in-location'));
-  } else {
-    app.ask(item.description);
-  }
+
+  const scureResponse = scureLook(itemName, app.data, scure);
+
+  overwriteDataFrom(scureResponse, app);
+  app.ask(scureResponse.sentence);
 };
 
 exports.look = look;

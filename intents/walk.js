@@ -1,6 +1,5 @@
 const getArgument = require('../lib/common').getArgument;
 const overwriteDataFrom = require('../lib/common').overwriteDataFrom;
-
 const scureWalk = require('../scure/scure-walk').scureWalk;
 
 const walk = scure => (app) => {
