@@ -14,10 +14,21 @@ class ScureSentences {
   }
 }
 
+class ScureItems {
+  constructor(data) {
+    this.data = data;
+  }
+
+  getItem(id) {
+    return this.data.items.find(i => i.id === id);
+  }
+}
+
 class Scure {
   constructor(data) {
     this.data = data;
     this.sentences = new ScureSentences(data);
+    this.items = new ScureItems(data);
   }
 
   getInit() {
@@ -45,9 +56,6 @@ class Scure {
     return joinMultipleStrings(destNames);
   }
 
-  getItem(id) {
-    return this.data.items.find(i => i.id === id);
-  }
 }
 
 const buildScureFor = data => new Scure(data);

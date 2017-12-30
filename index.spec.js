@@ -95,16 +95,20 @@ describe('Ric Escape', () => {
   });
 
   describe('when looking', () => {
-    it('looks the room when no argument given', () => {
-      const request = anAogRequestBuilder()
-        .withIntent('look')
-        .withArgs({ })
-        .withData({ roomId: 'sala-mandos' })
-        .build();
+    const EMPTY_ARGS = [null, '', ' ', 'not-valid'];
 
-      ricEscape.ricEscape(request);
+    EMPTY_ARGS.forEach((arg) => {
+      it(`looks the room when no argument given (arg: ${arg})`, () => {
+        const request = anAogRequestBuilder()
+          .withIntent('look')
+          .withArgs({ arg })
+          .withData({ roomId: 'sala-mandos' })
+          .build();
 
-      expect(getAogApp().lastAsk).to.equal(scure.getRoom('sala-mandos').description);
+        ricEscape.ricEscape(request);
+
+        expect(getAogApp().lastAsk).to.equal(scure.getRoom('sala-mandos').description);
+      });
     });
 
     it('looks the description of the object when argument is given', () => {
@@ -116,7 +120,7 @@ describe('Ric Escape', () => {
 
       ricEscape.ricEscape(request);
 
-      expect(getAogApp().lastAsk).to.equal(scure.getItem('key').description);
+      expect(getAogApp().lastAsk).to.equal(scure.items.getItem('key').description);
     });
   });
 });
