@@ -7,14 +7,14 @@ const walk = scure => (app) => {
 
   const arg = app.getArgument('arg');
   if (!arg) {
-    const destinations = scure.getDestinationNamesFrom(app.data.roomId);
+    const destinations = scure.rooms.getDestinationNamesFrom(app.data.roomId);
     app.ask(`Desde aquí puedo ir a: ${destinations}`);
     return;
   }
-  const newRoom = scure.getRoomByName(arg);
-  const isAllowed = scure.isAllowedDestination(arg, app.data.roomId);
+  const newRoom = scure.rooms.getRoomByName(arg);
+  const isAllowed = scure.rooms.isAllowedDestination(arg, app.data.roomId);
   if (!newRoom || !isAllowed) {
-    const destinations = scure.getDestinationNamesFrom(app.data.roomId);
+    const destinations = scure.rooms.getDestinationNamesFrom(app.data.roomId);
     app.ask(`No sé ir al sitio ${arg}. Desde aquí puedo ir a: ${destinations}`);
     return;
   }

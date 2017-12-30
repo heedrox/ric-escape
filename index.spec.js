@@ -41,7 +41,7 @@ describe('Ric Escape', () => {
       ricEscape.ricEscape(request);
 
       expect(getAogApp().data.roomId).to.equal('pasillo-norte');
-      expect(getAogApp().lastAsk).to.equal(scure.getRoom('pasillo-norte').description);
+      expect(getAogApp().lastAsk).to.equal(scure.rooms.getRoom('pasillo-norte').description);
     });
 
     it('cannot change the roomId when walking to somewhere not according to map', () => {
@@ -107,7 +107,7 @@ describe('Ric Escape', () => {
 
         ricEscape.ricEscape(request);
 
-        expect(getAogApp().lastAsk).to.equal(scure.getRoom('sala-mandos').description);
+        expect(getAogApp().lastAsk).to.equal(scure.rooms.getRoom('sala-mandos').description);
       });
     });
 

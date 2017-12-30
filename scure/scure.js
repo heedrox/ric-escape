@@ -24,15 +24,9 @@ class ScureItems {
   }
 }
 
-class Scure {
+class ScureRooms {
   constructor(data) {
     this.data = data;
-    this.sentences = new ScureSentences(data);
-    this.items = new ScureItems(data);
-  }
-
-  getInit() {
-    return this.data.init;
   }
 
   getRoom(id) {
@@ -55,7 +49,19 @@ class Scure {
     const destNames = destIds.map(rId => this.getRoom(rId).name);
     return joinMultipleStrings(destNames);
   }
+}
 
+class Scure {
+  constructor(data) {
+    this.data = data;
+    this.sentences = new ScureSentences(data);
+    this.items = new ScureItems(data);
+    this.rooms = new ScureRooms(data);
+  }
+
+  getInit() {
+    return this.data.init;
+  }
 }
 
 const buildScureFor = data => new Scure(data);

@@ -5,7 +5,7 @@ const look = scure => (app) => {
   if (itemId && item) {
     app.ask(item.description);
   } else {
-    app.ask(scure.getRoom(roomId).description);
+    app.ask(scure.rooms.getRoom(roomId).description);
   }
 };
 
