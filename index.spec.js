@@ -44,6 +44,20 @@ describe('Ric Escape', () => {
       expect(getAogApp().lastAsk).to.equal(scure.getRoom('pasillo-norte').description);
     });
 
+    it('cannot change the roomId when walking to somewhere not according to map', () => {
+      const request = anAogRequestBuilder()
+        .withIntent('walk')
+        .withArgs({ arg: 'biblioteca' })
+        .withData({ roomId: 'sala-mandos' })
+        .build();
+
+      ricEscape.ricEscape(request);
+
+      expect(getAogApp().data.roomId).to.equal('sala-mandos');
+      expect(getAogApp().lastAsk).to.contains('No sé ir al sitio biblioteca.');
+      expect(getAogApp().lastAsk).to.contains('Desde aquí puedo ir a: Pasillo norte');
+    });
+
     const TEST_DATA = [
       { room: 'pasillo-norte', destinations: 'Sala de mandos, Comedor y Pasillo central' },
       { room: 'sala-mandos', destinations: 'Pasillo norte' },
@@ -76,7 +90,7 @@ describe('Ric Escape', () => {
       ricEscape.ricEscape(request);
 
       expect(getAogApp().data.roomId).to.equal('sala-mandos');
-      expect(getAogApp().lastAsk).to.equal('No sé ir al sitio pasillo de la muerte.');
+      expect(getAogApp().lastAsk).to.contains('No sé ir al sitio pasillo de la muerte.');
     });
   });
 

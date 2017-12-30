@@ -20,7 +20,14 @@ class Scure {
     return this.data.rooms.find(r => r.name.toLowerCase() === name.toLowerCase());
   }
 
-  getDestinationsFrom(id) {
+  isAllowedDestination(destinationName, id) {
+    const room = this.getRoomByName(destinationName);
+    if (!room) return false;
+    const destIds = this.data.map[id];
+    return destIds.indexOf(room.id) >= 0;
+  }
+
+  getDestinationNamesFrom(id) {
     const destIds = this.data.map[id];
     const destNames = destIds.map(rId => this.getRoom(rId).name);
     return joinMultipleStrings(destNames);

@@ -66,13 +66,20 @@ const look = (app) => {
 const walk = (app) => {
   const arg = app.getArgument('arg');
   if (!arg) {
-    const destinations = scure.getDestinationsFrom(app.data.roomId);
+    const destinations = scure.getDestinationNamesFrom(app.data.roomId);
     app.ask(`Desde aquí puedo ir a: ${destinations}`);
     return;
   }
   const newRoom = scure.getRoomByName(arg);
   if (!newRoom) {
-    app.ask(`No sé ir al sitio ${arg}.`);
+    const destinations = scure.getDestinationNamesFrom(app.data.roomId);
+    app.ask(`No sé ir al sitio ${arg}. Desde aquí puedo ir a: ${destinations}`);
+    return;
+  }
+  const isAllowed = scure.isAllowedDestination(arg, app.data.roomId);
+  if (!isAllowed) {
+    const destinations = scure.getDestinationNamesFrom(app.data.roomId);
+    app.ask(`No sé ir al sitio ${arg}. Desde aquí puedo ir a: ${destinations}`);
     return;
   }
   changeRoom(app, newRoom.id);
