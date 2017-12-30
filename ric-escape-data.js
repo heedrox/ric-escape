@@ -52,6 +52,6 @@ exports.data = {
     anItem('comedor-sillas', 'Sillas en el comedor', ['sillas'], 'Son las sillas del comedor. No veo nada interesante.', 'comedor', true),
   ],
   usages: [
-    anUsage('sala-mandos-diario', ['Los primeros minutos del diario te muestran a tí en el comedor. Se te ve cómo se te ha caído la cartera al suelo.']),
+    anUsage('sala-mandos-diario', ['Los primeros minutos del diario te muestran a tí en el comedor. Se ve cómo se te cae la cartera al suelo.']),
   ],
 };
