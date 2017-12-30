@@ -5,6 +5,8 @@ exports.data = {
   sentences: {
     help: 'El único que puede ayudarte soy yo, RIC. Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario. Nos quedan {time} para estrellarnos.',
     fallback: 'No te entiendo. Di Ayuda si necesitas ayuda. Nos quedan {time} para estrellarnos.',
+    destinations: 'Desde aquí puedo ir a: {destinations}',
+    'destination-unknown': 'No sé ir al sitio {destination}.',
   },
   init: {
     roomId: 'sala-mandos',

@@ -1,26 +1,31 @@
 const getArgument = require('./common').getArgument;
 
-const walk = scure => (app) => {
-  const changeRoom = (roomId) => {
-    const newApp = app;
-    newApp.data.roomId = roomId;
-    return newApp;
-  };
+const getDestinationSentence = (scure, app) => {
+  const destinations = scure.rooms.getDestinationNamesFrom(app.data.roomId);
+  return scure.sentences.get('destinations', { destinations });
+};
 
+const changeRoom = (app, roomId) => {
+  const newApp = app;
+  newApp.data.roomId = roomId;
+  return newApp;
+};
+
+const walk = scure => (app) => {
   const arg = getArgument(app, 'arg');
   if (!arg) {
-    const destinations = scure.rooms.getDestinationNamesFrom(app.data.roomId);
-    app.ask(`Desde aquí puedo ir a: ${destinations}`);
+    app.ask(getDestinationSentence(scure, app));
     return;
   }
   const newRoom = scure.rooms.getRoomByName(arg);
   const isAllowed = scure.rooms.isAllowedDestination(arg, app.data.roomId);
   if (!newRoom || !isAllowed) {
-    const destinations = scure.rooms.getDestinationNamesFrom(app.data.roomId);
-    app.ask(`No sé ir al sitio ${arg}. Desde aquí puedo ir a: ${destinations}`);
+    const destinationsSentence = getDestinationSentence(scure, app);
+    const unknownPlaceSentence = scure.sentences.get('destination-unknown', { destination: arg  });
+    app.ask(`${unknownPlaceSentence} ${destinationsSentence}`);
     return;
   }
-  changeRoom(newRoom.id);
+  changeRoom(app, newRoom.id);
   app.ask(newRoom.description);
 };
 
