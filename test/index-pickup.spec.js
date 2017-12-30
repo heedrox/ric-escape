@@ -61,6 +61,18 @@ describe('Ric Escape - when picking up', () => {
     expect(getDfaApp().data.inventory).to.eql(['comedor-cartera']);
   });
 
+  it('marks it as picked up', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('pickup')
+      .withArgs({ arg: 'cartera' })
+      .withData({ roomId: 'comedor' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().data.picked).to.eql(['comedor-cartera']);
+  });
+
   it('tells you it cannot be picked when item not pickable', () => {
     const request = aDfaRequestBuilder()
       .withIntent('pickup')

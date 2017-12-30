@@ -5,6 +5,8 @@ const addToInventory = (app, itemId) => {
   const newApp = app;
   newApp.data.inventory = app.data.inventory || [];
   newApp.data.inventory.push(itemId);
+  newApp.data.picked = app.data.picked || [];
+  newApp.data.picked.push(itemId);
   return newApp;
 };
 
