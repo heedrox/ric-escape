@@ -3,7 +3,7 @@ const ricEscapeData = require('../ric-escape-data').data;
 const scure = require('../scure/scure').buildScureFor(ricEscapeData);
 
 
-describe('Ric Escap - when walking', () => {
+describe('Ric Escape - when walking', () => {
   it('changes the roomId when walking', () => {
     const request = aDfaRequestBuilder()
       .withIntent('walk')
