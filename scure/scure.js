@@ -48,7 +48,7 @@ class ScureRooms {
   }
 
   getRoomByName(name) {
-    return this.data.rooms.find(r => isTextEqual(r.name, name));
+    return this.data.rooms.find(r => isTextEqual(r.name, name) || isSynonym(r.synonyms, name));
   }
 
   isAllowedDestination(destinationName, id) {
