@@ -2,3 +2,4 @@ node_modules
 coverage
 .idea
 firebase-debug.log
+npm-debug.log

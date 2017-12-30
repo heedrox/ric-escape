@@ -1,6 +1,6 @@
-const ricEscape = require('./index.js');
-const ricEscapeData = require('./ric-escape-data').data;
-const scure = require('./scure/scure').buildScureFor(ricEscapeData);
+const ricEscape = require('../index.js');
+const ricEscapeData = require('../ric-escape-data').data;
+const scure = require('../scure/scure').buildScureFor(ricEscapeData);
 
 
 describe('Ric Escape', () => {

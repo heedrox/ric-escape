@@ -7,7 +7,7 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "test": "mocha --require ./test/common.js --compilers js:babel-register --require source-map-support/register '*.spec.js' *.spec.js",
+    "test": "mocha --require ./test/common.js --compilers js:babel-register --require source-map-support/register 'test/*.spec.js' test/*.spec.js",
     "tdd": "npm run test -- -w"
   },
   "dependencies": {
