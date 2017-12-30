@@ -18,4 +18,4 @@ Check ric-escape-data to check an example of data that expects.
 
 # TDD
 
-I include an AcionsOnGoogleMock, that overwrites and uses as helper for tdd stuff.
+I include a DialogFlowAppMock, that overwrites and uses as helper for tdd stuff.
