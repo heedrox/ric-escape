@@ -3,6 +3,15 @@ const joinMultipleStrings = (arr) => {
   return `${arr.slice(0, arr.length - 1).join(', ')} y ${arr[arr.length - 1]}`;
 };
 
+const isSynonym = (synonyms, name) => {
+  const lcSyns = synonyms.map(it => it.toLowerCase());
+  return lcSyns.indexOf(name.toLowerCase()) >= 0;
+};
+
+const isTextEqual = (name1, name2) => {
+  return name1.toLowerCase() === name2.toLowerCase();
+};
+
 class ScureSentences {
   constructor(data) {
     this.data = data;
@@ -22,6 +31,11 @@ class ScureItems {
   getItem(id) {
     return this.data.items.find(i => i.id === id);
   }
+
+  getItemByName(name) {
+    if (!name) return null;
+    return this.data.items.find(i => isTextEqual(i.name, name) || isSynonym(i.synonyms, name));
+  }
 }
 
 class ScureRooms {
@@ -34,7 +48,7 @@ class ScureRooms {
   }
 
   getRoomByName(name) {
-    return this.data.rooms.find(r => r.name.toLowerCase() === name.toLowerCase());
+    return this.data.rooms.find(r => isTextEqual(r.name, name));
   }
 
   isAllowedDestination(destinationName, id) {

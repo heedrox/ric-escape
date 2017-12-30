@@ -114,13 +114,13 @@ describe('Ric Escape', () => {
     it('looks the description of the object when argument is given', () => {
       const request = anAogRequestBuilder()
         .withIntent('look')
-        .withArgs({ arg: 'key' })
+        .withArgs({ arg: 'Ventanas al exterior' })
         .withData({ roomId: 'sala-mandos' })
         .build();
 
       ricEscape.ricEscape(request);
 
-      expect(getAogApp().lastAsk).to.equal(scure.items.getItem('key').description);
+      expect(getAogApp().lastAsk).to.equal(scure.items.getItem('sala-mandos-ventanas').description);
     });
   });
 });
