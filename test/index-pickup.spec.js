@@ -37,42 +37,6 @@ describe('Ric Escape - when picking up', () => {
     expect(getDfaApp().lastAsk).to.equal('No veo el objeto cartera por aquí');
   });
 
-  it('tells you it picked it up when valid arg', () => {
-    const request = aDfaRequestBuilder()
-      .withIntent('pickup')
-      .withArgs({ arg: 'cartera' })
-      .withData({ roomId: 'comedor' })
-      .build();
-
-    ricEscape.ricEscape(request);
-
-    expect(getDfaApp().lastAsk).to.equal('Me llevo el objeto cartera conmigo');
-  });
-
-  it('adds the object to inventory', () => {
-    const request = aDfaRequestBuilder()
-      .withIntent('pickup')
-      .withArgs({ arg: 'cartera' })
-      .withData({ roomId: 'comedor' })
-      .build();
-
-    ricEscape.ricEscape(request);
-
-    expect(getDfaApp().data.inventory).to.eql(['comedor-cartera']);
-  });
-
-  it('marks it as picked up', () => {
-    const request = aDfaRequestBuilder()
-      .withIntent('pickup')
-      .withArgs({ arg: 'cartera' })
-      .withData({ roomId: 'comedor' })
-      .build();
-
-    ricEscape.ricEscape(request);
-
-    expect(getDfaApp().data.picked).to.eql(['comedor-cartera']);
-  });
-
   it('tells you it cannot be picked when item not pickable', () => {
     const request = aDfaRequestBuilder()
       .withIntent('pickup')
@@ -95,5 +59,28 @@ describe('Ric Escape - when picking up', () => {
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().lastAsk).to.equal('Ya me llevé el objeto cartera.');
+  });
+
+  describe('when valid objects', () => {
+    beforeEach(() => {
+      const request = aDfaRequestBuilder()
+        .withIntent('pickup')
+        .withArgs({ arg: 'cartera' })
+        .withData({ roomId: 'comedor' })
+        .build();
+
+      ricEscape.ricEscape(request);
+    });
+    it('tells you it picked it up when valid arg', () => {
+      expect(getDfaApp().lastAsk).to.equal('Me llevo el objeto cartera conmigo');
+    });
+
+    it('adds the object to inventory', () => {
+      expect(getDfaApp().data.inventory).to.eql(['comedor-cartera']);
+    });
+
+    it('marks it as picked up', () => {
+      expect(getDfaApp().data.picked).to.eql(['comedor-cartera']);
+    });
   });
 });
