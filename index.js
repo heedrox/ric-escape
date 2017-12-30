@@ -13,6 +13,7 @@ const initialize = require('./intents/initializer').initialize;
 const walk = require('./intents/walk').walk(scure);
 const look = require('./intents/look').look(scure);
 const pickup = require('./intents/pickup').pickup(scure);
+const use = require('./intents/use').use(scure);
 const help = require('./intents/others').help(scure);
 const fallback = require('./intents/others').fallback(scure);
 
@@ -30,6 +31,7 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
   actionMap.set('look', look);
   actionMap.set('walk', walk);
   actionMap.set('pickup', pickup);
+  actionMap.set('use', use);
 
   app.handleRequest(actionMap);
 });

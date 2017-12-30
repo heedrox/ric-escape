@@ -2,6 +2,8 @@ const aRoom = (id, name, synonyms, description) =>
   ({ id, name, synonyms, description });
 const anItem = (id, name, synonyms, description, location, pickable) =>
   ({ id, name, synonyms, description, location, pickable });
+const anUsage = (items, response) =>
+  ({ items, response });
 
 exports.data = {
   sentences: {
@@ -16,6 +18,7 @@ exports.data = {
     'item-pickedup': 'Me llevo el objeto {name} conmigo',
     'item-notpickable': 'No puedo llevarme el objeto {name} conmigo',
     'item-alreadypicked': 'Ya me llevé el objeto {name}.',
+    'use-noarg': 'Especifíca que objeto u objetos quieres que use. Por ejemplo: usar objeto, o usar objeto con objeto.',
   },
   init: {
     roomId: 'sala-mandos',
@@ -46,5 +49,8 @@ exports.data = {
     anItem('comedor-cartera', 'Cartera', ['monedero', 'billetera'], 'Es una cartera. Creo que es la tuya.', 'comedor', true),
     anItem('comedor-mesas', 'Mesas del comedor', ['mesas'], 'Son las mesas del comedor. No veo nada interesante.', 'comedor', true),
     anItem('comedor-sillas', 'Sillas en el comedor', ['sillas'], 'Son las sillas del comedor. No veo nada interesante.', 'comedor', true),
+  ],
+  usages: [
+    anUsage('sala-mandos-diario', ['Los primeros minutos del diario te muestran a tí en el comedor. Se te ve cómo se te ha caído la cartera al suelo.']),
   ],
 };

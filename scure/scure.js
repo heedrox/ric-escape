@@ -27,6 +27,15 @@ class ScureSentences {
   }
 }
 
+class ScureUsages {
+  constructor(data) {
+    this.data = data;
+  }
+
+  getByItemId(itemId) {
+    return this.data.usages.find(i => i.items === itemId);
+  }
+}
 class ScureItems {
   constructor(data) {
     this.data = data;
@@ -75,6 +84,7 @@ class Scure {
     this.sentences = new ScureSentences(data);
     this.items = new ScureItems(data);
     this.rooms = new ScureRooms(data);
+    this.usages = new ScureUsages(data);
   }
 
   getInit() {

@@ -19,10 +19,9 @@ const alreadyPicked = (app, itemId) => {
 
 const pickup = scure => (app) => {
   const roomId = app.data.roomId;
-  const elementName = getArgument(app, 'arg');
   const itemName = getArgument(app, 'arg');
   const item = scure.items.getItemByName(itemName);
-  if (isEmptyArg(elementName)) {
+  if (isEmptyArg(itemName)) {
     app.ask(scure.sentences.get('item-unknown'));
   } else if (!item) {
     app.ask(scure.sentences.get('item-notseen', { name: itemName }));
