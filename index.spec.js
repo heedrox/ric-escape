@@ -5,34 +5,34 @@ const scure = require('./scure/scure').buildScureFor(ricEscapeData);
 
 describe('Ric Escape', () => {
   it('tells you the time when help', () => {
-    const request = anAogRequestBuilder()
+    const request = aDfaRequestBuilder()
       .withIntent('help')
       .build();
 
     ricEscape.ricEscape(request);
 
-    expect(getAogApp().lastAsk).to.contains('El único que puede ayudarte soy yo, RIC. Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario.');
-    expect(getAogApp().lastAsk).to.contains('Nos quedan');
-    expect(getAogApp().lastAsk).to.contains('minutos y');
-    expect(getAogApp().lastAsk).to.contains('segundos para estrellarnos.');
+    expect(getDfaApp().lastAsk).to.contains('El único que puede ayudarte soy yo, RIC. Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario.');
+    expect(getDfaApp().lastAsk).to.contains('Nos quedan');
+    expect(getDfaApp().lastAsk).to.contains('minutos y');
+    expect(getDfaApp().lastAsk).to.contains('segundos para estrellarnos.');
   });
 
   it('tells you the time when fallback', () => {
-    const request = anAogRequestBuilder()
+    const request = aDfaRequestBuilder()
       .withIntent('input.unknown')
       .build();
 
     ricEscape.ricEscape(request);
 
-    expect(getAogApp().lastAsk).to.contains('No te entiendo. Di Ayuda si');
-    expect(getAogApp().lastAsk).to.contains('Nos quedan');
-    expect(getAogApp().lastAsk).to.contains('minutos y');
-    expect(getAogApp().lastAsk).to.contains('segundos para estrellarnos.');
+    expect(getDfaApp().lastAsk).to.contains('No te entiendo. Di Ayuda si');
+    expect(getDfaApp().lastAsk).to.contains('Nos quedan');
+    expect(getDfaApp().lastAsk).to.contains('minutos y');
+    expect(getDfaApp().lastAsk).to.contains('segundos para estrellarnos.');
   });
 
   describe('when walking', () => {
     it('changes the roomId when walking', () => {
-      const request = anAogRequestBuilder()
+      const request = aDfaRequestBuilder()
         .withIntent('walk')
         .withArgs({ arg: 'pasillo norte' })
         .withData({ roomId: 'sala-mandos' })
@@ -40,12 +40,12 @@ describe('Ric Escape', () => {
 
       ricEscape.ricEscape(request);
 
-      expect(getAogApp().data.roomId).to.equal('pasillo-norte');
-      expect(getAogApp().lastAsk).to.equal(scure.rooms.getRoom('pasillo-norte').description);
+      expect(getDfaApp().data.roomId).to.equal('pasillo-norte');
+      expect(getDfaApp().lastAsk).to.equal(scure.rooms.getRoom('pasillo-norte').description);
     });
 
     it('cannot change the roomId when walking to somewhere not according to map', () => {
-      const request = anAogRequestBuilder()
+      const request = aDfaRequestBuilder()
         .withIntent('walk')
         .withArgs({ arg: 'biblioteca' })
         .withData({ roomId: 'sala-mandos' })
@@ -53,9 +53,9 @@ describe('Ric Escape', () => {
 
       ricEscape.ricEscape(request);
 
-      expect(getAogApp().data.roomId).to.equal('sala-mandos');
-      expect(getAogApp().lastAsk).to.contains('No sé ir al sitio biblioteca.');
-      expect(getAogApp().lastAsk).to.contains('Desde aquí puedo ir a: Pasillo norte');
+      expect(getDfaApp().data.roomId).to.equal('sala-mandos');
+      expect(getDfaApp().lastAsk).to.contains('No sé ir al sitio biblioteca.');
+      expect(getDfaApp().lastAsk).to.contains('Desde aquí puedo ir a: Pasillo norte');
     });
 
     const TEST_DATA = [
@@ -66,7 +66,7 @@ describe('Ric Escape', () => {
 
     TEST_DATA.forEach((data) => {
       it('explains places to go when no arg is given', () => {
-        const request = anAogRequestBuilder()
+        const request = aDfaRequestBuilder()
           .withIntent('walk')
           .withArgs({ })
           .withData({ roomId: data.room })
@@ -74,14 +74,14 @@ describe('Ric Escape', () => {
 
         ricEscape.ricEscape(request);
 
-        expect(getAogApp().data.roomId).to.equal(data.room);
-        expect(getAogApp().lastAsk).to.equal(`Desde aquí puedo ir a: ${data.destinations}`);
+        expect(getDfaApp().data.roomId).to.equal(data.room);
+        expect(getDfaApp().lastAsk).to.equal(`Desde aquí puedo ir a: ${data.destinations}`);
       });
     });
 
 
     it('does not change if the room cannot be found', () => {
-      const request = anAogRequestBuilder()
+      const request = aDfaRequestBuilder()
         .withIntent('walk')
         .withArgs({ arg: 'pasillo de la muerte' })
         .withData({ roomId: 'sala-mandos' })
@@ -89,8 +89,8 @@ describe('Ric Escape', () => {
 
       ricEscape.ricEscape(request);
 
-      expect(getAogApp().data.roomId).to.equal('sala-mandos');
-      expect(getAogApp().lastAsk).to.contains('No sé ir al sitio pasillo de la muerte.');
+      expect(getDfaApp().data.roomId).to.equal('sala-mandos');
+      expect(getDfaApp().lastAsk).to.contains('No sé ir al sitio pasillo de la muerte.');
     });
   });
 
@@ -99,7 +99,7 @@ describe('Ric Escape', () => {
 
     EMPTY_ARGS.forEach((arg) => {
       it(`looks the room when no argument given (arg: ${arg})`, () => {
-        const request = anAogRequestBuilder()
+        const request = aDfaRequestBuilder()
           .withIntent('look')
           .withArgs({ arg })
           .withData({ roomId: 'sala-mandos' })
@@ -107,12 +107,12 @@ describe('Ric Escape', () => {
 
         ricEscape.ricEscape(request);
 
-        expect(getAogApp().lastAsk).to.equal(scure.rooms.getRoom('sala-mandos').description);
+        expect(getDfaApp().lastAsk).to.equal(scure.rooms.getRoom('sala-mandos').description);
       });
     });
 
     it('looks the description of the object when argument is given', () => {
-      const request = anAogRequestBuilder()
+      const request = aDfaRequestBuilder()
         .withIntent('look')
         .withArgs({ arg: 'Ventanas al exterior' })
         .withData({ roomId: 'sala-mandos' })
@@ -120,7 +120,7 @@ describe('Ric Escape', () => {
 
       ricEscape.ricEscape(request);
 
-      expect(getAogApp().lastAsk).to.equal(scure.items.getItem('sala-mandos-ventanas').description);
+      expect(getDfaApp().lastAsk).to.equal(scure.items.getItem('sala-mandos-ventanas').description);
     });
   });
 });

@@ -25,7 +25,7 @@ module.exports = {
     'expect': true,
     'sinon': true,
     'window': true,
-    'getAogApp': true,
-    'anAogRequestBuilder': true,
+    'getDfaApp': true,
+    'aDfaRequestBuilder': true,
   }
 };

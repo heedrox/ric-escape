@@ -1,4 +1,4 @@
-class AogMock {
+class DialogflowAppMock {
 
   constructor(options) {
     this.lastAsk = '';
@@ -6,7 +6,7 @@ class AogMock {
     this.request = options.request;
     this.response = options.response;
     this.data = options.request.body.data;
-    global.aogApp = this;
+    global.dfaApp = this;
   }
 
   getArgument(argName) {
@@ -33,7 +33,7 @@ class AogMock {
 
 }
 
-class AogRequestBuilder {
+class DfaRequestBuilder {
   constructor() {
     this.intent = '';
     this.args = [];
@@ -67,10 +67,10 @@ class AogRequestBuilder {
   }
 }
 
-const anAogRequestBuilder = () => new AogRequestBuilder();
+const aDfaRequestBuilder = () => new DfaRequestBuilder();
 
-exports.AogMock = AogMock;
-exports.AogRequestBuilder = AogRequestBuilder;
+exports.DialogflowAppMock = DialogflowAppMock;
+exports.DfaRequestBuilder = DfaRequestBuilder;
 
-exports.anAogRequestBuilder = anAogRequestBuilder;
-exports.getAogApp = () => global.aogApp;
+exports.aDfaRequestBuilder = aDfaRequestBuilder;
+exports.getDfaApp = () => global.dfaApp;
