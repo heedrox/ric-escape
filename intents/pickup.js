@@ -7,6 +7,7 @@ const addToInventory = (app, itemId) => {
   newApp.data.inventory.push(itemId);
   return newApp;
 };
+
 const pickup = scure => (app) => {
   const roomId = app.data.roomId;
   const elementName = getArgument(app, 'arg');
