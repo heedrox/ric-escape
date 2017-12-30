@@ -1,5 +1,7 @@
-const aRoom = (id, name, synonyms, description) => ({ id, name, synonyms, description });
-const anItem = (id, name, synonyms, description) => ({ id, name, synonyms, description });
+const aRoom = (id, name, synonyms, description) =>
+  ({ id, name, synonyms, description });
+const anItem = (id, name, synonyms, description, location) =>
+  ({ id, name, synonyms, description, location });
 
 exports.data = {
   sentences: {
@@ -8,6 +10,7 @@ exports.data = {
     destinations: 'Desde aquí puedo ir a: {destinations}',
     'destination-unknown': 'No sé ir al sitio {destination}.',
     'remaining-time': '{minutes} minutos y {seconds} segundos',
+    'item-not-in-location': 'No encuentro o veo ese objeto.',
   },
   init: {
     roomId: 'sala-mandos',
@@ -31,6 +34,6 @@ exports.data = {
     'habitacion-108': ['pasillo-sur'],
   },
   items: [
-    anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventana al exterior', 'ventana', 'ventanas', 'ventanas exteriores'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca.'),
+    anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventana al exterior', 'ventana', 'ventanas', 'ventanas exteriores'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca.', 'sala-mandos'),
   ],
 };

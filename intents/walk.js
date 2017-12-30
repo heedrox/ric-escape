@@ -1,4 +1,4 @@
-const getArgument = require('./common').getArgument;
+const getArgument = require('../lib/common').getArgument;
 
 const getDestinationSentence = (scure, app) => {
   const destinations = scure.rooms.getDestinationNamesFrom(app.data.roomId);

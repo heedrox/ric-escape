@@ -1,14 +1,8 @@
+const isEmptyArg = require('../lib/common').isEmptyArg;
+
 const joinMultipleStrings = (arr) => {
   if (arr.length === 1) return arr[0];
   return `${arr.slice(0, arr.length - 1).join(', ')} y ${arr[arr.length - 1]}`;
-};
-
-const isEmptyArg = (arg) => {
-  if (!arg) return true;
-  if (typeof arg.length !== 'undefined' && arg.length === 0) return true;
-  if (JSON.stringify(arg).trim() === '[]') return true;
-  if (JSON.stringify(arg).trim() === '{}') return true;
-  return false;
 };
 
 const isSynonym = (synonyms, name) => {
@@ -27,6 +21,7 @@ class ScureSentences {
   }
 
   get(key, args) {
+    if (!args || args.length === 0) return this.data.sentences[key];
     const replacer = (s1, s2) => s1.replace(`{${s2}}`, args[s2]);
     return Object.keys(args).reduce(replacer, this.data.sentences[key]);
   }

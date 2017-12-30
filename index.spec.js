@@ -95,7 +95,7 @@ describe('Ric Escape', () => {
   });
 
   describe('when looking', () => {
-    const EMPTY_ARGS = [null, undefined, '', ' ', 'not-valid', [], {}];
+    const EMPTY_ARGS = [null, undefined, '', ' ', [], {}];
 
     EMPTY_ARGS.forEach((arg) => {
       it(`looks the room when no argument given (arg: ${arg})`, () => {
@@ -124,6 +124,22 @@ describe('Ric Escape', () => {
         ricEscape.ricEscape(request);
 
         expect(getDfaApp().lastAsk).to.equal(scure.items.getItem('sala-mandos-ventanas').description);
+      });
+    });
+
+    const INVALID_ARGS = ['ventana', 'not a valid object'];
+
+    INVALID_ARGS.forEach((arg) => {
+      it(`cannot look an object when not in place or not valid obj - ${JSON.stringify(arg)}`, () => {
+        const request = aDfaRequestBuilder()
+          .withIntent('look')
+          .withArgs({ arg })
+          .withData({ roomId: 'pasillo-central' })
+          .build();
+
+        ricEscape.ricEscape(request);
+
+        expect(getDfaApp().lastAsk).to.contains('No encuentro o veo ese objeto.');
       });
     });
   });
