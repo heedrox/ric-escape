@@ -143,4 +143,6 @@ describe('Ric Escape', () => {
       });
     });
   });
+
+  // PENDING: able to look several differnet things (ex: paredes)
 });

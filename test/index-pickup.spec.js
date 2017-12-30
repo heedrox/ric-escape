@@ -58,7 +58,7 @@ describe('Ric Escape - when picking up', () => {
 
     ricEscape.ricEscape(request);
 
-    expect(getDfaApp().data.inventory).to.eql(['cartera']);
+    expect(getDfaApp().data.inventory).to.eql(['comedor-cartera']);
   });
 
   it('tells you it cannot be picked when item not pickable', () => {
@@ -72,5 +72,4 @@ describe('Ric Escape - when picking up', () => {
 
     expect(getDfaApp().lastAsk).to.equal('No puedo llevarme el objeto ventanas al exterior conmigo');
   });
-
 });
