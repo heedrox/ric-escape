@@ -60,4 +60,17 @@ describe('Ric Escape - when picking up', () => {
 
     expect(getDfaApp().data.inventory).to.eql(['cartera']);
   });
+
+  it('tells you it cannot be picked when item not pickable', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('pickup')
+      .withArgs({ arg: 'ventanas' })
+      .withData({ roomId: 'sala-mandos' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.equal('No puedo llevarme el objeto ventanas al exterior conmigo');
+  });
+
 });

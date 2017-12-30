@@ -20,6 +20,9 @@ const pickup = scure => (app) => {
   } else if (roomId !== item.location) {
     const name = item.name.toLowerCase();
     app.ask(scure.sentences.get('item-notseen', { name }));
+  } else if (!item.pickable) {
+    const name = item.name.toLowerCase();
+    app.ask(scure.sentences.get('item-notpickable', { name }));
   } else {
     const name = item.name.toLowerCase();
     app.ask(scure.sentences.get('item-pickedup', { name }));

@@ -1,7 +1,7 @@
 const aRoom = (id, name, synonyms, description) =>
   ({ id, name, synonyms, description });
-const anItem = (id, name, synonyms, description, location) =>
-  ({ id, name, synonyms, description, location });
+const anItem = (id, name, synonyms, description, location, pickable) =>
+  ({ id, name, synonyms, description, location, pickable });
 
 exports.data = {
   sentences: {
@@ -14,6 +14,7 @@ exports.data = {
     'item-notseen': 'No veo el objeto {name} por aquí',
     'item-unknown': 'No te he entendido qué quieres que me lleve.',
     'item-pickedup': 'Me llevo el objeto {name} conmigo',
+    'item-notpickable': 'No puedo llevarme el objeto {name} conmigo',
   },
   init: {
     roomId: 'sala-mandos',
@@ -37,8 +38,7 @@ exports.data = {
     'habitacion-108': ['pasillo-sur'],
   },
   items: [
-    anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventana al exterior', 'ventana', 'ventanas', 'ventanas exteriores'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca.', 'sala-mandos'),
-    anItem('cartera', 'Cartera', ['monedero', 'billetera'], 'Es una cartera. Creo que es la tuya.', 'comedor'),
-
-  ],
+    anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventana al exterior', 'ventana', 'ventanas', 'ventanas exteriores'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca.', 'sala-mandos', false),
+    anItem('cartera', 'Cartera', ['monedero', 'billetera'], 'Es una cartera. Creo que es la tuya.', 'comedor', true),
+  ]
 };
