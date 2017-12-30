@@ -5,90 +5,19 @@
 process.env.DEBUG = 'actions-on-google:*';
 const App = require('actions-on-google').DialogflowApp;
 
-const TOTAL_SECS = 30 * 60;
 const functions = require('firebase-functions');
 const ricEscapeData = require('./ric-escape-data.js').data;
 const scure = require('./scure/scure').buildScureFor(ricEscapeData);
+const initialize = require('./intents/initializer').initialize;
 
-const initializeStartTime = (app) => {
-  const newApp = app;
-  newApp.data.startTime = newApp.data.startTime || JSON.stringify(new Date());
-  return newApp;
-};
-
-const initializeDefaultRoom = (app) => {
-  const newApp = app;
-  newApp.data.roomId = app.data.roomId || scure.getInit().roomId;
-  return newApp;
-};
-
-const initialize = (app) => {
-  const app0 = app;
-  app0.data = app.data || {};
-  const app1 = initializeStartTime(app);
-  const app2 = initializeDefaultRoom(app1);
-  return app2;
-};
-
-const getLeftTimeFrom = (app) => {
-  console.log(app.data.startTime);
-  const startTime = new Date(JSON.parse(app.data.startTime));
-  const remainingTime = TOTAL_SECS - ((new Date().getTime() - startTime.getTime()) / 1000);
-  return `${Math.floor(remainingTime / 60)} minutos y ${Math.floor(remainingTime % 60)} segundos`;
-};
-
-const changeRoom = (app, roomId) => {
-  const newApp = app;
-  newApp.data.roomId = roomId;
-  return newApp;
-};
-
-const help = (app) => {
-  const leftTime = getLeftTimeFrom(app);
-  app.ask(`El único que puede ayudarte soy yo, RIC. Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario. Nos quedan ${leftTime} para estrellarnos.`);
-};
-
-const fallback = (app) => {
-  const leftTime = getLeftTimeFrom(app);
-  app.ask(`No te entiendo. Di Ayuda si necesitas ayuda. Nos quedan ${leftTime} para estrellarnos.`);
-};
-
-const look = (app) => {
-  const roomId = app.data.roomId;
-  const itemId = app.getArgument('arg');
-  if (itemId) {
-    app.ask(scure.getItem(itemId).description);
-  } else {
-    app.ask(scure.getRoom(roomId).description);
-  }
-};
-
-const walk = (app) => {
-  const arg = app.getArgument('arg');
-  if (!arg) {
-    const destinations = scure.getDestinationNamesFrom(app.data.roomId);
-    app.ask(`Desde aquí puedo ir a: ${destinations}`);
-    return;
-  }
-  const newRoom = scure.getRoomByName(arg);
-  if (!newRoom) {
-    const destinations = scure.getDestinationNamesFrom(app.data.roomId);
-    app.ask(`No sé ir al sitio ${arg}. Desde aquí puedo ir a: ${destinations}`);
-    return;
-  }
-  const isAllowed = scure.isAllowedDestination(arg, app.data.roomId);
-  if (!isAllowed) {
-    const destinations = scure.getDestinationNamesFrom(app.data.roomId);
-    app.ask(`No sé ir al sitio ${arg}. Desde aquí puedo ir a: ${destinations}`);
-    return;
-  }
-  changeRoom(app, newRoom.id);
-  app.ask(newRoom.description);
-};
+const walk = require('./intents/walk').walk(scure);
+const look = require('./intents/look').look(scure);
+const help = require('./intents/others').help(scure);
+const fallback = require('./intents/others').fallback(scure);
 
 exports.ricEscape = functions.https.onRequest((request, response) => {
   const appInit = new App({ request, response });
-  const app = initialize(appInit);
+  const app = initialize(scure, appInit);
 
   console.log(`Request headers: ${JSON.stringify(request.headers)}`);
   console.log(`Request body: ${JSON.stringify(request.body)}`);

@@ -3,9 +3,21 @@ const joinMultipleStrings = (arr) => {
   return `${arr.slice(0, arr.length - 1).join(', ')} y ${arr[arr.length - 1]}`;
 };
 
+class ScureSentences {
+  constructor(data) {
+    this.data = data;
+  }
+
+  get(key, args) {
+    const replacer = (s1, s2) => s1.replace(`#${s2}#`, args[s2]);
+    return Object.keys(args).reduce(replacer, this.data.sentences[key]);
+  }
+}
+
 class Scure {
   constructor(data) {
     this.data = data;
+    this.sentences = new ScureSentences(data);
   }
 
   getInit() {
