@@ -3,12 +3,21 @@ const joinMultipleStrings = (arr) => {
   return `${arr.slice(0, arr.length - 1).join(', ')} y ${arr[arr.length - 1]}`;
 };
 
+const isEmptyArg = (arg) => {
+  if (!arg) return true;
+  if (typeof arg.length !== 'undefined' && arg.length === 0) return true;
+  if (JSON.stringify(arg).trim() === '[]') return true;
+  if (JSON.stringify(arg).trim() === '{}') return true;
+  return false;
+};
+
 const isSynonym = (synonyms, name) => {
   const lcSyns = synonyms.map(it => it.toLowerCase());
   return lcSyns.indexOf(name.toLowerCase()) >= 0;
 };
 
 const isTextEqual = (name1, name2) => {
+  if (isEmptyArg(name1) || isEmptyArg(name2)) return false;
   return name1.toLowerCase() === name2.toLowerCase();
 };
 
@@ -33,7 +42,7 @@ class ScureItems {
   }
 
   getItemByName(name) {
-    if (!name) return null;
+    if (isEmptyArg(name)) return null;
     return this.data.items.find(i => isTextEqual(i.name, name) || isSynonym(i.synonyms, name));
   }
 }

@@ -28,6 +28,6 @@ exports.data = {
     'habitacion-108': ['pasillo-sur'],
   },
   items: [
-    anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventanas'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca.'),
+    anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventana al exterior', 'ventana', 'ventanas', 'ventanas exteriores'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca.'),
   ],
 };

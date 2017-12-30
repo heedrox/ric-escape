@@ -1,3 +1,5 @@
+const getArgument = require('./common').getArgument;
+
 const walk = scure => (app) => {
   const changeRoom = (roomId) => {
     const newApp = app;
@@ -5,7 +7,7 @@ const walk = scure => (app) => {
     return newApp;
   };
 
-  const arg = app.getArgument('arg');
+  const arg = getArgument(app, 'arg');
   if (!arg) {
     const destinations = scure.rooms.getDestinationNamesFrom(app.data.roomId);
     app.ask(`Desde aquí puedo ir a: ${destinations}`);

@@ -95,7 +95,7 @@ describe('Ric Escape', () => {
   });
 
   describe('when looking', () => {
-    const EMPTY_ARGS = [null, '', ' ', 'not-valid'];
+    const EMPTY_ARGS = [null, undefined, '', ' ', 'not-valid', [], {}];
 
     EMPTY_ARGS.forEach((arg) => {
       it(`looks the room when no argument given (arg: ${arg})`, () => {
@@ -111,16 +111,20 @@ describe('Ric Escape', () => {
       });
     });
 
-    it('looks the description of the object when argument is given', () => {
-      const request = aDfaRequestBuilder()
-        .withIntent('look')
-        .withArgs({ arg: 'Ventanas al exterior' })
-        .withData({ roomId: 'sala-mandos' })
-        .build();
+    const ARGS = ['Ventanas al exterior', ['Ventanas al exterior'], 'ventana'];
 
-      ricEscape.ricEscape(request);
+    ARGS.forEach((arg) => {
+      it(`looks the description of the object when argument is given - ${JSON.stringify(arg)}`, () => {
+        const request = aDfaRequestBuilder()
+          .withIntent('look')
+          .withArgs({ arg })
+          .withData({ roomId: 'sala-mandos' })
+          .build();
 
-      expect(getDfaApp().lastAsk).to.equal(scure.items.getItem('sala-mandos-ventanas').description);
+        ricEscape.ricEscape(request);
+
+        expect(getDfaApp().lastAsk).to.equal(scure.items.getItem('sala-mandos-ventanas').description);
+      });
     });
   });
 });
