@@ -19,6 +19,7 @@ exports.data = {
     'item-notpickable': 'No puedo llevarme el objeto {name} conmigo',
     'item-alreadypicked': 'Ya me llevé el objeto {name}.',
     'use-noarg': 'Especifíca que objeto u objetos quieres que use. Por ejemplo: usar objeto, o usar objeto con objeto.',
+    inventory: 'Llevo los siguientes objetos conmigo: {items}',
   },
   init: {
     roomId: 'sala-mandos',
