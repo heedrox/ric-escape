@@ -3,8 +3,8 @@ const anItem = (id, name, description) => ({ id, name, description });
 
 exports.data = {
   sentences: {
-    help: 'El único que puede ayudarte soy yo, RIC. Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario. Nos quedan #time# para estrellarnos.',
-    fallback: 'No te entiendo. Di Ayuda si necesitas ayuda. Nos quedan #time# para estrellarnos.',
+    help: 'El único que puede ayudarte soy yo, RIC. Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario. Nos quedan {time} para estrellarnos.',
+    fallback: 'No te entiendo. Di Ayuda si necesitas ayuda. Nos quedan {time} para estrellarnos.',
   },
   init: {
     roomId: 'sala-mandos',
