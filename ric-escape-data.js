@@ -15,6 +15,7 @@ exports.data = {
     'item-unknown': 'No te he entendido qué quieres que me lleve.',
     'item-pickedup': 'Me llevo el objeto {name} conmigo',
     'item-notpickable': 'No puedo llevarme el objeto {name} conmigo',
+    'item-alreadypicked': 'Ya me llevé el objeto {name}.',
   },
   init: {
     roomId: 'sala-mandos',

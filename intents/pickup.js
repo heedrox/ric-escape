@@ -8,6 +8,13 @@ const addToInventory = (app, itemId) => {
   return newApp;
 };
 
+const alreadyPicked = (app, itemId) => {
+  if (!app.data) return false;
+  if (!app.data.picked) return false;
+  if (typeof app.data.picked.length !== 'number') return false;
+  return app.data.picked.indexOf(itemId) >= 0;
+};
+
 const pickup = scure => (app) => {
   const roomId = app.data.roomId;
   const elementName = getArgument(app, 'arg');
@@ -23,6 +30,9 @@ const pickup = scure => (app) => {
   } else if (!item.pickable) {
     const name = item.name.toLowerCase();
     app.ask(scure.sentences.get('item-notpickable', { name }));
+  } else if (alreadyPicked(app, item.id)) {
+    const name = item.name.toLowerCase();
+    app.ask(scure.sentences.get('item-alreadypicked', { name }));
   } else {
     const name = item.name.toLowerCase();
     app.ask(scure.sentences.get('item-pickedup', { name }));
