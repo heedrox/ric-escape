@@ -29,7 +29,9 @@ const scurePickup = (itemName, data, scure) => {
   }
   const name = item.name.toLowerCase();
   addToInventory(data, item.id);
-  return aResponse(scure.sentences.get('item-pickedup', { name }), data);
+  const aditionalResponse = item.pickingResponse ? ` ${item.pickingResponse}` : '';
+  const pickedResponse = scure.sentences.get('item-pickedup', { name });
+  return aResponse(`${pickedResponse}${aditionalResponse}`, data);
 };
 
 exports.scurePickup = scurePickup;

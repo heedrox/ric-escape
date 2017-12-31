@@ -83,4 +83,17 @@ describe('Ric Escape - when picking up', () => {
       expect(getDfaApp().data.picked).to.eql(['comedor-cartera']);
     });
   });
+
+  it('tells an aditional response if the item has an aditional picking response', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('pickup')
+      .withArgs({ arg: 'cuadro' })
+      .withData({ roomId: 'habitacion-108' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('Me llevo el objeto cuadro conmigo');
+    expect(getDfaApp().lastAsk).to.contains('Veo que al llevarme el cuadro');
+  });
 });

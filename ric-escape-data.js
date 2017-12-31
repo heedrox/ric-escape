@@ -1,7 +1,7 @@
 const aRoom = (id, name, synonyms, description) =>
   ({ id, name, synonyms, description });
-const anItem = (id, name, synonyms, description, location, pickable) =>
-  ({ id, name, synonyms, description, location, pickable });
+const anItem = (id, name, synonyms, description, location, pickable, pickingResponse) =>
+  ({ id, name, synonyms, description, location, pickable, pickingResponse });
 const anUsage = (items, response, onlyOnce) =>
   ({ items, response, onlyOnce });
 const anUnlockingAction = (response, lock) => ({ isUnlockingAction: true, response, lock });
@@ -79,7 +79,17 @@ exports.data = {
     anItem('comedor-cartera', 'Cartera', ['monedero', 'billetera'], 'Es una cartera. Creo que es la tuya.', 'comedor', true),
     anItem('comedor-mesas', 'Mesas del comedor', ['mesas', 'mesa', 'mesa del comedor'], 'Son las mesas del comedor. No veo nada interesante.', 'comedor', false),
     anItem('comedor-sillas', 'Sillas en el comedor', ['sillas', 'silla', 'silla del comedor', 'sillas del comedor'], 'Son las sillas del comedor. No veo nada interesante.', 'comedor', false),
+    anItem('comedor-comida', 'Mucha comida', ['comida', 'comida varia', 'comidas varias', 'comidas', 'restos de comida'], 'Aquí hay mucha comida. Demasiada. Dime qué quieres que coja exáctamente.', 'comedor', false),
+    anItem('comedor-utensilios', 'Muchos utensilios', ['utensilios', 'utensilios varios', 'electrodomésticos', 'aparatos de cocina', 'aparatos'], 'Aquí hay muchísimos aparatos. Si quieres que use alguno, dime cuál exáctamente.', 'comedor', false),
     anItem('combinacion-4815', 'Combinación 4815', ['combinación 4 8 1 5', 'combinación', 'combinación cuatro mil ochocientos quince'], 'Es la combinación que tenías apuntada en la cartera.', '', true),
+    anItem('hab108-cama', 'Cama', ['mi', 'yo', 'encima de la cama'], 'Encima de la cama estás tú. No te quiero despertar, pues tienes que morir.', 'habitacion-108', false),
+    anItem('hab108-mesilla', 'Mesilla', ['mesa', 'mesa de noche', 'mesas'], 'Encima de la mesa parece que hay un pequeño diario personal.', 'habitacion-108', false),
+    anItem('hab108-diario', 'Diario', ['diario personal', 'libro', 'librillo', 'mi diario'], 'Es tu diario personal. Si quieres que mire dentro, di "Usar diario"', 'habitacion-108', false),
+    anItem('hab108-pared', 'Pared de la habitación', ['pared', 'pared en habitación', 'pared de habitación'], [
+      aCondDesc('picked:hab108-cuadro', 'En la pared hay una caja fuerte.'),
+      aCondDesc('else', 'En la pared hay cuadro muy bonito.'),
+    ], 'habitacion-108', false),
+    anItem('hab108-cuadro', 'Cuadro', ['cuadro de la pared', 'cuadro de pared', 'cuadro en la pared', 'cuadro en pared'], 'Un cuadro de tu hogar natal en Newcomb.', 'habitacion-108', true, 'Veo que al llevarme el cuadro, se ha quedado en la pared una caja fuerte al descubierto.'),
   ],
   usages: [
     anUsage('sala-mandos-diario', [
