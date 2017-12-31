@@ -5,10 +5,8 @@ const overwriteDataFrom = require('../lib/common').overwriteDataFrom;
 const use = scure => (app) => {
   const itemName = getArgument(app, 'arg');
 
-  console.log(`before: ${JSON.stringify(app.data)}`);
   const scureResponse = scureUse(itemName, app.data, scure);
 
-  console.log(`after: ${JSON.stringify(scureResponse.data)}`);
   overwriteDataFrom(scureResponse, app);
   app.ask(scureResponse.sentence);
 };

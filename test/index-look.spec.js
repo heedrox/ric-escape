@@ -53,7 +53,7 @@ describe('Ric Escape - when looking up', () => {
     });
   });
 
-  describe.only('changes description of things depending on condition picked', () => {
+  describe('changes description of things depending on condition picked', () => {
     it('shows default description when object is not picked up', () => {
       const request = aDfaRequestBuilder()
         .withIntent('look')
