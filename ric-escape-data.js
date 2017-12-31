@@ -24,7 +24,7 @@ exports.data = {
     'use-noarg': 'Especifíca que objeto u objetos quieres que use. Por ejemplo: usar objeto, o usar objeto con objeto.',
     'use-cant': 'No puedo usar ese objeto.',
     inventory: 'Llevo los siguientes objetos conmigo: {items}',
-    bye: 'No sé si es que no sabemos comunicarnos o no quieres hablar. De cualquier modo, es mejor que me desconecte y dejemos que la nave siga sin curso. Ha sido un placer. Adiós.',
+    bye: 'Vale. Será un placer morir contigo. Adiós.',
   },
   init: {
     roomId: 'sala-mandos',
