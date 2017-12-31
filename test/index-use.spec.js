@@ -25,10 +25,10 @@ describe('Ric Escape - when using', () => {
 
   describe('using objects several times', () => {
     const TEST_DATA = [
-      { usages: null, expectedText: 'Los primeros minutos del diario' },
-      { usages: { 'sala-mandos-diario': 1 }, expectedText: 'Los siguientes minutos del diario' },
-      { usages: { 'sala-mandos-diario': 2 }, expectedText: 'Los últimos minutos del diario' },
-      { usages: { 'sala-mandos-diario': 3 }, expectedText: 'Los primeros minutos del diario' },
+      { usages: null, expectedText: 'Los primeros minutos del diario', nextUsage: 1 },
+      { usages: { 'sala-mandos-diario': 1 }, expectedText: 'Los siguientes minutos del diario', nextUsage: 2 },
+      { usages: { 'sala-mandos-diario': 2 }, expectedText: 'Los últimos minutos del diario', nextUsage: 3 },
+      { usages: { 'sala-mandos-diario': 3 }, expectedText: 'Los primeros minutos del diario', nextUsage: 4 },
     ];
 
     TEST_DATA.forEach((data) => {
@@ -42,6 +42,7 @@ describe('Ric Escape - when using', () => {
         ricEscape.ricEscape(request);
 
         expect(getDfaApp().lastAsk).to.contains(data.expectedText);
+        expect(getDfaApp().data.usages['sala-mandos-diario']).to.equal(data.nextUsage);
       });
     });
   });

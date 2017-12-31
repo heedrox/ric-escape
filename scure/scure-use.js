@@ -15,6 +15,11 @@ const unlockIfUnlockingAction = (response, data) => {
     }
   }
 };
+const increaseUsage = (item, data) => {
+  data.usages = data.usages || [];
+  data.usages[item.id] = data.usages[item.id] || 0;
+  data.usages[item.id] += 1;
+};
 
 const scureUse = (itemName, data, scure) => {
   if (isEmptyArg(itemName)) {
@@ -30,6 +35,7 @@ const scureUse = (itemName, data, scure) => {
   }
   const response = currentResponse(item, usage, data.usages);
   unlockIfUnlockingAction(response, data);
+  increaseUsage(item, data);
   return aResponse(getSentence(response), data);
 };
 
