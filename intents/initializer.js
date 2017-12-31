@@ -10,12 +10,20 @@ const initializeDefaultRoom = (scure, app) => {
   return newApp;
 };
 
+const increaseNumCommand = (app) => {
+  const getNextNumCommand = num => (!num ? 1 : (num + 1));
+  const newApp = app;
+  newApp.data.numCommands = getNextNumCommand(newApp.data.numCommands);
+  return newApp;
+};
+
 const initialize = (scure, app) => {
   const app0 = app;
   app0.data = app.data || {};
   const app1 = initializeStartTime(app);
   const app2 = initializeDefaultRoom(scure, app1);
-  return app2;
+  const app3 = increaseNumCommand(app2);
+  return app3;
 };
 
 exports.initialize = initialize;
