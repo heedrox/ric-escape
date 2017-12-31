@@ -15,7 +15,13 @@ const isTextEqual = (name1, name2) => {
   return name1.toLowerCase() === name2.toLowerCase();
 };
 
+const getPossibleDestinationsSentence = (scure, data) => {
+  const destinations = scure.rooms.getPossibleDestinationNamesFrom(data.roomId, data.unlocked);
+  return scure.sentences.get('destinations', { destinations });
+};
+
 
 exports.joinMultipleStrings = joinMultipleStrings;
 exports.isSynonym = isSynonym;
 exports.isTextEqual = isTextEqual;
+exports.getPossibleDestinationsSentence = getPossibleDestinationsSentence;

@@ -7,7 +7,7 @@ describe('Ric Escape - when looking up', () => {
   const EMPTY_ARGS = [null, undefined, '', ' ', [], {}];
 
   EMPTY_ARGS.forEach((arg) => {
-    it(`looks the room when no argument given (arg: ${arg})`, () => {
+    it(`looks the room and shows destinations when no argument given (arg: ${arg})`, () => {
       const request = aDfaRequestBuilder()
         .withIntent('look')
         .withArgs({ arg })
@@ -16,7 +16,8 @@ describe('Ric Escape - when looking up', () => {
 
       ricEscape.ricEscape(request);
 
-      expect(getDfaApp().lastAsk).to.equal(scure.rooms.getRoom('sala-mandos').description);
+      expect(getDfaApp().lastAsk).to.contains(scure.rooms.getRoom('sala-mandos').description);
+      expect(getDfaApp().lastAsk).to.contains('Desde aquí puedo ir a: Pasillo norte');
     });
   });
 
