@@ -51,6 +51,19 @@ describe('Ric Escape - when walking', () => {
     });
   });
 
+  it('does not change if the room cannot be found', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('walk')
+      .withArgs({ arg: 'pasillo de la muerte' })
+      .withData({ roomId: 'sala-mandos' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().data.roomId).to.equal('sala-mandos');
+    expect(getDfaApp().lastAsk).to.contains('No sé ir al sitio pasillo de la muerte.');
+  });
+
   describe('handles locks', () => {
     it('does not show a room if not unlocked', () => {
       const request = aDfaRequestBuilder()
@@ -76,20 +89,30 @@ describe('Ric Escape - when walking', () => {
       expect(getDfaApp().lastAsk).to.contains('Desde aquí puedo ir a: Habitación 108 y Pasillo central');
     });
 
-    // DOES NOT ALLOW TO MOVE IF LOCKED
-  });
+    it('does not change if the room is locked', () => {
+      const request = aDfaRequestBuilder()
+        .withIntent('walk')
+        .withArgs({ arg: 'habitación 108' })
+        .withData({ roomId: 'pasillo-sur' })
+        .build();
 
+      ricEscape.ricEscape(request);
 
-  it('does not change if the room cannot be found', () => {
-    const request = aDfaRequestBuilder()
-      .withIntent('walk')
-      .withArgs({ arg: 'pasillo de la muerte' })
-      .withData({ roomId: 'sala-mandos' })
-      .build();
+      expect(getDfaApp().data.roomId).to.equal('pasillo-sur');
+      expect(getDfaApp().lastAsk).to.contains('No sé ir al sitio habitación 108.');
+    });
 
-    ricEscape.ricEscape(request);
+    it('changes room when room is unlocked', () => {
+      const request = aDfaRequestBuilder()
+        .withIntent('walk')
+        .withArgs({ arg: 'habitación 108' })
+        .withData({ roomId: 'pasillo-sur', unlocked: ['hab108'] })
+        .build();
 
-    expect(getDfaApp().data.roomId).to.equal('sala-mandos');
-    expect(getDfaApp().lastAsk).to.contains('No sé ir al sitio pasillo de la muerte.');
+      ricEscape.ricEscape(request);
+
+      expect(getDfaApp().data.roomId).to.equal('habitacion-108');
+      expect(getDfaApp().lastAsk).to.contains(scure.rooms.getRoom('habitacion-108').description);
+    });
   });
 });

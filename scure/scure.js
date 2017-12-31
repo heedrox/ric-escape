@@ -52,14 +52,7 @@ class ScureRooms {
     return this.data.rooms.find(r => isTextEqual(r.name, name) || isSynonym(r.synonyms, name));
   }
 
-  isAllowedDestination(destinationName, id) {
-    const room = this.getRoomByName(destinationName);
-    if (!room) return false;
-    const destIds = this.data.map[id];
-    return destIds.indexOf(room.id) >= 0;
-  }
-
-  getPossibleDestinationNamesFrom(id, unlocked) {
+  getUnlockedDestinationsIds(fromId, unlocked) {
     const isUnlocked = destination => (unlocked && unlocked.indexOf(destination.lock) >= 0);
     const getId = (destination) => {
       if (!destination.isLockedDestination) return destination;
@@ -67,8 +60,19 @@ class ScureRooms {
       return null;
     };
 
-    const unlockedDestIds = this.data.map[id].map(getId).filter(d => d !== null);
-    const destNames = unlockedDestIds.map(rId => this.getRoom(rId).name);
+    return this.data.map[fromId].map(getId).filter(d => d !== null);
+  }
+
+  isAllowedDestination(destinationName, id, unlocked) {
+    const room = this.getRoomByName(destinationName);
+    if (!room) return false;
+    const destIds = this.getUnlockedDestinationsIds(id, unlocked);
+    return destIds.indexOf(room.id) >= 0;
+  }
+
+  getPossibleDestinationNamesFrom(id, unlocked) {
+    const unlockedIds = this.getUnlockedDestinationsIds(id, unlocked);
+    const destNames = unlockedIds.map(rId => this.getRoom(rId).name);
     return joinMultipleStrings(destNames);
   }
 }

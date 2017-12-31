@@ -11,7 +11,7 @@ const scureWalk = (arg, data, scure) => {
     return aResponse(getPossibleDestinationsSentence(scure, data));
   }
   const newRoom = scure.rooms.getRoomByName(arg);
-  const isAllowed = scure.rooms.isAllowedDestination(arg, data.roomId);
+  const isAllowed = scure.rooms.isAllowedDestination(arg, data.roomId, data.unlocked);
   if (!newRoom || !isAllowed) {
     const destinationsSentence = getPossibleDestinationsSentence(scure, data);
     const unknownPlaceSentence = scure.sentences.get('destination-unknown', { destination: arg  });
