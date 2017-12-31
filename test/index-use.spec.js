@@ -113,7 +113,21 @@ describe('Ric Escape - when using', () => {
     const request = aDfaRequestBuilder()
       .withIntent('use')
       .withArgs({ arg: 'cartera' })
-      .withData({ roomId: 'sala-mandos', picked: ['comedor-cartera'] })
+      .withData({ roomId: 'pasillo-norte', picked: ['comedor-cartera'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('Veo que');
+    expect(getDfaApp().data.picked).to.not.contains('comedor-cartera');
+    expect(getDfaApp().data.picked).to.contains('combinacion-4815');
+  });
+
+  it('provides - picks items if a pickable action even if I dont have it but im in the place', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: 'cartera' })
+      .withData({ roomId: 'comedor' })
       .build();
 
     ricEscape.ricEscape(request);
