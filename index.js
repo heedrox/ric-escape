@@ -18,6 +18,7 @@ const inventory = require('./intents/inventory').inventory(scure);
 const help = require('./intents/others').help(scure);
 const fallback = require('./intents/others').fallback(scure);
 const welcome = require('./intents/others').welcome(scure);
+const bye = require('./intents/others').bye(scure);
 
 exports.ricEscape = functions.https.onRequest((request, response) => {
   const appInit = new App({ request, response });
@@ -36,6 +37,7 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
   actionMap.set('pickup', pickup);
   actionMap.set('use', use);
   actionMap.set('inventory', inventory);
+  actionMap.set('bye', bye);
 
   app.handleRequest(actionMap);
 });

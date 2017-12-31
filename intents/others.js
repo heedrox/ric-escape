@@ -35,7 +35,11 @@ const fallback = scure => (app) => {
   }
 };
 
+const bye = scure => (app) => {
+  app.tell(scure.sentences.get('bye'));
+};
 
 exports.help = help;
 exports.fallback = fallback;
 exports.welcome = welcome;
+exports.bye = bye;

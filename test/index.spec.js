@@ -41,4 +41,14 @@ describe('Ric Escape - others', () => {
     expect(getDfaApp().lastAsk).to.contains('minutos y');
     expect(getDfaApp().lastAsk).to.contains('segundos para estrellarnos.');
   });
+
+  it('says goodbye if bye intent', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('bye')
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastTell).to.contains('Adiós.');
+  });
 });
