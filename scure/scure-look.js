@@ -11,9 +11,12 @@ const scureLook = (itemName, data, scure) => {
     return aResponse(
       `${getDescription(room.description, data, scure)} ${getPossibleDestinationsSentence(scure, data)}`
     );
-  } else if (!item) {
+  }
+  if (!item) {
     return aResponse(scure.sentences.get('item-not-in-location'));
-  } else if (roomId !== item.location) {
+  }
+  const isInInventory = scure.items.isInInventory(item.id, data.inventory);
+  if (!isInInventory && roomId !== item.location) {
     return aResponse(scure.sentences.get('item-not-in-location'));
   }
   return aResponse(getDescription(item.description, data, scure));

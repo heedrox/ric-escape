@@ -50,6 +50,18 @@ describe('Ric Escape - when looking up', () => {
     });
   });
 
+  it('looks the description of the item when in inventory', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('look')
+      .withArgs({ arg: 'combinación 4815' })
+      .withData({ roomId: 'sala-mandos', inventory: ['combinacion-4815'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.equal(scure.items.getItem('combinacion-4815').description);
+  });
+
   const INVALID_ARGS = ['ventana', 'not a valid object'];
 
   INVALID_ARGS.forEach((arg) => {
