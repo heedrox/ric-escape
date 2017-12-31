@@ -27,6 +27,11 @@ exports.data = {
   },
   init: {
     roomId: 'sala-mandos',
+    welcome: [
+      '¡Hola! Soy RIC',
+      '¿Oh, Estás despierto? No deberías estarlo... Déjame que investigue qué ha pasado... De mientras te cuento que yo soy RIC, tu Remoto Interfaz al Córtex. No, no abras los ojos. No puedes ver, no puedes andar, no puedes interactuar con tu entorno porque estás dormido en tu habitación... Vaya, veo que un fallo en el sistema te ha despertado cuando eso no debería haber pasado. Bueno, supongo que ya da igual.',
+      'Tras el proceso biológico de hibernación, es normal que no te acuerdes. La nave va rumbo a una estrella con la que colisionará dentro de 30 minutos. ¿Por qué? Ya no importa. ¿Quién es responsable de esto? Ya no importa. Dentro de 30 minutos nada importará. Es inútil que te resistas. Si quieres, puedes darme órdenes, ya que me creaste para obedecerte. Pero ya todo es en vano. Tú y los 2000 pasajeros de esta nave, debéis morir dentro de 30 minutos. Di "Ayuda" para lanzarme órdenes.',
+    ],
   },
   rooms: [
     aRoom('sala-mandos', 'Sala de mandos', [], 'Estoy en la sala de mandos de la nave espacial. Desde aquí puedo ver un ordenador, el diario de abordo y las ventanas al exterior.'),
