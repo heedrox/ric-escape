@@ -35,7 +35,7 @@ describe('Ric Escape - when using', () => {
     expect(getDfaApp().lastAsk).to.equal(scure.sentences.get('use-cant'));
   });
 
-  describe('using objects several times', () => {
+  describe('using objects ok several times', () => {
     const TEST_DATA = [
       { usages: null, expectedText: 'Los primeros minutos del diario', nextUsage: 1 },
       { usages: [], expectedText: 'Los primeros minutos del diario', nextUsage: 1 },
@@ -83,5 +83,17 @@ describe('Ric Escape - when using', () => {
 
       expect(getDfaApp().data.unlocked).to.eql(['hab108']);
     });
+  });
+
+  it(`uses items even if wrongly accented`, () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: 'diário' })
+      .withData({ roomId: 'sala-mandos' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().data.usages['sala-mandos-diario']).to.equal(1);
   });
 });
