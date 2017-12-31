@@ -25,6 +25,7 @@ exports.data = {
     'use-noarg': 'Especifíca que objeto u objetos quieres que use. Por ejemplo: usar objeto, o usar objeto con objeto.',
     'use-cant': 'No puedo usar ese objeto.',
     inventory: 'Llevo los siguientes objetos conmigo: {items}',
+    'inventory-nothing': 'No llevo nada encima.',
     bye: 'Vale. Será un placer morir contigo. Adiós.',
   },
   init: {
