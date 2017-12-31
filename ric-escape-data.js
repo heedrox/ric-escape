@@ -57,10 +57,10 @@ exports.data = {
       [
         aCondDesc('!picked:comedor-cartera', 'Veo una cartera en el suelo. Parece la tuya.'),
         aCondDesc('else', 'Es el suelo. No veo nada más.'),
-      ], 'comedor', true),
+      ], 'comedor', false),
     anItem('comedor-cartera', 'Cartera', ['monedero', 'billetera'], 'Es una cartera. Creo que es la tuya.', 'comedor', true),
-    anItem('comedor-mesas', 'Mesas del comedor', ['mesas'], 'Son las mesas del comedor. No veo nada interesante.', 'comedor', true),
-    anItem('comedor-sillas', 'Sillas en el comedor', ['sillas'], 'Son las sillas del comedor. No veo nada interesante.', 'comedor', true),
+    anItem('comedor-mesas', 'Mesas del comedor', ['mesas'], 'Son las mesas del comedor. No veo nada interesante.', 'comedor', false),
+    anItem('comedor-sillas', 'Sillas en el comedor', ['sillas'], 'Son las sillas del comedor. No veo nada interesante.', 'comedor', false),
   ],
   usages: [
     anUsage('sala-mandos-diario', [
