@@ -7,14 +7,14 @@ describe('Ric Escape - when walking', () => {
   it('changes the roomId when walking', () => {
     const request = aDfaRequestBuilder()
       .withIntent('walk')
-      .withArgs({ arg: 'pasillo norte' })
-      .withData({ roomId: 'sala-mandos' })
+      .withArgs({ arg: 'comedor' })
+      .withData({ roomId: 'pasillo-norte' })
       .build();
 
     ricEscape.ricEscape(request);
 
-    expect(getDfaApp().data.roomId).to.equal('pasillo-norte');
-    expect(getDfaApp().lastAsk).to.equal(scure.rooms.getRoom('pasillo-norte').description);
+    expect(getDfaApp().data.roomId).to.equal('comedor');
+    expect(getDfaApp().lastAsk).to.equal('Estoy en el comedor de la nave espacial. Puedo ver mesas, sillas, comida varia y varios utensilios que no entiendo para qué funcionan. También veo algo en el suelo.');
   });
 
   it('cannot change the roomId when walking to somewhere not according to map', () => {

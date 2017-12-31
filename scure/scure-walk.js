@@ -1,6 +1,7 @@
 const isEmptyArg = require('../lib/common').isEmptyArg;
 const aResponse = require('./scure-response').aResponse;
 const getPossibleDestinationsSentence = require('./scure-commons').getPossibleDestinationsSentence;
+const getDescription = require('./scure-commons').getDescription;
 
 const scureWalk = (arg, data, scure) => {
   if (isEmptyArg(arg)) {
@@ -14,7 +15,7 @@ const scureWalk = (arg, data, scure) => {
     return aResponse(`${unknownPlaceSentence} ${destinationsSentence}`);
   }
   data.roomId = newRoom.id;
-  return aResponse(newRoom.description, data);
+  return aResponse(getDescription(newRoom.description, data, scure), data);
 };
 
 exports.scureWalk = scureWalk;
