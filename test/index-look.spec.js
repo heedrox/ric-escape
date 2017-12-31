@@ -52,5 +52,32 @@ describe('Ric Escape - when looking up', () => {
       expect(getDfaApp().lastAsk).to.contains('No encuentro o veo ese objeto.');
     });
   });
+
+  describe.only('changes description of things depending on condition picked', () => {
+    it('shows default description when object is not picked up', () => {
+      const request = aDfaRequestBuilder()
+        .withIntent('look')
+        .withArgs({ arg: 'suelo' })
+        .withData({ roomId: 'comedor' })
+        .build();
+
+      ricEscape.ricEscape(request);
+
+      expect(getDfaApp().lastAsk).to.contains('Veo una cartera en el suelo');
+    });
+
+    it('shows another description when object is picked up', () => {
+      const request = aDfaRequestBuilder()
+        .withIntent('look')
+        .withArgs({ arg: 'suelo' })
+        .withData({ roomId: 'comedor', picked: ['comedor-cartera'] })
+        .build();
+
+      ricEscape.ricEscape(request);
+
+      expect(getDfaApp().lastAsk).to.contains('Es el suelo. No veo nada más.');
+    });
+  });
+
   // PENDING: able to look several differnet things (ex: paredes)
 });

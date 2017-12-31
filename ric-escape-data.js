@@ -6,6 +6,7 @@ const anUsage = (items, response) =>
   ({ items, response });
 const anUnlocking = (response, lock) => ({ isUnlockingAction: true, response, lock });
 const aLockedDestination = (roomId, lock) => ({ isLockedDestination: true, roomId, lock });
+const aCondDesc = (condition, description) => ({ conditional: true, condition, description });
 
 exports.data = {
   sentences: {
@@ -49,7 +50,11 @@ exports.data = {
     anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventana al exterior', 'ventana', 'ventanas', 'ventanas exteriores'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca.', 'sala-mandos', false),
     anItem('sala-mandos-ordenador', 'Ordenador de navegación', ['ordenador', 'navegación', 'ordenador para navegar', 'mandos de navegación'], 'Es el ordenador de navegación. Si no hacemos nada, nos estrellaremos contra esa estrella.', 'sala-mandos', false),
     anItem('sala-mandos-diario', 'Diario de abordo', ['diario'], 'Es el diario de abordo. Si quieres que interactúe con él, di "Usar diario".', 'sala-mandos', false),
-    anItem('comedor-suelo', 'Suelo del comedor', ['suelo', 'suelo en el comedor'], 'Veo una cartera en el suelo. Parece la tuya.', 'comedor', true),
+    anItem('comedor-suelo', 'Suelo del comedor', ['suelo', 'suelo en el comedor'],
+      [
+        aCondDesc('!picked:comedor-cartera', 'Veo una cartera en el suelo. Parece la tuya.'),
+        aCondDesc('else', 'Es el suelo. No veo nada más.'),
+      ], 'comedor', true),
     anItem('comedor-cartera', 'Cartera', ['monedero', 'billetera'], 'Es una cartera. Creo que es la tuya.', 'comedor', true),
     anItem('comedor-mesas', 'Mesas del comedor', ['mesas'], 'Son las mesas del comedor. No veo nada interesante.', 'comedor', true),
     anItem('comedor-sillas', 'Sillas en el comedor', ['sillas'], 'Son las sillas del comedor. No veo nada interesante.', 'comedor', true),

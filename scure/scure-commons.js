@@ -27,8 +27,30 @@ const getPossibleDestinationsSentence = (scure, data) => {
   return scure.sentences.get('destinations', { destinations });
 };
 
+const ifMatchCondition = (data, scure) => (descr) => {
+  if (descr.condition.indexOf(':') === -1) return true;
+  const [operator, itemId] = descr.condition.split(':', 2);
+  const isNegated = operator.startsWith('!');
+  if (operator === 'picked' || operator === '!picked') {
+    const isPicked = scure.items.isPicked(itemId, data.picked);
+    return (isNegated && !isPicked) || (!isNegated && isPicked);
+  }
+  return false;
+};
+
+const getMatchingDescription = (descriptions, data, scure) => {
+  const matchedDescriptions = descriptions.filter(ifMatchCondition(data, scure));
+  return matchedDescriptions.length > 0 ? matchedDescriptions[0] : null;
+};
+
+const getDescription = (descriptions, data, scure) => {
+  if (typeof descriptions === 'string') return descriptions;
+  const match = getMatchingDescription(descriptions, data, scure);
+  return match ? match.description : descriptions[descriptions.length - 1].description;
+};
 
 exports.joinMultipleStrings = joinMultipleStrings;
 exports.isSynonym = isSynonym;
 exports.isTextEqual = isTextEqual;
 exports.getPossibleDestinationsSentence = getPossibleDestinationsSentence;
+exports.getDescription = getDescription;

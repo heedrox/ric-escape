@@ -1,6 +1,7 @@
 const isEmptyArg = require('../lib/common').isEmptyArg;
 const aResponse = require('./scure-response').aResponse;
 const getPossibleDestinationsSentence = require('./scure-commons').getPossibleDestinationsSentence;
+const getDescription = require('./scure-commons').getDescription;
 
 const scureLook = (itemName, data, scure) => {
   const roomId = data.roomId;
@@ -14,7 +15,7 @@ const scureLook = (itemName, data, scure) => {
   } else if (roomId !== item.location) {
     return aResponse(scure.sentences.get('item-not-in-location'));
   }
-  return aResponse(item.description);
+  return aResponse(getDescription(item.description, data, scure));
 };
 
 exports.scureLook = scureLook;

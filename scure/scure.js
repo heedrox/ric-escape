@@ -37,6 +37,13 @@ class ScureItems {
     if (isEmptyArg(name)) return null;
     return this.data.items.find(i => isTextEqual(i.name, name) || isSynonym(i.synonyms, name));
   }
+
+  isPicked(itemId, picked) {
+    if (!picked) return false;
+    if (!this.getItem(itemId)) return false;
+    if (typeof picked.length !== 'number') return false;
+    return picked.indexOf(itemId) >= 0;
+  }
 }
 
 class ScureRooms {
