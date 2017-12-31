@@ -62,9 +62,15 @@ exports.data = {
     anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventana al exterior', 'ventana', 'ventanas', 'ventanas exteriores'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca.', 'sala-mandos', false),
     anItem('sala-mandos-ordenador', 'Ordenador de navegación', ['ordenador', 'navegación', 'ordenador para navegar', 'mandos de navegación'], 'Es el ordenador de navegación. Si no hacemos nada, nos estrellaremos contra esa estrella.', 'sala-mandos', false),
     anItem('sala-mandos-diario', 'Diario de abordo', ['diario'], 'Es el diario de abordo. Si quieres que interactúe con él, di "Usar diario".', 'sala-mandos', false),
-    anItem('pasnor-pared', 'Paredes del pasillo norte', ['paredes', 'pared'], 'Son las paredes del pasillo. No veo nada especial.', 'pasillo-norte', false),
-    anItem('pasnor-muebles', 'Muebles del pasillo norte', ['muebles', 'mueble', 'mueble del pasillo', 'mueble de pasillo'], 'Hay algunos muebles. Demasiado complejos y modernos para ti.', 'pasillo-norte', false),
-    anItem('pasnor-televisor', 'Televisores', ['televisor', 'televisión', 'televisor del pasillo', 'televisor del pasillo norte'], 'Son televisores que muestran números. No sé interpretarlos.', 'pasillo-norte', false),
+    anItem('pasnor-pared', 'Paredes', ['paredes del pasillo norte', 'paredes', 'pared'], 'Son las paredes del pasillo. No veo nada especial.', 'pasillo-norte', false),
+    anItem('pasnor-muebles', 'Muebles', ['muebles del pasillo norte', 'muebles', 'mueble', 'mueble del pasillo', 'mueble de pasillo'], 'Hay algunos muebles. Demasiado complejos y modernos para ti.', 'pasillo-norte', false),
+    anItem('pasnor-televisor', 'Televisores', ['televisores del pasillo norte', 'televisor', 'televisión', 'televisor del pasillo', 'televisor del pasillo norte'], 'Son televisores que muestran números. No sé interpretarlos.', 'pasillo-norte', false),
+    anItem('pascen-pared', 'Paredes del pasillo central', ['paredes', 'pared'], 'Son las paredes del pasillo. No veo nada especial.', 'pasillo-central', false),
+    anItem('pascen-muebles', 'Muebles del pasillo central', ['muebles', 'mueble', 'mueble del pasillo', 'mueble de pasillo'], 'Hay algunos muebles. Demasiado complejos y modernos para ti.', 'pasillo-central', false),
+    anItem('pascen-televisor', 'Televisores', ['televisor', 'televisión', 'televisor del pasillo', 'televisor del pasillo norte'], 'Son televisores que muestran números. No sé interpretarlos.', 'pasillo-central', false),
+    anItem('passur-pared', 'Paredes del pasillo sur', ['paredes', 'pared'], 'Son las paredes del pasillo sur. No veo nada especial.', 'pasillo-sur', false),
+    anItem('passur-muebles', 'Muebles del pasillo sur', ['muebles', 'mueble', 'mueble del pasillo', 'mueble de pasillo'], 'Hay algunos muebles. Demasiado complejos y modernos para ti.', 'pasillo-sur', false),
+    anItem('passur-televisor', 'Televisores', ['televisor', 'televisión', 'televisor del pasillo', 'televisor del pasillo norte'], 'Son televisores que muestran números. No sé interpretarlos.', 'pasillo-sur', false),
     anItem('comedor-suelo', 'Suelo del comedor', ['suelo', 'suelo en el comedor'],
       [
         aCondDesc('!picked:comedor-cartera', 'Veo una cartera en el suelo. Parece la tuya.'),
@@ -73,7 +79,7 @@ exports.data = {
     anItem('comedor-cartera', 'Cartera', ['monedero', 'billetera'], 'Es una cartera. Creo que es la tuya.', 'comedor', true),
     anItem('comedor-mesas', 'Mesas del comedor', ['mesas', 'mesa', 'mesa del comedor'], 'Son las mesas del comedor. No veo nada interesante.', 'comedor', false),
     anItem('comedor-sillas', 'Sillas en el comedor', ['sillas', 'silla', 'silla del comedor', 'sillas del comedor'], 'Son las sillas del comedor. No veo nada interesante.', 'comedor', false),
-    anItem('combinacion-4815', 'Combinación 4815', ['combinación 4 8 1 5','combinación', 'combinación cuatro mil ochocientos quince'], 'Es la combinación que tenías apuntada en la cartera.', '', true),
+    anItem('combinacion-4815', 'Combinación 4815', ['combinación 4 8 1 5', 'combinación', 'combinación cuatro mil ochocientos quince'], 'Es la combinación que tenías apuntada en la cartera.', '', true),
   ],
   usages: [
     anUsage('sala-mandos-diario', [

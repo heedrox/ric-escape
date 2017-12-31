@@ -62,6 +62,18 @@ describe('Ric Escape - when looking up', () => {
     expect(getDfaApp().lastAsk).to.equal(scure.items.getItem('combinacion-4815').description);
   });
 
+  it('looks the description of the proper item when in room', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('look')
+      .withArgs({ arg: 'paredes' })
+      .withData({ roomId: 'pasillo-sur' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.equal(scure.items.getItem('passur-pared').description);
+  });
+
   const INVALID_ARGS = ['ventana', 'not a valid object'];
 
   INVALID_ARGS.forEach((arg) => {

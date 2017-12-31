@@ -45,6 +45,13 @@ class ScureItems {
     return this.data.items.find(i => isTextEqual(i.name, name) || isSynonym(i.synonyms, name));
   }
 
+  getItemByNameAndRoom(name, roomId) {
+    if (isEmptyArg(name)) return null;
+    return this.data.items.find(i =>
+      (isTextEqual(i.name, name) || isSynonym(i.synonyms, name))
+      && (i.location === roomId));
+  }
+
   isInInventory(itemId, inventory) {
     if (!inventory) return false;
     if (!this.getItem(itemId)) return false;
