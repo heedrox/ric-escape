@@ -85,7 +85,7 @@ describe('Ric Escape - when using', () => {
     });
   });
 
-  it(`uses items even if wrongly accented`, () => {
+  it('uses items even if wrongly accented', () => {
     const request = aDfaRequestBuilder()
       .withIntent('use')
       .withArgs({ arg: 'diário' })
@@ -95,5 +95,17 @@ describe('Ric Escape - when using', () => {
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().data.usages['sala-mandos-diario']).to.equal(1);
+  });
+
+  it('uses item from the inventory', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: 'cartera' })
+      .withData({ roomId: 'sala-mandos', picked: ['comedor-cartera'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().data.usages['comedor-cartera']).to.equal(1);
   });
 });

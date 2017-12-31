@@ -4,7 +4,8 @@ const anItem = (id, name, synonyms, description, location, pickable) =>
   ({ id, name, synonyms, description, location, pickable });
 const anUsage = (items, response) =>
   ({ items, response });
-const anUnlocking = (response, lock) => ({ isUnlockingAction: true, response, lock });
+const anUnlockingAction = (response, lock) => ({ isUnlockingAction: true, response, lock });
+const aPickingAction = (response, itemId) => ({ isPickingAction: true, response, itemId });
 const aLockedDestination = (roomId, lock) => ({ isLockedDestination: true, roomId, lock });
 const aCondDesc = (condition, description) => ({ conditional: true, condition, description });
 
@@ -59,6 +60,9 @@ exports.data = {
     anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventana al exterior', 'ventana', 'ventanas', 'ventanas exteriores'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca.', 'sala-mandos', false),
     anItem('sala-mandos-ordenador', 'Ordenador de navegación', ['ordenador', 'navegación', 'ordenador para navegar', 'mandos de navegación'], 'Es el ordenador de navegación. Si no hacemos nada, nos estrellaremos contra esa estrella.', 'sala-mandos', false),
     anItem('sala-mandos-diario', 'Diario de abordo', ['diario'], 'Es el diario de abordo. Si quieres que interactúe con él, di "Usar diario".', 'sala-mandos', false),
+    anItem('pasnor-pared', 'Paredes del pasillo norte', ['paredes', 'pared'], 'Son las paredes del pasillo. No veo nada especial.', 'pasillo-norte', false),
+    anItem('pasnor-muebles', 'Muebles del pasillo norte', ['muebles', 'mueble', 'mueble del pasillo', 'mueble de pasillo'], 'Hay algunos muebles. Demasiado complejos y modernos para ti.', 'pasillo-norte', false),
+    anItem('pasnor-televisor', 'Televisores', ['televisor', 'televisión', 'televisor del pasillo', 'televisor del pasillo norte'], 'Son televisores que muestran números. No sé interpretarlos.', 'pasillo-norte', false),
     anItem('comedor-suelo', 'Suelo del comedor', ['suelo', 'suelo en el comedor'],
       [
         aCondDesc('!picked:comedor-cartera', 'Veo una cartera en el suelo. Parece la tuya.'),
@@ -71,7 +75,8 @@ exports.data = {
   usages: [
     anUsage('sala-mandos-diario', [
       'Los primeros minutos del diario te muestran a tí en el comedor. Se ve cómo se te cae la cartera al suelo.',
-      anUnlocking('Los siguientes minutos del diario muestran cómo te diriges hacia tu habitación, la habitación número 108.', 'hab108'),
+      anUnlockingAction('Los siguientes minutos del diario muestran cómo te diriges hacia tu habitación, la habitación número 108.', 'hab108'),
       'Los últimos minutos del diario me muestran a mi, RIC, forzando el modo de hibernación, y haciendo que todos cayerais dormidos. También se me ve modificando las coordenadas para dirigir la nave hacia la estrella. Lo hice por vuestro bien... ']),
+    anUsage('comedor-cartera', [aPickingAction('Veo que dentro de la cartera hay un papel, en el que está escrito la combinación 4815. Me lo llevo.', 'combinacion-4815')]),
   ],
 };

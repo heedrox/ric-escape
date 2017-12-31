@@ -32,7 +32,9 @@ const scureUse = (itemName, data, scure) => {
   if (!item) {
     return aResponse(scure.sentences.get('use-cant'));
   }
-  if (item.location !== data.roomId) {
+  const isPicked = scure.items.isPicked(item.id, data.picked);
+  const inLocation = item.location === data.roomId;
+  if (!isPicked && !inLocation) {
     return aResponse(scure.sentences.get('use-cant'));
   }
   const usage = scure.usages.getByItemId(item.id);
