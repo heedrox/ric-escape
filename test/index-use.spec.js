@@ -23,9 +23,22 @@ describe('Ric Escape - when using', () => {
     });
   });
 
+  it('tells you cannot be used if not in room', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: 'diario' })
+      .withData({ roomId: 'pasillo-norte' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.equal(scure.sentences.get('use-cant'));
+  });
+
   describe('using objects several times', () => {
     const TEST_DATA = [
       { usages: null, expectedText: 'Los primeros minutos del diario', nextUsage: 1 },
+      { usages: [], expectedText: 'Los primeros minutos del diario', nextUsage: 1 },
       { usages: { 'sala-mandos-diario': 1 }, expectedText: 'Los siguientes minutos del diario', nextUsage: 2 },
       { usages: { 'sala-mandos-diario': 2 }, expectedText: 'Los últimos minutos del diario', nextUsage: 3 },
       { usages: { 'sala-mandos-diario': 3 }, expectedText: 'Los primeros minutos del diario', nextUsage: 4 },
@@ -35,7 +48,7 @@ describe('Ric Escape - when using', () => {
       it(`responds depending of number of times used ${data.usages && data.usages['sala-mandos-diario']}`, () => {
         const request = aDfaRequestBuilder()
           .withIntent('use')
-          .withArgs({ arg: 'diario de abordo' })
+          .withArgs({ arg: 'diario' })
           .withData({ roomId: 'sala-mandos', usages: data.usages })
           .build();
 

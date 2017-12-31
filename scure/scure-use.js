@@ -14,11 +14,14 @@ const unlockIfUnlockingAction = (response, data) => {
       data.unlocked.push(response.lock);
     }
   }
+  return data;
 };
 const increaseUsage = (item, data) => {
-  data.usages = data.usages || [];
-  data.usages[item.id] = data.usages[item.id] || 0;
-  data.usages[item.id] += 1;
+  if (JSON.stringify(data.usages) === '[]') data.usages = {};
+  if (typeof data.usages !== 'object') data.usages = {};
+  if (!data.usages) data.usages = {};
+  data.usages[item.id] = (data.usages[item.id] + 1) || 1;
+  return data;
 };
 
 const scureUse = (itemName, data, scure) => {
@@ -29,13 +32,16 @@ const scureUse = (itemName, data, scure) => {
   if (!item) {
     return aResponse(scure.sentences.get('use-cant'));
   }
+  if (item.location !== data.roomId) {
+    return aResponse(scure.sentences.get('use-cant'));
+  }
   const usage = scure.usages.getByItemId(item.id);
   if (!usage) {
     return aResponse(scure.sentences.get('use-cant'));
   }
   const response = currentResponse(item, usage, data.usages);
-  unlockIfUnlockingAction(response, data);
-  increaseUsage(item, data);
+  data = unlockIfUnlockingAction(response, data);
+  data = increaseUsage(item, data);
   return aResponse(getSentence(response), data);
 };
 
