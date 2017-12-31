@@ -59,11 +59,16 @@ class ScureRooms {
     return destIds.indexOf(room.id) >= 0;
   }
 
-  getDestinationNamesFrom(id) {
-    const getId = destination =>
-      (destination.isLockedDestination ? destination.roomId : destination);
-    const destIds = this.data.map[id].map(getId);
-    const destNames = destIds.map(rId => this.getRoom(rId).name);
+  getPossibleDestinationNamesFrom(id, unlocked) {
+    const isUnlocked = destination => (unlocked && unlocked.indexOf(destination.lock) >= 0);
+    const getId = (destination) => {
+      if (!destination.isLockedDestination) return destination;
+      if (isUnlocked(destination)) return destination.roomId;
+      return null;
+    };
+
+    const unlockedDestIds = this.data.map[id].map(getId).filter(d => d !== null);
+    const destNames = unlockedDestIds.map(rId => this.getRoom(rId).name);
     return joinMultipleStrings(destNames);
   }
 }

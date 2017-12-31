@@ -34,7 +34,6 @@ describe('Ric Escape - when walking', () => {
   const TEST_DATA = [
     { room: 'pasillo-norte', destinations: 'Sala de mandos, Comedor y Pasillo central' },
     { room: 'sala-mandos', destinations: 'Pasillo norte' },
-    { room: 'pasillo-sur', destinations: 'Habitación 108 y Pasillo central' },
   ];
 
   TEST_DATA.forEach((data) => {
@@ -50,6 +49,34 @@ describe('Ric Escape - when walking', () => {
       expect(getDfaApp().data.roomId).to.equal(data.room);
       expect(getDfaApp().lastAsk).to.equal(`Desde aquí puedo ir a: ${data.destinations}`);
     });
+  });
+
+  describe('handles locks', () => {
+    it('does not show a room if not unlocked', () => {
+      const request = aDfaRequestBuilder()
+        .withIntent('walk')
+        .withArgs({})
+        .withData({ roomId: 'pasillo-sur' })
+        .build();
+
+      ricEscape.ricEscape(request);
+
+      expect(getDfaApp().lastAsk).to.contains('Desde aquí puedo ir a: Pasillo central');
+    });
+
+    it('shows a room if unlocked', () => {
+      const request = aDfaRequestBuilder()
+        .withIntent('walk')
+        .withArgs({})
+        .withData({ roomId: 'pasillo-sur', unlocked: ['hab108'] })
+        .build();
+
+      ricEscape.ricEscape(request);
+
+      expect(getDfaApp().lastAsk).to.contains('Desde aquí puedo ir a: Habitación 108 y Pasillo central');
+    });
+
+    // DOES NOT ALLOW TO MOVE IF LOCKED
   });
 
 
