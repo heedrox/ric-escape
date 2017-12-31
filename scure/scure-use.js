@@ -6,7 +6,7 @@ const getUsedTimes = (item, usages) =>
 const currentResponse = (item, usage, usages) =>
   usage.response[getUsedTimes(item, usages) % usage.response.length];
 const getSentence = response =>
-  (response.isUnlockingAction ? response.response : response);
+  (response.isUnlockingAction || response.isPickingAction ? response.response : response);
 const unlockIfUnlockingAction = (response, data) => {
   if (response.isUnlockingAction) {
     data.unlocked = data.unlocked || [];
@@ -16,6 +16,23 @@ const unlockIfUnlockingAction = (response, data) => {
   }
   return data;
 };
+const pickIfPickingAction = (response, data) => {
+  if (response.isPickingAction) {
+    data.picked = data.picked || [];
+    if (data.picked.indexOf(response.itemId) === -1) {
+      data.picked.push(response.itemId);
+    }
+  }
+  return data;
+};
+const disposeIfItemInInventory = (isPicked, itemId, data) => {
+  const newData = data;
+  if (isPicked) {
+    newData.picked.splice(newData.picked.indexOf(itemId), 1);
+  }
+  return newData;
+};
+
 const increaseUsage = (item, data) => {
   if (JSON.stringify(data.usages) === '[]') data.usages = {};
   if (typeof data.usages !== 'object') data.usages = {};
@@ -43,6 +60,8 @@ const scureUse = (itemName, data, scure) => {
   }
   const response = currentResponse(item, usage, data.usages);
   data = unlockIfUnlockingAction(response, data);
+  data = pickIfPickingAction(response, data);
+  data = disposeIfItemInInventory(isPicked, item.id, data);
   data = increaseUsage(item, data);
   return aResponse(getSentence(response), data);
 };

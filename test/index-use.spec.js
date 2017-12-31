@@ -108,4 +108,18 @@ describe('Ric Escape - when using', () => {
 
     expect(getDfaApp().data.usages['comedor-cartera']).to.equal(1);
   });
+
+  it('provides - picks items if is a pickable action and disposes old one', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: 'cartera' })
+      .withData({ roomId: 'sala-mandos', picked: ['comedor-cartera'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('Veo que');
+    expect(getDfaApp().data.picked).to.not.contains('comedor-cartera');
+    expect(getDfaApp().data.picked).to.contains('combinacion-4815');
+  });
 });
