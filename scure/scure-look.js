@@ -7,8 +7,9 @@ const scureLook = (itemName, data, scure) => {
   const roomId = data.roomId;
   const item = scure.items.getItemByName(itemName);
   if (isEmptyArg(itemName)) {
+    const room = scure.rooms.getRoom(roomId);
     return aResponse(
-      `${scure.rooms.getRoom(roomId).description} ${getPossibleDestinationsSentence(scure, data)}`
+      `${getDescription(room.description, data, scure)} ${getPossibleDestinationsSentence(scure, data)}`
     );
   } else if (!item) {
     return aResponse(scure.sentences.get('item-not-in-location'));

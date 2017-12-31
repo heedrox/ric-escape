@@ -21,6 +21,19 @@ describe('Ric Escape - when looking up', () => {
     });
   });
 
+  it('looks the room depending on conditions', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('look')
+      .withArgs({ arg: null })
+      .withData({ roomId: 'comedor', picked: ['comedor-cartera'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('Estoy en el comedor de la nave espacial');
+    expect(getDfaApp().lastAsk).to.not.contains('También veo algo en el suelo.');
+  });
+
   const ARGS = ['Ventanas al exterior', ['Ventanas al exterior'], 'ventana', 'véntana'];
 
   ARGS.forEach((arg) => {
