@@ -19,6 +19,7 @@ exports.data = {
     'item-notpickable': 'No puedo llevarme el objeto {name} conmigo',
     'item-alreadypicked': 'Ya me llevé el objeto {name}.',
     'use-noarg': 'Especifíca que objeto u objetos quieres que use. Por ejemplo: usar objeto, o usar objeto con objeto.',
+    'use-cant': 'No puedo usar ese objeto.',
     inventory: 'Llevo los siguientes objetos conmigo: {items}',
   },
   init: {
@@ -52,6 +53,9 @@ exports.data = {
     anItem('comedor-sillas', 'Sillas en el comedor', ['sillas'], 'Son las sillas del comedor. No veo nada interesante.', 'comedor', true),
   ],
   usages: [
-    anUsage('sala-mandos-diario', ['Los primeros minutos del diario te muestran a tí en el comedor. Se ve cómo se te cae la cartera al suelo.']),
+    anUsage('sala-mandos-diario', [
+      'Los primeros minutos del diario te muestran a tí en el comedor. Se ve cómo se te cae la cartera al suelo.',
+      'Los siguientes minutos del diario muestran cómo te diriges hacia tu habitación, la habitación número 108.',
+      'Los últimos minutos del diario me muestran a mi, RIC, forzando el modo de hibernación, y haciendo que todos cayerais dormidos. También se me ve modificando las coordenadas para dirigir la nave hacia la estrella.']),
   ],
 };
