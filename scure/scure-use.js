@@ -16,19 +16,25 @@ const unlockIfUnlockingAction = (response, data) => {
   }
   return data;
 };
+
+const addItemIdTo = (itemId, data, container) => {
+  data[container] = data[container] || [];
+  if (data[container].indexOf(itemId) === -1) {
+    data[container].push(itemId);
+  }
+};
+
 const pickIfPickingAction = (response, data) => {
   if (response.isPickingAction) {
-    data.picked = data.picked || [];
-    if (data.picked.indexOf(response.itemId) === -1) {
-      data.picked.push(response.itemId);
-    }
+    addItemIdTo(response.itemId, data, 'picked');
+    addItemIdTo(response.itemId, data, 'inventory');
   }
   return data;
 };
-const disposeIfItemInInventory = (isPicked, itemId, data) => {
+const disposeIfItemInInventory = (isInInventory, itemId, data) => {
   const newData = data;
-  if (isPicked) {
-    newData.picked.splice(newData.picked.indexOf(itemId), 1);
+  if (isInInventory) {
+    newData.inventory.splice(newData.inventory.indexOf(itemId), 1);
   }
   return newData;
 };
@@ -41,6 +47,14 @@ const increaseUsage = (item, data) => {
   return data;
 };
 
+const markAsPickedIfPickableObjectButUsed = (item, data) => {
+  const newData = data;
+  if (item.pickable) {
+    addItemIdTo(item.id, data, 'picked');
+  }
+  return newData;
+};
+
 const scureUse = (itemName, data, scure) => {
   if (isEmptyArg(itemName)) {
     return aResponse(scure.sentences.get('use-noarg'));
@@ -49,9 +63,9 @@ const scureUse = (itemName, data, scure) => {
   if (!item) {
     return aResponse(scure.sentences.get('use-cant'));
   }
-  const isPicked = scure.items.isPicked(item.id, data.picked);
+  const isInInventory = scure.items.isInInventory(item.id, data.inventory);
   const inLocation = item.location === data.roomId;
-  if (!isPicked && !inLocation) {
+  if (!isInInventory && !inLocation) {
     return aResponse(scure.sentences.get('use-cant'));
   }
   const usage = scure.usages.getByItemId(item.id);
@@ -61,7 +75,8 @@ const scureUse = (itemName, data, scure) => {
   const response = currentResponse(item, usage, data.usages);
   data = unlockIfUnlockingAction(response, data);
   data = pickIfPickingAction(response, data);
-  data = disposeIfItemInInventory(isPicked, item.id, data);
+  data = markAsPickedIfPickableObjectButUsed(item, data);
+  data = disposeIfItemInInventory(isInInventory, item.id, data);
   data = increaseUsage(item, data);
   return aResponse(getSentence(response), data);
 };

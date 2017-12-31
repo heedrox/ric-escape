@@ -38,6 +38,13 @@ class ScureItems {
     return this.data.items.find(i => isTextEqual(i.name, name) || isSynonym(i.synonyms, name));
   }
 
+  isInInventory(itemId, inventory) {
+    if (!inventory) return false;
+    if (!this.getItem(itemId)) return false;
+    if (typeof inventory.length !== 'number') return false;
+    return inventory.indexOf(itemId) >= 0;
+  }
+
   isPicked(itemId, picked) {
     if (!picked) return false;
     if (!this.getItem(itemId)) return false;

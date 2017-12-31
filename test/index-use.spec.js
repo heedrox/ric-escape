@@ -101,7 +101,7 @@ describe('Ric Escape - when using', () => {
     const request = aDfaRequestBuilder()
       .withIntent('use')
       .withArgs({ arg: 'cartera' })
-      .withData({ roomId: 'sala-mandos', picked: ['comedor-cartera'] })
+      .withData({ roomId: 'sala-mandos', picked: ['comedor-cartera'], inventory: ['comedor-cartera'] })
       .build();
 
     ricEscape.ricEscape(request);
@@ -113,14 +113,16 @@ describe('Ric Escape - when using', () => {
     const request = aDfaRequestBuilder()
       .withIntent('use')
       .withArgs({ arg: 'cartera' })
-      .withData({ roomId: 'pasillo-norte', picked: ['comedor-cartera'] })
+      .withData({ roomId: 'pasillo-norte', picked: ['comedor-cartera'], inventory: ['comedor-cartera'] })
       .build();
 
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().lastAsk).to.contains('Veo que');
-    expect(getDfaApp().data.picked).to.not.contains('comedor-cartera');
+    expect(getDfaApp().data.picked).to.contains('comedor-cartera');
     expect(getDfaApp().data.picked).to.contains('combinacion-4815');
+    expect(getDfaApp().data.inventory).to.not.contains('comedor-cartera');
+    expect(getDfaApp().data.inventory).to.contains('combinacion-4815');
   });
 
   it('provides - picks items if a pickable action even if I dont have it but im in the place', () => {
@@ -133,7 +135,9 @@ describe('Ric Escape - when using', () => {
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().lastAsk).to.contains('Veo que');
-    expect(getDfaApp().data.picked).to.not.contains('comedor-cartera');
+    expect(getDfaApp().data.picked).to.contains('comedor-cartera');
     expect(getDfaApp().data.picked).to.contains('combinacion-4815');
+    expect(getDfaApp().data.inventory).to.not.contains('comedor-cartera');
+    expect(getDfaApp().data.inventory).to.contains('combinacion-4815');
   });
 });

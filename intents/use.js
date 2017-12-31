@@ -7,7 +7,9 @@ const use = scure => (app) => {
 
   const scureResponse = scureUse(itemName, app.data, scure);
 
+  console.log(scureResponse.data);
   overwriteDataFrom(scureResponse, app);
+  console.log(app.data);
   app.ask(scureResponse.sentence);
 };
 
