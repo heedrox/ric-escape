@@ -21,7 +21,7 @@ describe('Ric Escape - when looking up', () => {
     });
   });
 
-  const ARGS = ['Ventanas al exterior', ['Ventanas al exterior'], 'ventana'];
+  const ARGS = ['Ventanas al exterior', ['Ventanas al exterior'], 'ventana', 'véntana'];
 
   ARGS.forEach((arg) => {
     it(`looks the description of the object when argument is given - ${JSON.stringify(arg)}`, () => {

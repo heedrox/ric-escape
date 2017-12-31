@@ -5,17 +5,17 @@ const joinMultipleStrings = (arr) => {
   return `${arr.slice(0, arr.length - 1).join(', ')} y ${arr[arr.length - 1]}`;
 };
 
-const isSynonym = (synonyms, name) => {
-  const lcSyns = synonyms.map(it => it.toLowerCase());
-  return lcSyns.indexOf(name.toLowerCase()) >= 0;
-};
-
 const baseChars = str => str.replace(/[áäàÀÁÂÃÄÅ]/g, 'a')
   .replace(/[èéèÈÉÊË]/g, 'e')
   .replace(/[íìIÎ]/g, 'i')
   .replace(/[óòÓÔ]/g, 'o')
   .replace(/[úùüÙ]/g, 'u')
   .replace(/[çÇ]/g, 'c');
+
+const isSynonym = (synonyms, name) => {
+  const lcSyns = synonyms.map(it => baseChars(it.toLowerCase()));
+  return lcSyns.indexOf(baseChars(name.toLowerCase())) >= 0;
+};
 
 const isTextEqual = (name1, name2) => {
   if (isEmptyArg(name1) || isEmptyArg(name2)) return false;
