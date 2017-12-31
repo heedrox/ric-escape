@@ -1,9 +1,20 @@
 const isEmptyArg = require('../lib/common').isEmptyArg;
 const aResponse = require('./scure-response').aResponse;
 
-const getUsedTimes = (item, data) => (data.usages && data.usages[item.id]) || 0;
-const getProperSentence = (item, usage, data) =>
-  usage.response[getUsedTimes(item, data) % usage.response.length];
+const getUsedTimes = (item, usages) =>
+  (usages && usages[item.id]) || 0;
+const currentResponse = (item, usage, usages) =>
+  usage.response[getUsedTimes(item, usages) % usage.response.length];
+const getSentence = response =>
+  (response.isUnlockableAction ? response.response : response);
+const unlockIfUnlockableAction = (response, data) => {
+  if (response.isUnlockableAction) {
+    data.unlocked = data.unlocked || [];
+    if (data.unlocked.indexOf(response.lock) === -1) {
+      data.unlocked.push(response.lock);
+    }
+  }
+};
 
 const scureUse = (itemName, data, scure) => {
   if (isEmptyArg(itemName)) {
@@ -17,7 +28,9 @@ const scureUse = (itemName, data, scure) => {
   if (!usage) {
     return aResponse(scure.sentences.get('use-cant'));
   }
-  return aResponse(getProperSentence(item, usage, data), data);
+  const response = currentResponse(item, usage, data.usages);
+  unlockIfUnlockableAction(response, data);
+  return aResponse(getSentence(response), data);
 };
 
 exports.scureUse = scureUse;

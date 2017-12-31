@@ -45,4 +45,29 @@ describe('Ric Escape - when using', () => {
       });
     });
   });
+
+  describe('when unlocking actions', () => {
+    it('adds to unlocked array', () => {
+      const request = aDfaRequestBuilder()
+        .withIntent('use')
+        .withArgs({ arg: 'diario de abordo' })
+        .withData({ roomId: 'sala-mandos', usages: { 'sala-mandos-diario': 1 } })
+        .build();
+
+      ricEscape.ricEscape(request);
+
+      expect(getDfaApp().data.unlocked).to.eql(['hab108']);
+    });
+    it('does not add it twice', () => {
+      const request = aDfaRequestBuilder()
+        .withIntent('use')
+        .withArgs({ arg: 'diario de abordo' })
+        .withData({ roomId: 'sala-mandos', unlocked: ['hab108'], usages: { 'sala-mandos-diario': 4 } })
+        .build();
+
+      ricEscape.ricEscape(request);
+
+      expect(getDfaApp().data.unlocked).to.eql(['hab108']);
+    });
+  });
 });
