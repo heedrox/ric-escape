@@ -4,7 +4,7 @@ const anItem = (id, name, synonyms, description, location, pickable) =>
   ({ id, name, synonyms, description, location, pickable });
 const anUsage = (items, response) =>
   ({ items, response });
-const anUnlockable = (response, lock) => ({ isUnlockableAction: true, response, lock });
+const anUnlocking = (response, lock) => ({ isUnlockingAction: true, response, lock });
 
 exports.data = {
   sentences: {
@@ -56,7 +56,7 @@ exports.data = {
   usages: [
     anUsage('sala-mandos-diario', [
       'Los primeros minutos del diario te muestran a tí en el comedor. Se ve cómo se te cae la cartera al suelo.',
-      anUnlockable('Los siguientes minutos del diario muestran cómo te diriges hacia tu habitación, la habitación número 108.', 'hab108'),
+      anUnlocking('Los siguientes minutos del diario muestran cómo te diriges hacia tu habitación, la habitación número 108.', 'hab108'),
       'Los últimos minutos del diario me muestran a mi, RIC, forzando el modo de hibernación, y haciendo que todos cayerais dormidos. También se me ve modificando las coordenadas para dirigir la nave hacia la estrella. Lo hice por vuestro bien... ']),
   ],
 };

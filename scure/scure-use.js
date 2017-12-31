@@ -6,9 +6,9 @@ const getUsedTimes = (item, usages) =>
 const currentResponse = (item, usage, usages) =>
   usage.response[getUsedTimes(item, usages) % usage.response.length];
 const getSentence = response =>
-  (response.isUnlockableAction ? response.response : response);
-const unlockIfUnlockableAction = (response, data) => {
-  if (response.isUnlockableAction) {
+  (response.isUnlockingAction ? response.response : response);
+const unlockIfUnlockingAction = (response, data) => {
+  if (response.isUnlockingAction) {
     data.unlocked = data.unlocked || [];
     if (data.unlocked.indexOf(response.lock) === -1) {
       data.unlocked.push(response.lock);
@@ -29,7 +29,7 @@ const scureUse = (itemName, data, scure) => {
     return aResponse(scure.sentences.get('use-cant'));
   }
   const response = currentResponse(item, usage, data.usages);
-  unlockIfUnlockableAction(response, data);
+  unlockIfUnlockingAction(response, data);
   return aResponse(getSentence(response), data);
 };
 
