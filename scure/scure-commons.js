@@ -10,9 +10,16 @@ const isSynonym = (synonyms, name) => {
   return lcSyns.indexOf(name.toLowerCase()) >= 0;
 };
 
+const baseChars = str => str.replace(/[áäàÀÁÂÃÄÅ]/g, 'a')
+  .replace(/[èéèÈÉÊË]/g, 'e')
+  .replace(/[íìIÎ]/g, 'i')
+  .replace(/[óòÓÔ]/g, 'o')
+  .replace(/[úùüÙ]/g, 'u')
+  .replace(/[çÇ]/g, 'c');
+
 const isTextEqual = (name1, name2) => {
   if (isEmptyArg(name1) || isEmptyArg(name2)) return false;
-  return name1.toLowerCase() === name2.toLowerCase();
+  return baseChars(name1.toLowerCase()) === baseChars(name2.toLowerCase());
 };
 
 const getPossibleDestinationsSentence = (scure, data) => {

@@ -115,4 +115,15 @@ describe('Ric Escape - when walking', () => {
       expect(getDfaApp().lastAsk).to.contains(scure.rooms.getRoom('habitacion-108').description);
     });
   });
+  it('works with unaccented words', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('walk')
+      .withArgs({ arg: 'habitacion 108' })
+      .withData({ roomId: 'pasillo-sur', unlocked: ['hab108'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().data.roomId).to.equal('habitacion-108');
+  });
 });
