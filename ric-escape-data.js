@@ -78,6 +78,6 @@ exports.data = {
       'Los primeros minutos del diario te muestran a tí en el comedor. Se ve cómo se te cae la cartera al suelo.',
       anUnlockingAction('Los siguientes minutos del diario muestran cómo te diriges hacia tu habitación, la habitación número 108.', 'hab108'),
       'Los últimos minutos del diario me muestran a mi, RIC, forzando el modo de hibernación, y haciendo que todos cayerais dormidos. También se me ve modificando las coordenadas para dirigir la nave hacia la estrella. Lo hice por vuestro bien... ']),
-    anUsage('comedor-cartera', [aPickingAction('Veo que dentro de la cartera hay un papel, en el que está escrito la combinación 4815. Me lo llevo.', 'combinacion-4815')]),
+    anUsage('comedor-cartera', [aPickingAction('Veo que dentro de la cartera hay un papel, en el que está escrito la combinación 4815. Vaya seguridad, ¿guardando números secretos en la cartera? Bueno, me lo llevo por si es de utilidad.', 'combinacion-4815')]),
   ],
 };
