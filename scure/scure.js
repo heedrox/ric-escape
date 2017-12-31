@@ -60,7 +60,9 @@ class ScureRooms {
   }
 
   getDestinationNamesFrom(id) {
-    const destIds = this.data.map[id];
+    const getId = destination =>
+      (destination.isLockedDestination ? destination.roomId : destination);
+    const destIds = this.data.map[id].map(getId);
     const destNames = destIds.map(rId => this.getRoom(rId).name);
     return joinMultipleStrings(destNames);
   }

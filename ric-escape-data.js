@@ -5,6 +5,7 @@ const anItem = (id, name, synonyms, description, location, pickable) =>
 const anUsage = (items, response) =>
   ({ items, response });
 const anUnlocking = (response, lock) => ({ isUnlockingAction: true, response, lock });
+const aLockedDestination = (roomId, lock) => ({ isLockedDestination: true, roomId, lock });
 
 exports.data = {
   sentences: {
@@ -39,7 +40,7 @@ exports.data = {
     'sala-mandos': ['pasillo-norte'],
     'pasillo-norte': ['sala-mandos', 'comedor', 'pasillo-central'],
     'pasillo-central': ['biblioteca', 'pasillo-norte', 'pasillo-sur'],
-    'pasillo-sur': ['habitacion-108', 'pasillo-central'],
+    'pasillo-sur': [aLockedDestination('habitacion-108', 'hab108'), 'pasillo-central'],
     biblioteca: ['pasillo-central'],
     comedor: ['pasillo-norte'],
     'habitacion-108': ['pasillo-sur'],
