@@ -28,6 +28,7 @@ describe('Ric Escape - when using', () => {
       { usages: null, expectedText: 'Los primeros minutos del diario' },
       { usages: { 'sala-mandos-diario': 1 }, expectedText: 'Los siguientes minutos del diario' },
       { usages: { 'sala-mandos-diario': 2 }, expectedText: 'Los últimos minutos del diario' },
+      { usages: { 'sala-mandos-diario': 3 }, expectedText: 'Los primeros minutos del diario' },
     ];
 
     TEST_DATA.forEach((data) => {
