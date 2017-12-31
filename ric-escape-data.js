@@ -2,8 +2,8 @@ const aRoom = (id, name, synonyms, description) =>
   ({ id, name, synonyms, description });
 const anItem = (id, name, synonyms, description, location, pickable) =>
   ({ id, name, synonyms, description, location, pickable });
-const anUsage = (items, response) =>
-  ({ items, response });
+const anUsage = (items, response, onlyOnce) =>
+  ({ items, response, onlyOnce });
 const anUnlockingAction = (response, lock) => ({ isUnlockingAction: true, response, lock });
 const aPickingAction = (response, itemId) => ({ isPickingAction: true, response, itemId });
 const aLockedDestination = (roomId, lock) => ({ isLockedDestination: true, roomId, lock });
@@ -24,6 +24,7 @@ exports.data = {
     'item-alreadypicked': 'Ya me llevé el objeto {name}.',
     'use-noarg': 'Especifíca que objeto u objetos quieres que use. Por ejemplo: usar objeto, o usar objeto con objeto.',
     'use-cant': 'No puedo usar ese objeto.',
+    'use-onlyonce': 'Ya utilicé ese objeto. No puedo usarlo otra vez.',
     inventory: 'Llevo los siguientes objetos conmigo: {items}',
     'inventory-nothing': 'No llevo nada encima.',
     bye: 'Vale. Será un placer morir contigo. Adiós.',
@@ -72,13 +73,16 @@ exports.data = {
     anItem('comedor-cartera', 'Cartera', ['monedero', 'billetera'], 'Es una cartera. Creo que es la tuya.', 'comedor', true),
     anItem('comedor-mesas', 'Mesas del comedor', ['mesas', 'mesa', 'mesa del comedor'], 'Son las mesas del comedor. No veo nada interesante.', 'comedor', false),
     anItem('comedor-sillas', 'Sillas en el comedor', ['sillas', 'silla', 'silla del comedor', 'sillas del comedor'], 'Son las sillas del comedor. No veo nada interesante.', 'comedor', false),
-    anItem('combinacion-4815', 'Combinación 4815', ['combinación', 'combinación cuatro mil ochocientos quince'], 'Es la combinación que tenías apuntada en la cartera.', '', false),
+    anItem('combinacion-4815', 'Combinación 4815', ['combinación', 'combinación cuatro mil ochocientos quince'], 'Es la combinación que tenías apuntada en la cartera.', '', true),
   ],
   usages: [
     anUsage('sala-mandos-diario', [
       'Los primeros minutos del diario te muestran a tí en el comedor. Se ve cómo se te cae la cartera al suelo.',
       anUnlockingAction('Los siguientes minutos del diario muestran cómo te diriges hacia tu habitación, la habitación número 108.', 'hab108'),
-      'Los últimos minutos del diario me muestran a mi, RIC, forzando el modo de hibernación, y haciendo que todos cayerais dormidos. También se me ve modificando las coordenadas para dirigir la nave hacia la estrella. Lo hice por vuestro bien... ']),
-    anUsage('comedor-cartera', [aPickingAction('Veo que dentro de la cartera hay un papel, en el que está escrito la combinación 4815. Vaya seguridad, ¿guardando números secretos en la cartera? Bueno, me lo llevo por si es de utilidad.', 'combinacion-4815')]),
+      'Los últimos minutos del diario me muestran a mi, RIC, forzando el modo de hibernación, y haciendo que todos cayerais dormidos. También se me ve modificando las coordenadas para dirigir la nave hacia la estrella. Lo hice por vuestro bien... ',
+    ], false),
+    anUsage('comedor-cartera', [
+      aPickingAction('Veo que dentro de la cartera hay un papel, en el que está escrito la combinación 4815. Vaya seguridad, ¿guardando números secretos en la cartera? Bueno, me lo llevo por si es de utilidad.', 'combinacion-4815'),
+    ], true),
   ],
 };

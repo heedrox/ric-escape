@@ -23,6 +23,13 @@ class ScureUsages {
   getByItemId(itemId) {
     return this.data.usages.find(i => i.items === itemId);
   }
+
+  isUsed(itemId, usages) {
+    if (!usages) return false;
+    if (!this.getByItemId(itemId)) return false;
+    if (!usages[itemId]) return false;
+    return usages[itemId] >= 1;
+  }
 }
 class ScureItems {
   constructor(data) {

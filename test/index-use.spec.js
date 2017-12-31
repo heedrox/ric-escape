@@ -129,6 +129,18 @@ describe('Ric Escape - when using', () => {
     const request = aDfaRequestBuilder()
       .withIntent('use')
       .withArgs({ arg: 'cartera' })
+      .withData({ roomId: 'comedor', usages: { 'comedor-cartera': 1 } })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('Ya utilicé ese objeto. No puedo usarlo otra vez.');
+  });
+
+  it('uses items only once if marked as onlyOnce to true', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: 'cartera' })
       .withData({ roomId: 'comedor' })
       .build();
 

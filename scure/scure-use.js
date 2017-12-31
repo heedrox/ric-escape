@@ -72,6 +72,9 @@ const scureUse = (itemName, data, scure) => {
   if (!usage) {
     return aResponse(scure.sentences.get('use-cant'));
   }
+  if (usage.onlyOnce && scure.usages.isUsed(item.id, data.usages)) {
+    return aResponse(scure.sentences.get('use-onlyonce'));
+  }
   const response = currentResponse(item, usage, data.usages);
   data = unlockIfUnlockingAction(response, data);
   data = pickIfPickingAction(response, data);
