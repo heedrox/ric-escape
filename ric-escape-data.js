@@ -91,7 +91,7 @@ exports.data = {
     anItem('comedor-utensilios', 'Muchos utensilios', ['utensilios', 'utensilios varios', 'electrodomésticos', 'aparatos de cocina', 'aparatos'], 'Aquí hay muchísimos aparatos de cocina. Si quieres que use alguno, dime cuál exáctamente, ya que no me sé los nombres de los que hay.', 'comedor', false),
     anItem('comedor-gasotron', 'Gasotrón', ['gasotrom'], 'Un Gasotrón, que sirve para diluir en el aire un alimento.', 'comedor', true),
     anItem('comedor-zanahoria', 'Zanahoria', ['zanaoria', 'zanahorias'], 'Zanahorias, alimentos ricos en betacarotenos.', 'comedor', true),
-    anItem('combinacion-4815', 'Combinación 4815', ['combinación 4 8 1 5', 'combinación', 'combinación cuatro mil ochocientos quince'], 'Es la combinación que tenías apuntada en la cartera.', '', true),
+    anItem('combinacion-4815', 'Combinación 4815', ['4815', 'combinación 4 8 1 5', 'combinación', 'combinación cuatro mil ochocientos quince'], 'Es la combinación que tenías apuntada en la cartera.', '', true),
     anItem('hab108-cama', 'Cama', ['mi', 'yo', 'encima de la cama'], 'Encima de la cama estás tú. No te quiero despertar, pues tienes que morir.', 'habitacion-108', false),
     anItem('hab108-mesilla', 'Mesilla', ['mesa', 'mesa de noche', 'mesas'], 'Encima de la mesa parece que hay un pequeño diario personal.', 'habitacion-108', false),
     anItem('hab108-diario', 'Diario', ['diario personal', 'libro', 'librillo', 'mi diario'], 'Es tu diario personal. Si quieres que mire dentro, di "Usar diario"', 'habitacion-108', false),

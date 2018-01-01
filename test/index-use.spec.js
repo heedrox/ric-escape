@@ -290,7 +290,7 @@ describe('Ric Escape - when using', () => {
     });
   });
 
-  it('ends the game when is ending scene', () => {
+  it('ends the game when is ending scene and adds time', () => {
     const request = aDfaRequestBuilder()
       .withIntent('use')
       .withArgs({ arg: ['ric', 'ordenador'] })
@@ -300,5 +300,6 @@ describe('Ric Escape - when using', () => {
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().lastTell).to.contains('he alterado');
+    expect(getDfaApp().lastTell).to.contains('minutos');
   });
 });
