@@ -183,7 +183,11 @@ describe('Ric Escape - when using', () => {
     const request = aDfaRequestBuilder()
       .withIntent('use')
       .withArgs({ arg: ['combinación', 'cartera'] })
-      .withData({ roomId: 'habitacion-108', picked: ['comedor-cartera', 'combinacion-4815'], inventory: ['comedor-cartera', 'combinacion-4815'] })
+      .withData({
+        roomId: 'habitacion-108',
+        picked: ['comedor-cartera', 'combinacion-4815'],
+        inventory: ['comedor-cartera', 'combinacion-4815']
+      })
       .build();
 
     ricEscape.ricEscape(request);
@@ -197,7 +201,11 @@ describe('Ric Escape - when using', () => {
     const request = aDfaRequestBuilder()
       .withIntent('use')
       .withArgs({ arg: ['noexiste', 'cartera'] })
-      .withData({ roomId: 'habitacion-108', picked: ['comedor-cartera', 'combinacion-4815'], inventory: ['comedor-cartera', 'combinacion-4815'] })
+      .withData({
+        roomId: 'habitacion-108',
+        picked: ['comedor-cartera', 'combinacion-4815'],
+        inventory: ['comedor-cartera', 'combinacion-4815']
+      })
       .build();
 
     ricEscape.ricEscape(request);
@@ -252,8 +260,20 @@ describe('Ric Escape - when using', () => {
 
         ricEscape.ricEscape(request);
 
-        expect(getDfaApp().lastAsk).to.contains(data.expectedSentence);
+        expect(getDfaApp().lastAsk + getDfaApp().lastTell).to.contains(data.expectedSentence);
       });
     });
+  });
+
+  it('ends the game when is ending scene', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: ['ric', 'ordenador'] })
+      .withData({ roomId: 'sala-mandos', unlocked: ['ricmodified'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastTell).to.contains('he alterado');
   });
 });

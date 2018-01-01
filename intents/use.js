@@ -8,7 +8,13 @@ const use = scure => (app) => {
   const scureResponse = scureUse(items, app.data, scure);
 
   overwriteDataFrom(scureResponse, app);
-  app.ask(scureResponse.sentence);
+
+  const finalSentence = scureResponse.sentence;
+  if (finalSentence.isEndingScene) {
+    app.tell(finalSentence.description);
+  } else {
+    app.ask(finalSentence);
+  }
 };
 
 exports.use = use;

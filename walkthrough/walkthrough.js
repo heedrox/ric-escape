@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 require('./common.js');
 const ricEscape = require('../index.js');
 
@@ -50,7 +51,15 @@ commands.forEach((command) => {
 
   ricEscape.ricEscape(request);
 
-  console.log('RIC says: \x1b[31m', getDfaApp().lastAsk, '\x1b[0m');
-  console.log('RICs data', getDfaApp().data);
+  if (getDfaApp().lastAsk) {
+    console.log('RIC says: \x1b[31m', getDfaApp().lastAsk, '\x1b[0m');
+    console.log('RICs data', getDfaApp().data);
+  } else {
+    console.log('\x1b[41m **** ENDING SCENE ***** \x1b[0m');
+    console.log('RIC says: \x1b[31m', getDfaApp().lastTell, '\x1b[0m');
+    console.log('RICs data', getDfaApp().data);
+    console.log('\x1b[41m **** ENDING SCENE ***** \x1b[0m');
+  }
+
 });
 
