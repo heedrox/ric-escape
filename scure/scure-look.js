@@ -22,7 +22,9 @@ const scureLook = (itemName, data, scure) => {
     return aResponse(scure.sentences.get('item-not-in-location'));
   }
   const isInInventory = scure.items.isInInventory(item.id, data.inventory);
-  if (!isInInventory && roomId !== item.location) {
+  const isInLocation = (item.location === null) ||
+    (roomId === item.location && item.location !== null);
+  if (!isInInventory && !isInLocation) {
     return aResponse(scure.sentences.get('item-not-in-location'));
   }
   return aResponse(getDescription(item.description, data, scure));
