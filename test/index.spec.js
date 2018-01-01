@@ -1,4 +1,8 @@
 const ricEscape = require('../index.js');
+const ricEscapeData = require('../ric-escape-data').data;
+const scure = require('../scure/scure').buildScureFor(ricEscapeData);
+
+const ABOUT_90_MINUTES_AGO = new Date(new Date().getTime() - (90 * 1000 * 60));
 
 describe('Ric Escape - others', () => {
   const TEST_CASES = [
@@ -50,5 +54,16 @@ describe('Ric Escape - others', () => {
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().lastTell).to.contains('Adiós.');
+  });
+
+  it('finishes when time is up', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('bye')
+      .withData({ startTime: JSON.stringify(ABOUT_90_MINUTES_AGO) })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastTell).to.contains(scure.sentences.get('end-timeover'));
   });
 });

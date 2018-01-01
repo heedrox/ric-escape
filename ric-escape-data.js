@@ -35,6 +35,7 @@ exports.data = {
     inventory: 'Llevo los siguientes objetos conmigo: {items}',
     'inventory-nothing': 'No llevo nada encima.',
     bye: 'Vale. Será un placer morir contigo. Adiós.',
+    'end-timeover': 'Ya no hay tiempo. Vamos a estrellarnos. Ha sido un placer trabajar junto a ti. Te veo en la otra vida, hermano.',
   },
   init: {
     roomId: 'sala-mandos',

@@ -9,6 +9,7 @@ const functions = require('firebase-functions');
 const ricEscapeData = require('./ric-escape-data.js').data;
 const scure = require('./scure/scure').buildScureFor(ricEscapeData);
 const initialize = require('./intents/initializer').initialize;
+const isTimeOver = require('./lib/common').isTimeOver;
 
 const walk = require('./intents/walk').walk(scure);
 const look = require('./intents/look').look(scure);
@@ -27,6 +28,11 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
   console.log(`Request headers: ${JSON.stringify(request.headers)}`);
   console.log(`Request body: ${JSON.stringify(request.body)}`);
   console.log(`Intent: ${app.getIntent()}`);
+
+  if (isTimeOver(app.data)) {
+    app.tell(scure.sentences.get('end-timeover'));
+    return;
+  }
 
   const actionMap = new Map();
   actionMap.set('help', help);
