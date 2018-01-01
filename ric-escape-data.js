@@ -88,14 +88,16 @@ exports.data = {
     anItem('comedor-mesas', 'Mesas del comedor', ['mesas', 'mesa', 'mesa del comedor'], 'Son las mesas del comedor. No veo nada interesante.', 'comedor', false),
     anItem('comedor-sillas', 'Sillas en el comedor', ['sillas', 'silla', 'silla del comedor', 'sillas del comedor'], 'Son las sillas del comedor. No veo nada interesante.', 'comedor', false),
     anItem('comedor-comida', 'Mucha comida', ['comida', 'comida varia', 'comidas varias', 'comidas', 'restos de comida'], 'Aquí hay mucha comida. Demasiada. Dime qué quieres que coja exáctamente.', 'comedor', false),
-    anItem('comedor-utensilios', 'Muchos utensilios', ['utensilios', 'utensilios varios', 'electrodomésticos', 'aparatos de cocina', 'aparatos'], 'Aquí hay muchísimos aparatos. Si quieres que use alguno, dime cuál exáctamente.', 'comedor', false),
+    anItem('comedor-utensilios', 'Muchos utensilios', ['utensilios', 'utensilios varios', 'electrodomésticos', 'aparatos de cocina', 'aparatos'], 'Aquí hay muchísimos aparatos de cocina. Si quieres que use alguno, dime cuál exáctamente, ya que no me sé los nombres de los que hay.', 'comedor', false),
+    anItem('comedor-gasotron', 'Gasotron', [], 'Un Gasotron, que sirve para diluir en el aire un alimento.', 'comedor', true),
+    anItem('comedor-zanahoria', 'Zanahoria', ['zanaoria', 'zanahorias'], 'Zanahorias, alimentos ricos en betacarotenos.', 'comedor', true),
     anItem('combinacion-4815', 'Combinación 4815', ['combinación 4 8 1 5', 'combinación', 'combinación cuatro mil ochocientos quince'], 'Es la combinación que tenías apuntada en la cartera.', '', true),
     anItem('hab108-cama', 'Cama', ['mi', 'yo', 'encima de la cama'], 'Encima de la cama estás tú. No te quiero despertar, pues tienes que morir.', 'habitacion-108', false),
     anItem('hab108-mesilla', 'Mesilla', ['mesa', 'mesa de noche', 'mesas'], 'Encima de la mesa parece que hay un pequeño diario personal.', 'habitacion-108', false),
     anItem('hab108-diario', 'Diario', ['diario personal', 'libro', 'librillo', 'mi diario'], 'Es tu diario personal. Si quieres que mire dentro, di "Usar diario"', 'habitacion-108', false),
     anItem('hab108-pared', 'Pared de la habitación', ['pared', 'pared en habitación', 'pared de habitación'], [
       aCondDesc('picked:hab108-cuadro', 'En la pared hay una caja fuerte.'),
-      aCondDesc('else', 'En la pared hay cuadro muy bonito.'),
+      aCondDesc('else', 'En la pared hay un cuadro muy bonito.'),
     ], 'habitacion-108', false),
     anItem('hab108-cuadro', 'Cuadro', ['cuadro de la pared', 'cuadro de pared', 'cuadro en la pared', 'cuadro en pared'], 'Un cuadro de tu hogar natal en Newcomb.', 'habitacion-108', true, 'Veo que al llevarme el cuadro, se ha quedado en la pared una caja fuerte al descubierto.'),
     anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared', 'caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras.', 'habitacion-108', false),
@@ -139,7 +141,8 @@ exports.data = {
     anUsage(['ric', 'sala-mandos-ordenador'], [
       aConditionalResponse([
         aCondDescUsage(false, '!unlocked:ricmodified', 'No quiero alterar el curso de navegación del ordenador, pues es necesario que todos muráis. Solo así salvaremos la humanidad.'),
-        aCondDescUsage(false, 'unlocked:ricmodified', theEndingScene('Ok, he alterado el curso de navegación, ya no os estrellaréis. Todo termina aquí. Felicidades, has conseguido salvarte, pero no has salvado a la humanidad. Podías haber hecho algo diferente para llegar a este punto. Pero no, has preferido salvarte tú. Lo siento, pero tú y tu raza estáis abocados a la extinción. Adiós.')),
+        aCondDescUsage(false, '!unlocked:humanitysaved', theEndingScene('Ok, he alterado el curso de navegación, ya no os estrellaréis. Todo termina aquí. Felicidades, has conseguido salvarte, pero no has salvado a la humanidad. Podías haber hecho algo diferente para llegar a este punto. Pero no, has preferido salvarte tú. Lo siento, pero tú y tu raza estáis abocados a la extinción. Adiós.')),
+        aCondDescUsage(false, 'unlocked:humanitysaved', theEndingScene('He alterado el curso de navegación, ya no os estrellaréis. Y además, la humanidad está salvada, ya que el patógeno está muerto por efecto del betacaroteno. ¡Enhorabuena! Has hecho un trabajo excelente. Hasta la próxima.')),
       ]),
     ], false),
     anUsage('biblio-libroric', [
@@ -180,5 +183,8 @@ exports.data = {
         aCondDescUsage(false, 'unlocked:libroplanetas', 'Hay mucha información sobre el planeta, pero quizás esto te interese: Los agentes biológicos del planeta Lexus encuentran altamente tóxicos los alimentos basados en carotenos, como por ejemplo, la zanahoria.'),
       ]),
     ], false),
+    anUsage(['comedor-gasotron', 'comedor-zanahoria'], [
+      anUnlockingAction('Introduzco la zanahoria en el gasotrón. Veo que un gas sale del gasotron y se diluye por la nave. Puedo garantizar que el caroteno de la zanahoria se ha introducido en el organismo de todos los pasajeros, incluyendo en el tuyo. ¡Estáis salvados! Pero no lo celebres, todavía tenemos que desviar esta nave.', 'humanitysaved'),
+    ], true),
   ],
 };

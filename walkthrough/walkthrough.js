@@ -65,6 +65,15 @@ const commands = [
   c('look', 'libro sobre venus'),
   c('use', 'libro sobre venus'),
   c('use', 'libro sobre lexus'),
+  c('walk', 'pasillo central'),
+  c('walk', 'pasillo norte'),
+  c('walk', 'comedor'),
+  c('pickup', 'gasotron'),
+  c('pickup', 'zanahorias'),
+  c('use', ['zanahorias', 'gasotron']),
+  c('walk', 'pasillo norte'),
+  c('walk', 'sala de mandos'),
+  c('use', ['robot', 'ordenador']),
 ];
 
 commands.forEach((command) => {
