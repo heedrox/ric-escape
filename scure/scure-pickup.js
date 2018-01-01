@@ -20,6 +20,9 @@ const scurePickup = (itemName, data, scure) => {
   } else if (roomId !== item.location) {
     const name = item.name.toLowerCase();
     return aResponse(scure.sentences.get('item-notseen', { name }));
+  } else if (scure.items.isInInventory(item.id, data.inventory)) {
+    const name = item.name.toLowerCase();
+    return aResponse(scure.sentences.get('item-alreadyinventory', { name }));
   } else if (!item.pickable) {
     const name = item.name.toLowerCase();
     return aResponse(scure.sentences.get('item-notpickable', { name }));

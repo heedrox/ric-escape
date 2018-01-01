@@ -96,4 +96,17 @@ describe('Ric Escape - when picking up', () => {
     expect(getDfaApp().lastAsk).to.contains('Me llevo el objeto cuadro conmigo');
     expect(getDfaApp().lastAsk).to.contains('Veo que al llevarme el cuadro');
   });
+
+  it('tells you first that it has it, if item already in inventory', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('pickup')
+      .withArgs({ arg: 'aparato' })
+      .withData({ roomId: 'habitacion-108', inventory: ['hab108-aparato'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('Ya llevo conmigo');
+    expect(getDfaApp().lastAsk).to.contains('aparato');
+  });
 });

@@ -21,6 +21,7 @@ exports.data = {
     'item-unknown': 'No te he entendido qué quieres que me lleve.',
     'item-pickedup': 'Me llevo el objeto {name} conmigo.',
     'item-notpickable': 'No puedo llevarme el objeto {name} conmigo',
+    'item-alreadyinventory': 'Ya llevo conmigo el objeto {name}',
     'item-alreadypicked': 'Ya me llevé el objeto {name}.',
     'use-noarg': 'Especifíca que objeto u objetos quieres que use. Por ejemplo: usar objeto, o usar objeto con objeto.',
     'use-cant': 'No puedo usar el objeto {item}',
@@ -93,6 +94,8 @@ exports.data = {
     ], 'habitacion-108', false),
     anItem('hab108-cuadro', 'Cuadro', ['cuadro de la pared', 'cuadro de pared', 'cuadro en la pared', 'cuadro en pared'], 'Un cuadro de tu hogar natal en Newcomb.', 'habitacion-108', true, 'Veo que al llevarme el cuadro, se ha quedado en la pared una caja fuerte al descubierto.'),
     anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared','caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras.', 'habitacion-108', false),
+    anItem('hab108-aparato', 'Aparato extraño', ['aparato', 'aparato para reprogramar robots', 'aparato de reprogramar', 'aparato para reprogramación' ,'aparato para reprogramar'], 'Es un aparato para reprogramar robots. Confieso que lo escondí yo en esa caja fuerte porque me da miedo.', 'habitacion-108', false),
+
   ],
   usages: [
     anUsage('sala-mandos-diario', [
@@ -104,7 +107,7 @@ exports.data = {
       aPickingAction('Veo que dentro de la cartera hay un papel, en el que está escrito la combinación 4815. Vaya seguridad, ¿guardando números secretos en la cartera? Bueno, me lo llevo por si es de utilidad.', 'combinacion-4815'),
     ], true),
     anUsage(['combinacion-4815', 'hab108-cajafuerte'], [
-      aPickingAction('Clic. Sí, la caja se ha abierto. Hay un aparato extraño dentro de la caja fuerte. Me lo llevo.', 'opencajafuerte'),
+      aPickingAction('Clic. Sí, la caja se ha abierto. Hay un aparato extraño dentro de la caja fuerte. Me lo llevo.', 'hab108-aparato'),
     ], true),
   ],
 };
