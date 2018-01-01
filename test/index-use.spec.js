@@ -151,6 +151,18 @@ describe('Ric Escape - when using', () => {
     expect(getDfaApp().lastAsk).to.contains('Ya utilicé ese objeto. No puedo usarlo otra vez.');
   });
 
+  it('uses items if they are not attached to a room (null location)', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: 'robot' })
+      .withData({ roomId: 'habitacion-108' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('Ya me estás usando');
+  });
+
   it('uses items only once if marked as onlyOnce to true', () => {
     const request = aDfaRequestBuilder()
       .withIntent('use')

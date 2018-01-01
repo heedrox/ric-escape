@@ -66,7 +66,8 @@ const validateUsability = (itemNames, data, scure) => {
       return scure.sentences.get('use-cant', { item: itemName });
     }
     const isInInventory = scure.items.isInInventory(item.id, data.inventory);
-    const inLocation = item.location === data.roomId;
+    const inLocation = ((item.location === data.roomId) &&
+      (item.location !== null)) || (item.location === null);
     if (!isInInventory && !inLocation) {
       return scure.sentences.get('use-cant', { item: itemName });
     }

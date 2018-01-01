@@ -95,6 +95,7 @@ exports.data = {
     anItem('hab108-cuadro', 'Cuadro', ['cuadro de la pared', 'cuadro de pared', 'cuadro en la pared', 'cuadro en pared'], 'Un cuadro de tu hogar natal en Newcomb.', 'habitacion-108', true, 'Veo que al llevarme el cuadro, se ha quedado en la pared una caja fuerte al descubierto.'),
     anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared','caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras.', 'habitacion-108', false),
     anItem('hab108-aparato', 'Aparato extraño', ['aparato', 'aparato para reprogramar robots', 'aparato de reprogramar', 'aparato para reprogramación' ,'aparato para reprogramar'], 'Es un aparato para reprogramar robots. Confieso que lo escondí yo en esa caja fuerte porque me da miedo.', 'habitacion-108', false),
+    anItem('ric', 'RIC', ['robot', 'robot ric', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'Soy RIC, el Remoto Interfaz al Córtex. Gracias a mi, puedes interactuar y andar en esta nave, aunque realmente estás tendido en tu habitación.', null, false),
 
   ],
   usages: [
@@ -102,6 +103,9 @@ exports.data = {
       'Los primeros minutos del diario te muestran a tí en el comedor. Se ve cómo se te cae la cartera al suelo.',
       anUnlockingAction('Los siguientes minutos del diario muestran cómo te diriges hacia tu habitación, la habitación número 108.', 'hab108'),
       'Los últimos minutos del diario me muestran a mi, RIC, forzando el modo de hibernación, y haciendo que todos cayerais dormidos. También se me ve modificando las coordenadas para dirigir la nave hacia la estrella. Lo hice por vuestro bien... ',
+    ], false),
+    anUsage('ric', [
+      'Ya me estás usando. Aunque deberías estar dormido, ya que todos debéis morir.',
     ], false),
     anUsage('comedor-cartera', [
       aPickingAction('Veo que dentro de la cartera hay un papel, en el que está escrito la combinación 4815. Vaya seguridad, ¿guardando números secretos en la cartera? Bueno, me lo llevo por si es de utilidad.', 'combinacion-4815'),
