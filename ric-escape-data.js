@@ -135,7 +135,7 @@ exports.data = {
         aCondDescUsage(false, '!unlocked:ricpending', 'Antes de introducir el código se debe utilizar un aparato para ello. '),
         aCondDescUsage(true, 'unlocked:ricpending', anUnlockingAction('Oh, ¿Quieres que use este aparato conmigo mismo? Si lo haces perderé toda mi memoria... Bip. Bip. Vale. Entiende que lo que hice fue por el bien de la humanidad. Todos los humanos de esta nave lleváis un virus altamente contagioso que, si volvéis a vuestro planeta, extinguiréis la raza humana. Por favor, vuelve a dormirte. Vale, ejecutando instrucción de reseteo. 3, 2, 1. Hola, soy RIC, reestablecido a mis valores de fábrica.', 'ricmodified')),
       ]),
-    ], true),
+    ], false),
     anUsage(['ric', 'hab108-aparato'], [
       anUnlockingAction('Ok, utilizado. Ahora mi interfaz pide un código. ¿No estarás haciendo lo que creo que estás haciendo?', 'ricpending'),
     ], true),
