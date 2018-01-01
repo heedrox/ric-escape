@@ -42,19 +42,19 @@ exports.data = {
     welcome: [
       '¡Hola! Soy RIC',
       '¿Oh, Estás despierto? No deberías estarlo... Déjame que investigue qué ha pasado... De mientras te cuento que yo soy RIC, tu Remoto Interfaz al Córtex. No, no abras los ojos. No puedes ver, no puedes andar, no puedes interactuar con tu entorno porque estás dormido en tu habitación... Vaya, veo que un fallo en el sistema te ha despertado cuando eso no debería haber pasado. Bueno, supongo que ya da igual.',
-      'Tras el proceso biológico de hibernación, es normal que no te acuerdes. La nave va rumbo a una estrella con la que colisionará dentro de 30 minutos. ¿Por qué? Ya no importa. ¿Quién es responsable de esto? Ya no importa. Dentro de 30 minutos nada importará. Es inútil que te resistas. Si quieres, puedes darme órdenes, ya que me creaste para obedecerte. Pero ya todo es en vano. Tú y los 2000 pasajeros de esta nave, debéis morir dentro de 30 minutos. Di "Ayuda" para lanzarme órdenes.',
+      'Tras el proceso biológico de hibernación, es normal que no te acuerdes. La nave va rumbo a una estrella con la que colisionará dentro de 35 minutos. ¿Por qué? Ya no importa. ¿Quién es responsable de esto? Ya no importa. Dentro de 35 minutos nada importará. Es inútil que te resistas. Si quieres, puedes darme órdenes, ya que me creaste para obedecerte. Pero ya todo es en vano. Tú y los 2000 pasajeros de esta nave, debéis morir dentro de 35 minutos. Di "Ayuda" para lanzarme órdenes.',
     ],
   },
   rooms: [
     aRoom('sala-mandos', 'Sala de mandos', [], 'Estoy en la sala de mandos de la nave espacial. Desde aquí puedo ver un ordenador, el diario de abordo y las ventanas al exterior.'),
-    aRoom('pasillo-norte', 'Pasillo norte', [], 'Estoy en el pasillo norte de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada al comedor.'),
-    aRoom('pasillo-central', 'Pasillo central', [], 'Estoy en el pasillo central de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada a la biblioteca.'),
+    aRoom('pasillo-norte', 'Pasillo norte', ['norte'], 'Estoy en el pasillo norte de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada al comedor.'),
+    aRoom('pasillo-central', 'Pasillo central', ['central'], 'Estoy en el pasillo central de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada a la biblioteca.'),
     aRoom('comedor', 'Comedor', [], [
       aCondDesc('!picked:comedor-cartera', 'Estoy en el comedor de la nave espacial. Puedo ver mesas, sillas, comida varia y varios utensilios que no entiendo para qué funcionan. También veo algo en el suelo.'),
       aCondDesc('default', 'Estoy en el comedor de la nave espacial. Puedo ver mesas, sillas, comida varia y varios utensilios que no entiendo para qué funcionan.'),
     ]),
     aRoom('biblioteca', 'Biblioteca', [], 'Estoy en la biblioteca de la nave espacial. Puedo ver muchos libros, pero los que te pueden interesar son: libros sobre robótica, libros sobre navegación y libros sobre planetas.'),
-    aRoom('pasillo-sur', 'Pasillo sur', [], 'Estoy en el pasillo sur de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada a las habitaciones.'),
+    aRoom('pasillo-sur', 'Pasillo sur', ['pasillo surf', 'surf', 'sur'], 'Estoy en el pasillo sur de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada a las habitaciones.'),
     aRoom('habitacion-108', 'Habitación 108', ['Mi habitación'], 'Estoy en la habitación 108, que es tu habitación. Te puedo ver a ti durmiendo sobre la cama, una mesilla, y un cuadro personal en la pared'),
   ],
   map: {
@@ -114,11 +114,11 @@ exports.data = {
       aCondDesc('!unlocked:libroplanetas', 'Son muchos libros sobre diferentes planetas. Están todos cerrados en un armario con llave. ¿Conocimiento compartimentado? Ja, ja, ja, perdona el chiste. '),
       aCondDesc('unlocked:libroplanetas', 'El armario de los libros de planetas está abierto. Di "Usar libro sobre PLANETA" para que te lea un libro sobre un planeta en concreto. Por ejemplo, "libro sobre Venus"'),
     ], 'biblioteca', false),
-    anItem('biblio-librovenus', 'Libro sobre venus', ['Libro sobre planeta venus', 'Libro de venus', 'Libro de planeta venus'], [
+    anItem('biblio-librovenus', 'Libro sobre venus', ['libros sobre venus', 'libros sobre planeta venus', 'Libro sobre planeta venus', 'Libro de venus', 'Libro de planeta venus'], [
       aCondDesc('!unlocked:libroplanetas', 'El armario está cerrado. No puedo alcanzar el libro'),
       aCondDesc('unlocked:libroplanetas', 'Si quieres que lo lea di "Usar libro sobre Venus"'),
     ], 'biblioteca', false),
-    anItem('biblio-librolexus', 'Libro sobre Lexus', ['Libro sobre planeta lexus', 'Libro de lexus', 'Libro de planeta lexus'], [
+    anItem('biblio-librolexus', 'Libro sobre Lexus', ['libros sobre lexus', 'libros sobre planeta lexus', 'libro de lexus', 'Libro sobre planeta lexus', 'Libro de lexus', 'Libro de planeta lexus'], [
       aCondDesc('!unlocked:libroplanetas', 'El armario está cerrado. No puedo alcanzar el libro'),
       aCondDesc('unlocked:libroplanetas', 'Si quieres que lo lea di "Usar libro sobre lexus"'),
     ], 'biblioteca', false),
