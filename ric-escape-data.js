@@ -89,7 +89,7 @@ exports.data = {
     anItem('comedor-sillas', 'Sillas en el comedor', ['sillas', 'silla', 'silla del comedor', 'sillas del comedor'], 'Son las sillas del comedor. No veo nada interesante.', 'comedor', false),
     anItem('comedor-comida', 'Mucha comida', ['comida', 'comida varia', 'comidas varias', 'comidas', 'restos de comida'], 'Aquí hay mucha comida. Demasiada. Dime qué quieres que coja exáctamente.', 'comedor', false),
     anItem('comedor-utensilios', 'Muchos utensilios', ['utensilios', 'utensilios varios', 'electrodomésticos', 'aparatos de cocina', 'aparatos'], 'Aquí hay muchísimos aparatos de cocina. Si quieres que use alguno, dime cuál exáctamente, ya que no me sé los nombres de los que hay.', 'comedor', false),
-    anItem('comedor-gasotron', 'Gasotron', [], 'Un Gasotron, que sirve para diluir en el aire un alimento.', 'comedor', true),
+    anItem('comedor-gasotron', 'Gasotrón', ['gasotrom'], 'Un Gasotrón, que sirve para diluir en el aire un alimento.', 'comedor', true),
     anItem('comedor-zanahoria', 'Zanahoria', ['zanaoria', 'zanahorias'], 'Zanahorias, alimentos ricos en betacarotenos.', 'comedor', true),
     anItem('combinacion-4815', 'Combinación 4815', ['combinación 4 8 1 5', 'combinación', 'combinación cuatro mil ochocientos quince'], 'Es la combinación que tenías apuntada en la cartera.', '', true),
     anItem('hab108-cama', 'Cama', ['mi', 'yo', 'encima de la cama'], 'Encima de la cama estás tú. No te quiero despertar, pues tienes que morir.', 'habitacion-108', false),
@@ -169,7 +169,7 @@ exports.data = {
       'En las siguientes páginas hablas del planeta extraño al que llegamos. Indicas cómo alguien de la tripulación se infectó de un extraño virus. El virus rápidamente se contagió al resto de la tripulación.',
       'Las siguientes páginas hablan de lo preocupado que estabas porque dicho virus llegara a la tierra. Un momento de desesperación finalmente te lleva a escribir tus últimas páginas. ',
       'Te las leo literalmente: "No creo que haya cura, lo he intentado pero no puedo más, ya no hay tiempo. Mi mente se revela. He decidido que es mejor que muramos. He programado a RIC para que dirija la nave hacia la estrella más cercana.". Es muy duro, ¿quieres que siga leyendo?"',
-      'Durante la pasada noche, he gaseado a la tripulación con el GASOTRON del comedor. Yo dormiré esta noche. Estas son mis últimas palabras. En un par de días, moriremos. Será lo mejor para salvar la humanidad.',
+      'Durante la pasada noche, he gaseado a la tripulación con el Gasotrón del comedor. Yo dormiré esta noche. Estas son mis últimas palabras. En un par de días, moriremos. Será lo mejor para salvar la humanidad.',
       aConditionalResponse([
         aCondDescUsage(false, '!picked:hab108-librarykey', aPickingAction('En las últimas páginas hay una llave con el siguiente mensaje: "Lexus nos ha traido la muerte, así encierro yo esta muerte". Recojo la llave. ', 'hab108-librarykey')),
         aCondDescUsage(false, 'else', 'No hay nada más escrito a excepción de "Lexus nos ha traido la muerte, así encierro yo esta muerte"'),
@@ -191,7 +191,7 @@ exports.data = {
       ]),
     ], false),
     anUsage(['comedor-gasotron', 'comedor-zanahoria'], [
-      anUnlockingAction('Introduzco la zanahoria en el gasotrón. Veo que un gas sale del gasotron y se diluye por la nave. Puedo garantizar que el caroteno de la zanahoria se ha introducido en el organismo de todos los pasajeros, incluyendo en el tuyo. ¡Estáis salvados! Pero no lo celebres, todavía tenemos que desviar esta nave.', 'humanitysaved'),
+      anUnlockingAction('Introduzco la zanahoria en el gasotrón. Veo que un gas sale del gasotrón y se diluye por la nave. Puedo garantizar que el caroteno de la zanahoria se ha introducido en el organismo de todos los pasajeros, incluyendo en el tuyo. ¡Estáis salvados! Pero no lo celebres, todavía tenemos que desviar esta nave.', 'humanitysaved'),
     ], true),
   ],
 };
