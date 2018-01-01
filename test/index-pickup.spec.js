@@ -72,7 +72,7 @@ describe('Ric Escape - when picking up', () => {
       ricEscape.ricEscape(request);
     });
     it('tells you it picked it up when valid arg', () => {
-      expect(getDfaApp().lastAsk).to.equal('Me llevo el objeto cartera conmigo');
+      expect(getDfaApp().lastAsk).to.contains('Me llevo el objeto cartera conmigo');
     });
 
     it('adds the object to inventory', () => {

@@ -19,7 +19,7 @@ exports.data = {
     'item-not-in-location': 'No encuentro o veo ese objeto.',
     'item-notseen': 'No veo el objeto {name} por aquí',
     'item-unknown': 'No te he entendido qué quieres que me lleve.',
-    'item-pickedup': 'Me llevo el objeto {name} conmigo',
+    'item-pickedup': 'Me llevo el objeto {name} conmigo.',
     'item-notpickable': 'No puedo llevarme el objeto {name} conmigo',
     'item-alreadypicked': 'Ya me llevé el objeto {name}.',
     'use-noarg': 'Especifíca que objeto u objetos quieres que use. Por ejemplo: usar objeto, o usar objeto con objeto.',
