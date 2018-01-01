@@ -46,22 +46,6 @@ const disposeIfItemInInventory = (itemId, data, scure) => {
   return newData;
 };
 
-const increaseUsage = (item, data) => {
-  if (JSON.stringify(data.usages) === '[]') data.usages = {};
-  if (typeof data.usages !== 'object') data.usages = {};
-  if (!data.usages) data.usages = {};
-  data.usages[item.id] = (data.usages[item.id] + 1) || 1;
-  return data;
-};
-
-const increaseUsageForTwo = (item1, item2, data) => {
-  const usageIndex = buildUsageIndex(item1.id, item2.id);
-  if (JSON.stringify(data.usages) === '[]') data.usages = {};
-  if (typeof data.usages !== 'object') data.usages = {};
-  if (!data.usages) data.usages = {};
-  data.usages[usageIndex] = (data.usages[usageIndex] + 1) || 1;
-  return data;
-};
 
 const markAsPickedIfPickableObjectButUsed = (item, data) => {
   const newData = data;
@@ -104,7 +88,7 @@ const scureUseOneItem = (itemName, data, scure) => {
   data = pickIfPickingAction(response, data);
   data = markAsPickedIfPickableObjectButUsed(item, data);
   data = disposeIfItemInInventory(item.id, data, scure);
-  data = increaseUsage(item, data);
+  data.usages = scure.usages.increaseUsage(item, data.usages);
   return aResponse(getSentence(response), data);
 };
 
@@ -126,7 +110,7 @@ const scureUseTwoItems = (itemName1, itemName2, data, scure) => {
   data = markAsPickedIfPickableObjectButUsed(item2, data);
   data = disposeIfItemInInventory(item1.id, data, scure);
   data = disposeIfItemInInventory(item2.id, data, scure);
-  data = increaseUsageForTwo(item1, item2, data);
+  data.usages = scure.usages.increaseUsageForTwo(item1, item2, data.usages);
   return aResponse(getSentence(response), data);
 };
 

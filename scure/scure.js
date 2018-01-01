@@ -44,6 +44,25 @@ class ScureUsages {
     console.log(usages[usageIndex]);
     return usages[usageIndex] >= 1;
   }
+
+  increaseUsage(item, usages) {
+    if (!this.getByItemId(item.id)) return false;
+    if (JSON.stringify(usages) === '[]') usages = {};
+    if (typeof usages !== 'object') usages = {};
+    if (!usages) usages = {};
+    usages[item.id] = (usages[item.id] + 1) || 1;
+    return usages;
+  }
+
+  increaseUsageForTwo(item1, item2, usages) {
+    if (!this.getByItemIds(item1.id, item2.id)) return false;
+    const usageIndex = buildUsageIndex(item1.id, item2.id);
+    if (JSON.stringify(usages) === '[]') usages = {};
+    if (typeof usages !== 'object') usages = {};
+    if (!usages) usages = {};
+    usages[usageIndex] = (usages[usageIndex] + 1) || 1;
+    return usages;
+  }
 }
 class ScureItems {
   constructor(data) {
