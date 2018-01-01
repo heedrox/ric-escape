@@ -98,7 +98,7 @@ exports.data = {
     anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared', 'caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras.', 'habitacion-108', false),
     anItem('hab108-aparato', 'Aparato extraño', ['aparato', 'aparato para reprogramar robots', 'aparato de reprogramar', 'aparato para reprogramación', 'aparato para reprogramar'], 'Es un aparato para reprogramar robots. Confieso que lo escondí yo en esa caja fuerte porque me da miedo.', 'habitacion-108', false),
     anItem('ric', 'RIC', ['robot', 'robot ric', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'Soy RIC, el Remoto Interfaz al Córtex. Gracias a mi, puedes interactuar y andar en esta nave, aunque realmente estás tendido en tu habitación.', null, false),
-
+    anItem('hab108-librarykey', 'Llave', [''], 'Es una llave pequeña.', null, false),
   ],
   usages: [
     anUsage('sala-mandos-diario', [
@@ -123,6 +123,17 @@ exports.data = {
     ], false),
     anUsage(['ric', 'hab108-aparato'], [
       anUnlockingAction('Oh, ¿Quieres que use este aparato conmigo mismo? Si lo haces perderé toda mi memoria... Bip. Bip. Vale. Entiende que lo que hice fue por el bien de la humanidad. Todos los humanos de esta nave lleváis un virus altamente contagioso que, si volvéis a vuestro planeta, extinguiréis la raza humana. Por favor, vuelve a dormirte. Vale, ejecutando instrucción de reseteo. 3, 2, 1. Hola, soy RIC, reestablecido a mis valores de fábrica.', 'ricmodified'),
+    ], true),
+    anUsage('hab108-diario', [
+      'Son las primeras páginas de tu diario. Hablas de lo ilusionante que es este viaje, de llegar osadamente a lugares donde ninguna otra persona ha llegado antes.',
+      'En las siguientes páginas hablas del planeta extraño al que llegamos. Indicas cómo alguien de la tripulación se infectó de un extraño virus. El virus rápidamente se contagió al resto de la tripulación.',
+      'Las siguientes páginas hablan de lo preocupado que estabas porque dicho virus llegara a la tierra. Un momento de desesperación finalmente te lleva a escribir tus últimas páginas. ',
+      'Te las leo literalmente: "No creo que haya cura, lo he intentado pero no puedo más, ya no hay tiempo. Mi mente se revela. He decidido que es mejor que muramos. He programado a RIC para que dirija la nave hacia la estrella más cercana.". Es muy duro, ¿quieres que siga leyendo?"',
+      'Durante la pasada noche, he gaseado a la tripulación con el GASOTRON del comedor. Yo dormiré esta noche. Estas son mis últimas palabras. En un par de días, moriremos. Será lo mejor para salvar la humanidad.',
+      aConditionalResponse([
+        aCondDesc('!picked:librarykey', aPickingAction('No hay nada más escrito, aunque en las últimas páginas hay una llave. La recojo. ', 'librarykey')),
+        aCondDesc('else', 'No hay nada más escrito.'),
+      ]),
     ], false),
   ],
 };

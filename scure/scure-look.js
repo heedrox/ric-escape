@@ -3,15 +3,9 @@ const aResponse = require('./scure-response').aResponse;
 const getPossibleDestinationsSentence = require('./scure-commons').getPossibleDestinationsSentence;
 const getDescription = require('./scure-commons').getDescription;
 
-const getTheBestItem = (itemName, roomId, scure) => {
-  const exactItemFromRoom = scure.items.getItemByNameAndRoom(itemName, roomId);
-  if (exactItemFromRoom) return exactItemFromRoom;
-  return scure.items.getItemByName(itemName);
-};
-
 const scureLook = (itemName, data, scure) => {
   const roomId = data.roomId;
-  const item = getTheBestItem(itemName, roomId, scure);
+  const item = scure.items.getBestItem(itemName, roomId, scure);
   if (isEmptyArg(itemName)) {
     const room = scure.rooms.getRoom(roomId);
     return aResponse(

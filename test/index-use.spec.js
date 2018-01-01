@@ -111,6 +111,18 @@ describe('Ric Escape - when using', () => {
     expect(getDfaApp().data.usages['sala-mandos-diario']).to.equal(1);
   });
 
+  it('uses items that are in two different rooms, but chooses the right one depending on current roomId', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: 'diario' })
+      .withData({ roomId: 'habitacion-108' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('Son las primeras');
+  });
+
   it('uses item from the inventory', () => {
     const request = aDfaRequestBuilder()
       .withIntent('use')

@@ -84,6 +84,12 @@ class ScureItems {
       && (i.location === roomId));
   }
 
+  getBestItem(itemName, roomId) {
+    const exactItemFromRoom = this.getItemByNameAndRoom(itemName, roomId);
+    if (exactItemFromRoom) return exactItemFromRoom;
+    return this.getItemByName(itemName);
+  }
+
   isInInventory(itemId, inventory) {
     if (!inventory) return false;
     if (!this.getItem(itemId)) return false;

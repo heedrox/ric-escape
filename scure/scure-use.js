@@ -62,7 +62,7 @@ const validateUsability = (itemNames, data, scure) => {
     if (isEmptyArg(itemName)) {
       return scure.sentences.get('use-noarg');
     }
-    const item = scure.items.getItemByName(itemName);
+    const item = scure.items.getBestItem(itemName, data.roomId);
     if (!item) {
       return scure.sentences.get('use-cant', { item: itemName });
     }
@@ -96,7 +96,7 @@ const processIfConditionalResponse = (response, data, scure) => {
 };
 
 const scureUseOneItem = (itemName, data, scure) => {
-  const item = scure.items.getItemByName(itemName);
+  const item = scure.items.getBestItem(itemName, data.roomId);
   const usage = scure.usages.getByItemId(item.id);
   if (!usage) {
     return aResponse(scure.sentences.get('use-cant', { item: itemName }));
@@ -104,7 +104,8 @@ const scureUseOneItem = (itemName, data, scure) => {
   if (usage.onlyOnce && scure.usages.isUsed(item.id, data.usages)) {
     return aResponse(scure.sentences.get('use-onlyonce'));
   }
-  const response = currentResponse(item, usage, data.usages);
+  const rawResponse = currentResponse(item, usage, data.usages);
+  const response = processIfConditionalResponse(rawResponse, data, scure);
   data = resolveActions(response, data);
   data = processItemAfterUsage(item, data, scure);
   data.usages = scure.usages.increaseUsage(item, data.usages);
@@ -112,8 +113,8 @@ const scureUseOneItem = (itemName, data, scure) => {
 };
 
 const scureUseTwoItems = (itemName1, itemName2, data, scure) => {
-  const item1 = scure.items.getItemByName(itemName1);
-  const item2 = scure.items.getItemByName(itemName2);
+  const item1 = scure.items.getBestItem(itemName1, data.roomId);
+  const item2 = scure.items.getBestItem(itemName2, data.roomId);
   const usage = scure.usages.getByItemIds(item1.id, item2.id);
   if (!usage) {
     return aResponse(scure.sentences.get('use-canttwo', { item1: itemName1, item2: itemName2 }));
