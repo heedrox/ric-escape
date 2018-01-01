@@ -82,9 +82,13 @@ const resolveActions = (response, data) => {
   return data;
 };
 
-const processItemAfterUsage = (item, data, scure) => {
+const processItemAfterUsage = (item, rawResponse, response, data, scure) => {
   data = markAsPickedIfPickableObjectButUsed(item, data);
-  data = disposeIfItemInInventory(item.id, data, scure);
+  const shouldDispose = (!rawResponse.isConditional) ||
+    (rawResponse.isConditional && response.consumesObjects);
+  if (shouldDispose) {
+    data = disposeIfItemInInventory(item.id, data, scure);
+  }
   return data;
 };
 
@@ -107,7 +111,7 @@ const scureUseOneItem = (itemName, data, scure) => {
   const rawResponse = currentResponse(item, usage, data.usages);
   const response = processIfConditionalResponse(rawResponse, data, scure);
   data = resolveActions(response, data);
-  data = processItemAfterUsage(item, data, scure);
+  data = processItemAfterUsage(item, rawResponse, response, data, scure);
   data.usages = scure.usages.increaseUsage(item, data.usages);
   return aResponse(getSentence(response), data);
 };
@@ -126,8 +130,8 @@ const scureUseTwoItems = (itemName1, itemName2, data, scure) => {
   const rawResponse = currentResponseForTwo(item1, item2, usage, data.usages);
   const response = processIfConditionalResponse(rawResponse, data, scure);
   data = resolveActions(response, data);
-  data = processItemAfterUsage(item1, data, scure);
-  data = processItemAfterUsage(item2, data, scure);
+  data = processItemAfterUsage(item1, rawResponse, response, data, scure);
+  data = processItemAfterUsage(item2, rawResponse, response, data, scure);
   data.usages = scure.usages.increaseUsageForTwo(item1, item2, data.usages);
   return aResponse(getSentence(response), data);
 };

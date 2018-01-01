@@ -22,6 +22,13 @@ const commands = [
   c('walk', 'pasillo norte'),
   c('use', 'cartera'),
   c('walk', 'pasillo central'),
+  c('walk', 'biblioteca'),
+  c('look', 'libros'),
+  c('look', 'libros de robótica'),
+  c('look', 'libro modelos RIC'),
+  c('use', 'libro modelos RIC'),
+  c('use', ['ric', 'codigo']),
+  c('walk', 'pasillo central'),
   c('walk', 'pasillo sur'),
   c('walk', 'habitacion 108'),
   c('look', 'cama'),
@@ -34,11 +41,12 @@ const commands = [
   c('look', 'caja fuerte'),
   c('use', ['caja fuerte', 'combinación 4815']),
   c('use', ['aparato', 'robot']),
+  c('use', ['robot', 'codigo']),
   c('walk', ['pasillo sur']),
   c('walk', ['pasillo central']),
   c('walk', ['pasillo norte']),
   c('walk', ['sala de mandos']),
-
+  c('use', ['ric', 'ordenador']),
 ];
 
 commands.forEach((command) => {

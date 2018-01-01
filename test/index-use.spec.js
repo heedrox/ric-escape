@@ -263,7 +263,7 @@ describe('Ric Escape - when using', () => {
       { unlocked: ['ricmodified'], expectedSentence: 'he alterado el curso' },
     ];
     TEST_CASES.forEach((data) => {
-      it('tells the proper description when using', () => {
+      it(`tells the proper description when using (case ${JSON.stringify(data.unlocked)})`, () => {
         const request = aDfaRequestBuilder()
           .withIntent('use')
           .withArgs({ arg: ['ric', 'ordenador'] })
@@ -274,6 +274,19 @@ describe('Ric Escape - when using', () => {
 
         expect(getDfaApp().lastAsk + getDfaApp().lastTell).to.contains(data.expectedSentence);
       });
+    });
+
+    it('consumes the objects only if said so (consumesObjects = true and conditional)', () => {
+      const request = aDfaRequestBuilder()
+        .withIntent('use')
+        .withArgs({ arg: ['ric', 'codigo'] })
+        .withData({ roomId: 'sala-mandos', inventory: ['codigo-1893'], unlocked: [] })
+        .build();
+
+      ricEscape.ricEscape(request);
+
+      expect(getDfaApp().lastAsk).to.contains('Antes de introducir');
+      expect(getDfaApp().data.inventory).to.contains('codigo-1893');
     });
   });
 

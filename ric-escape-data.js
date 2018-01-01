@@ -9,6 +9,8 @@ const aPickingAction = (response, itemId) => ({ isPickingAction: true, response,
 const aConditionalResponse = conditions => ({ isConditional: true, conditions });
 const aLockedDestination = (roomId, lock) => ({ isLockedDestination: true, roomId, lock });
 const aCondDesc = (condition, description) => ({ conditional: true, condition, description });
+const aCondDescUsage = (consumesObjects, condition, description) =>
+  ({ conditional: true, consumesObjects, condition, description });
 const theEndingScene = description => ({ isEndingScene: true, description });
 
 exports.data = {
@@ -64,6 +66,7 @@ exports.data = {
     'habitacion-108': ['pasillo-sur'],
   },
   items: [
+    anItem('ric', 'RIC', ['rick', 'robot', 'robot ric', 'robot rick', 'rick el robot', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'Soy RIC, el Remoto Interfaz al Córtex. Gracias a mi, puedes interactuar y andar en esta nave, aunque realmente estás tendido en tu habitación.', null, false),
     anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventana al exterior', 'ventana', 'ventanas', 'ventanas exteriores'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca.', 'sala-mandos', false),
     anItem('sala-mandos-ordenador', 'Ordenador de navegación', ['ordenador', 'navegación', 'ordenador para navegar', 'mandos de navegación'], 'Es el ordenador de navegación. Si no hacemos nada, nos estrellaremos contra esa estrella.', 'sala-mandos', false),
     anItem('sala-mandos-diario', 'Diario de abordo', ['diario'], 'Es el diario de abordo. Si quieres que interactúe con él, di "Usar diario".', 'sala-mandos', false),
@@ -97,10 +100,11 @@ exports.data = {
     anItem('hab108-cuadro', 'Cuadro', ['cuadro de la pared', 'cuadro de pared', 'cuadro en la pared', 'cuadro en pared'], 'Un cuadro de tu hogar natal en Newcomb.', 'habitacion-108', true, 'Veo que al llevarme el cuadro, se ha quedado en la pared una caja fuerte al descubierto.'),
     anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared', 'caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras.', 'habitacion-108', false),
     anItem('hab108-aparato', 'Aparato extraño', ['aparato', 'aparato para reprogramar robots', 'aparato de reprogramar', 'aparato para reprogramación', 'aparato para reprogramar'], 'Es un aparato para reprogramar robots. Confieso que lo escondí yo en esa caja fuerte porque me da miedo.', 'habitacion-108', false),
-    anItem('ric', 'RIC', ['rick', 'robot', 'robot ric', 'robot rick', 'rick el robot', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'Soy RIC, el Remoto Interfaz al Córtex. Gracias a mi, puedes interactuar y andar en esta nave, aunque realmente estás tendido en tu habitación.', null, false),
-    anItem('hab108-librarykey', 'Llave', ['llave pequeña'], 'Es una llave pequeña.', null, false),
-    anItem('biblio-librorobots', 'Libros sobre robótica', [''], 'Es una llave pequeña.', null, false),
-
+    anItem('hab108-librarykey', 'Llave', ['llave pequeña'], 'Es una llave pequeña.', 'habitacion-108', false),
+    anItem('biblio-libros', 'Libros', ['libro'], 'Aquí hay muchos libros. libros sobre robótica, Los que más te pueden interesar son: libros sobre navegación, libros sobre planetas y libros sobre biología.', 'biblioteca', false),
+    anItem('biblio-librorobots', 'Libros sobre robótica', ['libros de robots', 'libros robótica', 'libro robótica', 'libro de robótica', 'libros de robótica'], 'Son muchos libros sobre robótica. Veo uno que te puede interesar, sobre cómo se programa un modelo como el mío. Se titula "Modelos RIC".', 'biblioteca', false),
+    anItem('biblio-libroric', 'Libro Modelos RIC', ['modelos ric', 'modelos rick', 'libro modelos rick', 'libro sobre modelo ric', 'libro modelo ric', 'libro modelo rick', 'libro modelo rick'], 'Es el libro de título "Modelos RIC". Di "Usar libro Modelos RIC" si quieres que te lo lea.', 'biblioteca', false),
+    anItem('codigo-1893', 'Código 1893', ['codigo', 'codigo mil ochocientos noventa y 3', 'código 1 8 9 3'], 'Es el código para reprogramar un robot RIC. No sé por qué me miras así. ', 'biblioteca', false),
   ],
   usages: [
     anUsage('sala-mandos-diario', [
@@ -119,12 +123,21 @@ exports.data = {
     ], true),
     anUsage(['ric', 'sala-mandos-ordenador'], [
       aConditionalResponse([
-        aCondDesc('!unlocked:ricmodified', 'No quiero alterar el curso de navegación del ordenador, pues es necesario que todos muráis. Solo así salvaremos la humanidad.'),
-        aCondDesc('unlocked:ricmodified', theEndingScene('Ok, he alterado el curso de navegación, ya no os estrellaréis. Todo termina aquí. Felicidades, has conseguido salvarte, pero no has salvado a la humanidad. Podías haber hecho algo diferente para llegar a este punto. Pero no, has preferido salvarte tú. Lo siento, pero tú y tu raza estáis abocados a la extinción. Adiós.')),
+        aCondDescUsage(false, '!unlocked:ricmodified', 'No quiero alterar el curso de navegación del ordenador, pues es necesario que todos muráis. Solo así salvaremos la humanidad.'),
+        aCondDescUsage(false, 'unlocked:ricmodified', theEndingScene('Ok, he alterado el curso de navegación, ya no os estrellaréis. Todo termina aquí. Felicidades, has conseguido salvarte, pero no has salvado a la humanidad. Podías haber hecho algo diferente para llegar a este punto. Pero no, has preferido salvarte tú. Lo siento, pero tú y tu raza estáis abocados a la extinción. Adiós.')),
       ]),
     ], false),
+    anUsage('biblio-libroric', [
+      aPickingAction('Entre otras muchas cosas, dice que para reprogramar un robot RIC se debe usar el código 1893. Me apunto "Código 1893" en mi inventario.', 'codigo-1893'),
+    ], true),
+    anUsage(['ric', 'codigo-1893'], [
+      aConditionalResponse([
+        aCondDescUsage(false, '!unlocked:ricpending', 'Antes de introducir el código se debe utilizar un aparato para ello. '),
+        aCondDescUsage(true, 'unlocked:ricpending', anUnlockingAction('Oh, ¿Quieres que use este aparato conmigo mismo? Si lo haces perderé toda mi memoria... Bip. Bip. Vale. Entiende que lo que hice fue por el bien de la humanidad. Todos los humanos de esta nave lleváis un virus altamente contagioso que, si volvéis a vuestro planeta, extinguiréis la raza humana. Por favor, vuelve a dormirte. Vale, ejecutando instrucción de reseteo. 3, 2, 1. Hola, soy RIC, reestablecido a mis valores de fábrica.', 'ricmodified')),
+      ]),
+    ], true),
     anUsage(['ric', 'hab108-aparato'], [
-      anUnlockingAction('Oh, ¿Quieres que use este aparato conmigo mismo? Si lo haces perderé toda mi memoria... Bip. Bip. Vale. Entiende que lo que hice fue por el bien de la humanidad. Todos los humanos de esta nave lleváis un virus altamente contagioso que, si volvéis a vuestro planeta, extinguiréis la raza humana. Por favor, vuelve a dormirte. Vale, ejecutando instrucción de reseteo. 3, 2, 1. Hola, soy RIC, reestablecido a mis valores de fábrica.', 'ricmodified'),
+      anUnlockingAction('Ok, utilizado. Ahora mi interfaz pide un código. ¿No estarás haciendo lo que creo que estás haciendo?', 'ricpending'),
     ], true),
     anUsage('hab108-diario', [
       'Son las primeras páginas de tu diario. Hablas de lo ilusionante que es este viaje, de llegar osadamente a lugares donde ninguna otra persona ha llegado antes.',
@@ -133,8 +146,8 @@ exports.data = {
       'Te las leo literalmente: "No creo que haya cura, lo he intentado pero no puedo más, ya no hay tiempo. Mi mente se revela. He decidido que es mejor que muramos. He programado a RIC para que dirija la nave hacia la estrella más cercana.". Es muy duro, ¿quieres que siga leyendo?"',
       'Durante la pasada noche, he gaseado a la tripulación con el GASOTRON del comedor. Yo dormiré esta noche. Estas son mis últimas palabras. En un par de días, moriremos. Será lo mejor para salvar la humanidad.',
       aConditionalResponse([
-        aCondDesc('!picked:hab108-librarykey', aPickingAction('No hay nada más escrito, aunque en las últimas páginas hay una llave. La recojo. ', 'hab108-librarykey')),
-        aCondDesc('else', 'No hay nada más escrito.'),
+        aCondDesc(false, '!picked:hab108-librarykey', aPickingAction('No hay nada más escrito, aunque en las últimas páginas hay una llave. La recojo. ', 'hab108-librarykey')),
+        aCondDesc(false, 'else', 'No hay nada más escrito.'),
       ]),
     ], false),
   ],
