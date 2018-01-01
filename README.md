@@ -14,7 +14,7 @@ Developed with Firebase Functions, Actions on Google and through TDD with Mocha.
 
 Hope you like it!
 
-# Do you to develop your own adventure game?
+# Do you want to develop your own adventure game?
 
 You can do it in a few minutes!
 
