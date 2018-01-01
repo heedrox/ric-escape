@@ -16,6 +16,14 @@ class ScureSentences {
   }
 }
 
+const increaseUsageIndex = (index, usages) => {
+  if (JSON.stringify(usages) === '[]') usages = {};
+  if (typeof usages !== 'object') usages = {};
+  if (!usages) usages = {};
+  usages[index] = (usages[index] + 1) || 1;
+  return usages;
+};
+
 class ScureUsages {
   constructor(data) {
     this.data = data;
@@ -41,27 +49,18 @@ class ScureUsages {
     if (!usages) return false;
     if (!this.getByItemIds(itemId1, itemId2)) return false;
     const usageIndex = buildUsageIndex(itemId1, itemId2);
-    console.log(usages[usageIndex]);
     return usages[usageIndex] >= 1;
   }
 
   increaseUsage(item, usages) {
     if (!this.getByItemId(item.id)) return false;
-    if (JSON.stringify(usages) === '[]') usages = {};
-    if (typeof usages !== 'object') usages = {};
-    if (!usages) usages = {};
-    usages[item.id] = (usages[item.id] + 1) || 1;
-    return usages;
+    return increaseUsageIndex(item.id, usages);
   }
 
   increaseUsageForTwo(item1, item2, usages) {
     if (!this.getByItemIds(item1.id, item2.id)) return false;
     const usageIndex = buildUsageIndex(item1.id, item2.id);
-    if (JSON.stringify(usages) === '[]') usages = {};
-    if (typeof usages !== 'object') usages = {};
-    if (!usages) usages = {};
-    usages[usageIndex] = (usages[usageIndex] + 1) || 1;
-    return usages;
+    return increaseUsageIndex(usageIndex, usages);
   }
 }
 class ScureItems {

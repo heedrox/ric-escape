@@ -74,6 +74,18 @@ const validateUsability = (itemNames, data, scure) => {
   return null;
 };
 
+const resolveActions = (response, data) => {
+  data = unlockIfUnlockingAction(response, data);
+  data = pickIfPickingAction(response, data);
+  return data;
+};
+
+const processItemAfterUsage = (item, data, scure) => {
+  data = markAsPickedIfPickableObjectButUsed(item, data);
+  data = disposeIfItemInInventory(item.id, data, scure);
+  return data;
+};
+
 const scureUseOneItem = (itemName, data, scure) => {
   const item = scure.items.getItemByName(itemName);
   const usage = scure.usages.getByItemId(item.id);
@@ -84,10 +96,8 @@ const scureUseOneItem = (itemName, data, scure) => {
     return aResponse(scure.sentences.get('use-onlyonce'));
   }
   const response = currentResponse(item, usage, data.usages);
-  data = unlockIfUnlockingAction(response, data);
-  data = pickIfPickingAction(response, data);
-  data = markAsPickedIfPickableObjectButUsed(item, data);
-  data = disposeIfItemInInventory(item.id, data, scure);
+  data = resolveActions(response, data);
+  data = processItemAfterUsage(item, data, scure);
   data.usages = scure.usages.increaseUsage(item, data.usages);
   return aResponse(getSentence(response), data);
 };
@@ -104,12 +114,9 @@ const scureUseTwoItems = (itemName1, itemName2, data, scure) => {
     return aResponse(scure.sentences.get('use-onlyonce-two'));
   }
   const response = currentResponseForTwo(item1, item2, usage, data.usages);
-  data = unlockIfUnlockingAction(response, data);
-  data = pickIfPickingAction(response, data);
-  data = markAsPickedIfPickableObjectButUsed(item1, data);
-  data = markAsPickedIfPickableObjectButUsed(item2, data);
-  data = disposeIfItemInInventory(item1.id, data, scure);
-  data = disposeIfItemInInventory(item2.id, data, scure);
+  data = resolveActions(response, data);
+  data = processItemAfterUsage(item1, data, scure);
+  data = processItemAfterUsage(item2, data, scure);
   data.usages = scure.usages.increaseUsageForTwo(item1, item2, data.usages);
   return aResponse(getSentence(response), data);
 };
