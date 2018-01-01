@@ -52,7 +52,7 @@ exports.data = {
       aCondDesc('!picked:comedor-cartera', 'Estoy en el comedor de la nave espacial. Puedo ver mesas, sillas, comida varia y varios utensilios que no entiendo para qué funcionan. También veo algo en el suelo.'),
       aCondDesc('default', 'Estoy en el comedor de la nave espacial. Puedo ver mesas, sillas, comida varia y varios utensilios que no entiendo para qué funcionan.'),
     ]),
-    aRoom('biblioteca', 'Biblioteca', [], 'Estoy en la biblioteca de la nave espacial. Puedo ver muchos libros, pero los que te pueden interesar son: libros sobre robótica, libros sobre navegación, libros sobre planetas y libros sobre biología.'),
+    aRoom('biblioteca', 'Biblioteca', [], 'Estoy en la biblioteca de la nave espacial. Puedo ver muchos libros, pero los que te pueden interesar son: libros sobre robótica, libros sobre navegación y libros sobre planetas.'),
     aRoom('pasillo-sur', 'Pasillo sur', [], 'Estoy en el pasillo sur de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada a las habitaciones.'),
     aRoom('habitacion-108', 'Habitación 108', ['Mi habitación'], 'Estoy en la habitación 108, que es tu habitación. Te puedo ver a ti durmiendo sobre la cama, una mesilla, y un cuadro personal en la pared'),
   ],
@@ -101,10 +101,25 @@ exports.data = {
     anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared', 'caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras.', 'habitacion-108', false),
     anItem('hab108-aparato', 'Aparato extraño', ['aparato', 'aparato para reprogramar robots', 'aparato de reprogramar', 'aparato para reprogramación', 'aparato para reprogramar'], 'Es un aparato para reprogramar robots. Confieso que lo escondí yo en esa caja fuerte porque me da miedo.', 'habitacion-108', false),
     anItem('hab108-librarykey', 'Llave', ['llave pequeña'], 'Es una llave pequeña.', 'habitacion-108', false),
-    anItem('biblio-libros', 'Libros', ['libro'], 'Aquí hay muchos libros. libros sobre robótica, Los que más te pueden interesar son: libros sobre navegación, libros sobre planetas y libros sobre biología.', 'biblioteca', false),
+    anItem('biblio-libros', 'Libros', ['libro'], 'Aquí hay muchos libros. Los que más te pueden interesar son: libros sobre navegación, libros sobre robótica y libros sobre planetas.', 'biblioteca', false),
     anItem('biblio-librorobots', 'Libros sobre robótica', ['libros de robots', 'libros robótica', 'libro robótica', 'libro de robótica', 'libros de robótica'], 'Son muchos libros sobre robótica. Veo uno que te puede interesar, sobre cómo se programa un modelo como el mío. Se titula "Modelos RIC".', 'biblioteca', false),
-    anItem('biblio-libroric', 'Libro Modelos RIC', ['modelos ric', 'modelos rick', 'libro modelos rick', 'libro sobre modelo ric', 'libro modelo ric', 'libro modelo rick', 'libro modelo rick'], 'Es el libro de título "Modelos RIC". Di "Usar libro Modelos RIC" si quieres que te lo lea.', 'biblioteca', false),
+    anItem('biblio-libroric', 'Libro Modelos RIC', ['libros sobre modelos ric', 'modelos ric', 'modelos rick', 'libro modelos rick', 'libro sobre modelo ric', 'libro modelo ric', 'libro modelo rick', 'libro modelo rick'], 'Es el libro de título "Modelos RIC". Di "Usar libro Modelos RIC" si quieres que te lo lea.', 'biblioteca', false),
     anItem('codigo-1893', 'Código 1893', ['codigo', 'codigo mil ochocientos noventa y 3', 'código 1 8 9 3'], 'Es el código para reprogramar un robot RIC. No sé por qué me miras así. ', 'biblioteca', false),
+    anItem('biblio-libronavegacion', 'Libros sobre navegación', ['navegación', 'libros navegación', 'libros sobre navegar', 'libro de navegación', 'libros de navegación'], 'Son muchos libros sobre navegación. Navegar esta nave es fácil. Yo puedo hacerlo. No te preocupes.', 'biblioteca', false),
+    anItem('biblio-armario', 'Armario de libros', ['armario', 'armario de libros sobre planetas', 'armario con libros de planetas', 'armario pequeño', 'armario cerrado'], 'El armario con los libros de planetas', 'biblioteca', false),
+    anItem('biblio-libroplanetas', 'Libros sobre planetas', ['libros de planetas', 'libros planetas', 'libros de planeta'], [
+      aCondDesc('!unlocked:libroplanetas', 'Son muchos libros sobre diferentes planetas. Están todos cerrados en un armario con llave. ¿Conocimiento compartimentado? Ja, ja, ja, perdona el chiste. '),
+      aCondDesc('unlocked:libroplanetas', 'El armario de los libros de planetas está abierto. Di "Usar libro sobre PLANETA" para que te lea un libro sobre un planeta en concreto. Por ejemplo, "libro sobre Venus"'),
+    ], 'biblioteca', false),
+    anItem('biblio-librovenus', 'Libro sobre venus', ['Libro sobre planeta venus', 'Libro de venus', 'Libro de planeta venus'], [
+      aCondDesc('!unlocked:libroplanetas', 'El armario está cerrado. No puedo alcanzar el libro'),
+      aCondDesc('unlocked:libroplanetas', 'Si quieres que lo lea di "Usar libro sobre Venus"'),
+    ], 'biblioteca', false),
+    anItem('biblio-librolexus', 'Libro sobre Lexus', ['Libro sobre planeta lexus', 'Libro de lexus', 'Libro de planeta lexus'], [
+      aCondDesc('!unlocked:libroplanetas', 'El armario está cerrado. No puedo alcanzar el libro'),
+      aCondDesc('unlocked:libroplanetas', 'Si quieres que lo lea di "Usar libro sobre lexus"'),
+    ], 'biblioteca', false),
+
   ],
   usages: [
     anUsage('sala-mandos-diario', [
@@ -146,8 +161,23 @@ exports.data = {
       'Te las leo literalmente: "No creo que haya cura, lo he intentado pero no puedo más, ya no hay tiempo. Mi mente se revela. He decidido que es mejor que muramos. He programado a RIC para que dirija la nave hacia la estrella más cercana.". Es muy duro, ¿quieres que siga leyendo?"',
       'Durante la pasada noche, he gaseado a la tripulación con el GASOTRON del comedor. Yo dormiré esta noche. Estas son mis últimas palabras. En un par de días, moriremos. Será lo mejor para salvar la humanidad.',
       aConditionalResponse([
-        aCondDesc(false, '!picked:hab108-librarykey', aPickingAction('No hay nada más escrito, aunque en las últimas páginas hay una llave. La recojo. ', 'hab108-librarykey')),
-        aCondDesc(false, 'else', 'No hay nada más escrito.'),
+        aCondDescUsage(false, '!picked:hab108-librarykey', aPickingAction('En las últimas páginas hay una llave con el siguiente mensaje: "Lexus nos ha traido la muerte, así encierro yo esta muerte". Recojo la llave. ', 'hab108-librarykey')),
+        aCondDescUsage(false, 'else', 'No hay nada más escrito a excepción de "Lexus nos ha traido la muerte, así encierro yo esta muerte"'),
+      ]),
+    ], false),
+    anUsage(['hab108-librarykey', 'biblio-armario'], [
+      anUnlockingAction('Ok, armario abierto. Ya puedo llegar a los libros sobre planetas.', 'libroplanetas'),
+    ], true),
+    anUsage('biblio-librovenus', [
+      aConditionalResponse([
+        aCondDescUsage(false, '!unlocked:libroplanetas', 'El armario está cerrado. No puedo alcanzar el libro'),
+        aCondDescUsage(false, 'unlocked:libroplanetas', '¿Qué poca imaginación no? A ver, Venus es un planeta de masa 0.8 veces que la tierra y bla bla bla. ¿Para qué quieres saber todo esto?'),
+      ]),
+    ], false),
+    anUsage('biblio-librolexus', [
+      aConditionalResponse([
+        aCondDescUsage(false, '!unlocked:libroplanetas', 'El armario está cerrado. No puedo alcanzar el libro'),
+        aCondDescUsage(false, 'unlocked:libroplanetas', 'Hay mucha información sobre el planeta, pero quizás esto te interese: Los agentes biológicos del planeta Lexus encuentran altamente tóxicos los alimentos basados en carotenos, como por ejemplo, la zanahoria.'),
       ]),
     ], false),
   ],

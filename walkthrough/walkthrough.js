@@ -50,8 +50,21 @@ const commands = [
   c('walk', 'pasillo sur'),
   c('walk', 'pasillo central'),
   c('walk', 'biblioteca'),
-  c('look', ''),
-
+  c('look', 'libros'),
+  c('look', 'libros sobre robótica'),
+  c('look', 'libros sobre modelos ric'),
+  c('use', 'libros sobre modelos ric'),
+  c('use', ['robot', 'codigo']),
+  c('look', 'libros sobre navegación'),
+  c('look', 'libros sobre planetas'),
+  c('look', 'libro sobre venus'),
+  c('use', 'libro sobre venus'),
+  c('look', 'armario'),
+  c('use', ['llave', 'armario']),
+  c('look', 'libros sobre planetas'),
+  c('look', 'libro sobre venus'),
+  c('use', 'libro sobre venus'),
+  c('use', 'libro sobre lexus'),
 ];
 
 commands.forEach((command) => {

@@ -127,6 +127,4 @@ describe('Ric Escape - when looking up', () => {
       expect(getDfaApp().lastAsk).to.contains('Es el suelo. No veo nada más.');
     });
   });
-
-  // PENDING: able to look several differnet things (ex: paredes)
 });

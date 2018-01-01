@@ -18,6 +18,7 @@ const scureLook = (itemName, data, scure) => {
   const isInInventory = scure.items.isInInventory(item.id, data.inventory);
   const isInLocation = (item.location === null) ||
     (roomId === item.location && item.location !== null);
+  console.log(item, item.location, isInLocation);
   if (!isInInventory && !isInLocation) {
     return aResponse(scure.sentences.get('item-not-in-location'));
   }
