@@ -129,7 +129,6 @@ const scureUse = (itemNames, data, scure) => {
   if (itemNames.length === 1) {
     return scureUseOneItem(itemNames[0], data, scure);
   }
-  console.log('probar 2');
   return scureUseTwoItems(itemNames[0], itemNames[1], data, scure);
 };
 
