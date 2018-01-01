@@ -2,6 +2,7 @@ const isEmptyArg = require('../lib/common').isEmptyArg;
 const isTextEqual = require('./scure-commons').isTextEqual;
 const joinMultipleStrings = require('./scure-commons').joinMultipleStrings;
 const isSynonym = require('./scure-commons').isSynonym;
+const buildUsageIndex = require('./scure-commons').buildUsageIndex;
 
 class ScureSentences {
   constructor(data) {
@@ -24,11 +25,24 @@ class ScureUsages {
     return this.data.usages.find(i => i.items === itemId);
   }
 
+  getByItemIds(itemId1, itemId2) {
+    const containsBoth = i => (i.items.indexOf(itemId1) >= 0 && i.items.indexOf(itemId2) >= 0);
+    return this.data.usages.find(containsBoth);
+  }
+
   isUsed(itemId, usages) {
     if (!usages) return false;
     if (!this.getByItemId(itemId)) return false;
     if (!usages[itemId]) return false;
     return usages[itemId] >= 1;
+  }
+
+  isUsedCombination(itemId1,itemId2, usages) {
+    if (!usages) return false;
+    if (!this.getByItemIds(itemId1, itemId2)) return false;
+    const usageIndex = buildUsageIndex(itemId1, itemId2);
+    console.log(usages[usageIndex]);
+    return usages[usageIndex] >= 1;
   }
 }
 class ScureItems {

@@ -49,8 +49,14 @@ const getDescription = (descriptions, data, scure) => {
   return match ? match.description : descriptions[descriptions.length - 1].description;
 };
 
+const buildUsageIndex = (itemId1, itemId2) => {
+  const itemsSorted = [itemId1, itemId2].sort();
+  return itemsSorted.join('-');
+};
+
 exports.joinMultipleStrings = joinMultipleStrings;
 exports.isSynonym = isSynonym;
 exports.isTextEqual = isTextEqual;
 exports.getPossibleDestinationsSentence = getPossibleDestinationsSentence;
 exports.getDescription = getDescription;
+exports.buildUsageIndex = buildUsageIndex;

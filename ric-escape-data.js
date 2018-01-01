@@ -23,8 +23,10 @@ exports.data = {
     'item-notpickable': 'No puedo llevarme el objeto {name} conmigo',
     'item-alreadypicked': 'Ya me llevé el objeto {name}.',
     'use-noarg': 'Especifíca que objeto u objetos quieres que use. Por ejemplo: usar objeto, o usar objeto con objeto.',
-    'use-cant': 'No puedo usar ese objeto.',
+    'use-cant': 'No puedo usar el objeto {item}',
+    'use-canttwo': 'No puedo usar los objetos {item1} y {item2} entre sí',
     'use-onlyonce': 'Ya utilicé ese objeto. No puedo usarlo otra vez.',
+    'use-onlyonce-two': 'Ya utilicé esos objetos. No puedo usarlos otra vez.',
     inventory: 'Llevo los siguientes objetos conmigo: {items}',
     'inventory-nothing': 'No llevo nada encima.',
     bye: 'Vale. Será un placer morir contigo. Adiós.',
@@ -90,6 +92,7 @@ exports.data = {
       aCondDesc('else', 'En la pared hay cuadro muy bonito.'),
     ], 'habitacion-108', false),
     anItem('hab108-cuadro', 'Cuadro', ['cuadro de la pared', 'cuadro de pared', 'cuadro en la pared', 'cuadro en pared'], 'Un cuadro de tu hogar natal en Newcomb.', 'habitacion-108', true, 'Veo que al llevarme el cuadro, se ha quedado en la pared una caja fuerte al descubierto.'),
+    anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared','caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras.', 'habitacion-108', false),
   ],
   usages: [
     anUsage('sala-mandos-diario', [
@@ -99,6 +102,9 @@ exports.data = {
     ], false),
     anUsage('comedor-cartera', [
       aPickingAction('Veo que dentro de la cartera hay un papel, en el que está escrito la combinación 4815. Vaya seguridad, ¿guardando números secretos en la cartera? Bueno, me lo llevo por si es de utilidad.', 'combinacion-4815'),
+    ], true),
+    anUsage(['combinacion-4815', 'hab108-cajafuerte'], [
+      aPickingAction('Clic. Sí, la caja se ha abierto. Hay un aparato extraño dentro de la caja fuerte. Me lo llevo.', 'opencajafuerte'),
     ], true),
   ],
 };

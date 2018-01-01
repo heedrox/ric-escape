@@ -4,7 +4,7 @@ const scure = require('../scure/scure').buildScureFor(ricEscapeData);
 
 describe('Ric Escape - when using', () => {
   const WRONG_ARG_DATA = [
-    { arg: null, expectedSentence: 'use-noarg', comment: 'no arg' },
+    { arg: null, expectedSentence: 'use-noarg', comment: 'no arg (null)' },
     { arg: 'Cuadro', expectedSentence: 'use-cant', comment: 'object does not exist' },
     { arg: 'sillas', expectedSentence: 'use-cant', comment: 'object cannot be used' },
   ];
@@ -19,7 +19,7 @@ describe('Ric Escape - when using', () => {
 
       ricEscape.ricEscape(request);
 
-      expect(getDfaApp().lastAsk).to.equal(scure.sentences.get(data.expectedSentence));
+      expect(getDfaApp().lastAsk).to.equal(scure.sentences.get(data.expectedSentence, {item: data.arg }));
     });
   });
 
@@ -32,7 +32,7 @@ describe('Ric Escape - when using', () => {
 
     ricEscape.ricEscape(request);
 
-    expect(getDfaApp().lastAsk).to.equal(scure.sentences.get('use-cant'));
+    expect(getDfaApp().lastAsk).to.equal(scure.sentences.get('use-cant', { item: 'diario' }));
   });
 
   describe('using objects ok several times', () => {
@@ -151,5 +151,50 @@ describe('Ric Escape - when using', () => {
     expect(getDfaApp().data.picked).to.contains('combinacion-4815');
     expect(getDfaApp().data.inventory).to.not.contains('comedor-cartera');
     expect(getDfaApp().data.inventory).to.contains('combinacion-4815');
+  });
+
+  it('tries to use two items but fails if not work (usage not exist)', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: ['combinación', 'cartera'] })
+      .withData({ roomId: 'habitacion-108', picked: ['comedor-cartera', 'combinacion-4815'], inventory: ['comedor-cartera', 'combinacion-4815'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('No puedo usar los objetos');
+    expect(getDfaApp().lastAsk).to.contains('cartera');
+    expect(getDfaApp().lastAsk).to.contains('combinación');
+  });
+
+  it('fails to use two items if were used and onlyOnce', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: ['combinacion', 'caja fuerte'] })
+      .withData({
+        roomId: 'habitacion-108',
+        usages: { 'combinacion-4815-hab108-cajafuerte': 1 },
+        picked: ['combinacion-4815'],
+        inventory: ['combinacion-4815'],
+      })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('Ya utilicé esos objetos.');
+  });
+
+  it('uses two items', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: ['combinacion', 'caja fuerte'] })
+      .withData({ roomId: 'habitacion-108', picked: ['combinacion-4815'], inventory: ['combinacion-4815'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('la caja se ha abierto.');
+    expect(getDfaApp().data.inventory).to.not.contains('combinacion-4815');
+    expect(getDfaApp().data.usages['combinacion-4815-hab108-cajafuerte']).to.equal(1);
   });
 });
