@@ -8,6 +8,7 @@ const commands = [
   c('input.unknown', ''),
   c('input.unknown', ''),
   c('look', ''),
+  c('use', ['ordenador', 'robot']),
   c('look', 'diario de abordo'),
   c('use', 'diario de abordo'),
   c('use', 'diario de abordo'),
@@ -32,6 +33,11 @@ const commands = [
   c('look', 'caja fuerte'),
   c('use', ['caja fuerte', 'combinación 4815']),
   c('use', ['aparato', 'robot']),
+  c('walk', ['pasillo sur']),
+  c('walk', ['pasillo central']),
+  c('walk', ['pasillo norte']),
+  c('walk', ['sala de mandos']),
+  c('use', ['ric', 'ordenador']),
 ];
 
 commands.forEach((command) => {

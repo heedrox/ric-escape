@@ -113,5 +113,11 @@ exports.data = {
     anUsage(['combinacion-4815', 'hab108-cajafuerte'], [
       aPickingAction('Clic. Sí, la caja se ha abierto. Hay un aparato extraño dentro de la caja fuerte. Me lo llevo.', 'hab108-aparato'),
     ], true),
+    anUsage(['ric', 'sala-mandos-ordenador'], [
+      'No quiero alterar el curso de navegación del ordenador, pues es necesario que todos muráis. Solo así salvaremos la humanidad.',
+    ], false),
+    anUsage(['ric', 'hab108-aparato'], [
+      anUnlockingAction('Oh, ¿Quieres que use este aparato conmigo mismo? Si lo haces perderé toda mi memoria... Bip. Bip. Vale. Entiende que lo que hice fue por el bien de la humanidad. Todos los humanos de esta nave lleváis un virus altamente contagioso que, si volvéis a vuestro planeta, extinguiréis la raza humana. Por favor, vuelve a dormirte. Vale, ejecutando instrucción de reseteo. 3, 2, 1. Hola, soy RIC, reestablecido a mis valores de fábrica.','ricmodified'),
+    ], false),
   ],
 };
