@@ -50,7 +50,7 @@ exports.data = {
       aCondDesc('!picked:comedor-cartera', 'Estoy en el comedor de la nave espacial. Puedo ver mesas, sillas, comida varia y varios utensilios que no entiendo para qué funcionan. También veo algo en el suelo.'),
       aCondDesc('default', 'Estoy en el comedor de la nave espacial. Puedo ver mesas, sillas, comida varia y varios utensilios que no entiendo para qué funcionan.'),
     ]),
-    aRoom('biblioteca', 'Biblioteca', [], 'Estoy en la biblioteca de la nave espacial. Puedo ver muchos libros, pero los que te pueden interesar son: libros sobre robótica, libros sobre navegación, libros sobre planetas y libros sobre biologías.'),
+    aRoom('biblioteca', 'Biblioteca', [], 'Estoy en la biblioteca de la nave espacial. Puedo ver muchos libros, pero los que te pueden interesar son: libros sobre robótica, libros sobre navegación, libros sobre planetas y libros sobre biología.'),
     aRoom('pasillo-sur', 'Pasillo sur', [], 'Estoy en el pasillo sur de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada a las habitaciones.'),
     aRoom('habitacion-108', 'Habitación 108', ['Mi habitación'], 'Estoy en la habitación 108, que es tu habitación. Te puedo ver a ti durmiendo sobre la cama, una mesilla, y un cuadro personal en la pared'),
   ],
@@ -97,8 +97,10 @@ exports.data = {
     anItem('hab108-cuadro', 'Cuadro', ['cuadro de la pared', 'cuadro de pared', 'cuadro en la pared', 'cuadro en pared'], 'Un cuadro de tu hogar natal en Newcomb.', 'habitacion-108', true, 'Veo que al llevarme el cuadro, se ha quedado en la pared una caja fuerte al descubierto.'),
     anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared', 'caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras.', 'habitacion-108', false),
     anItem('hab108-aparato', 'Aparato extraño', ['aparato', 'aparato para reprogramar robots', 'aparato de reprogramar', 'aparato para reprogramación', 'aparato para reprogramar'], 'Es un aparato para reprogramar robots. Confieso que lo escondí yo en esa caja fuerte porque me da miedo.', 'habitacion-108', false),
-    anItem('ric', 'RIC', ['robot', 'robot ric', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'Soy RIC, el Remoto Interfaz al Córtex. Gracias a mi, puedes interactuar y andar en esta nave, aunque realmente estás tendido en tu habitación.', null, false),
-    anItem('hab108-librarykey', 'Llave', [''], 'Es una llave pequeña.', null, false),
+    anItem('ric', 'RIC', ['rick', 'robot', 'robot ric', 'robot rick', 'rick el robot', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'Soy RIC, el Remoto Interfaz al Córtex. Gracias a mi, puedes interactuar y andar en esta nave, aunque realmente estás tendido en tu habitación.', null, false),
+    anItem('hab108-librarykey', 'Llave', ['llave pequeña'], 'Es una llave pequeña.', null, false),
+    anItem('biblio-librorobots', 'Libros sobre robótica', [''], 'Es una llave pequeña.', null, false),
+
   ],
   usages: [
     anUsage('sala-mandos-diario', [
@@ -131,7 +133,7 @@ exports.data = {
       'Te las leo literalmente: "No creo que haya cura, lo he intentado pero no puedo más, ya no hay tiempo. Mi mente se revela. He decidido que es mejor que muramos. He programado a RIC para que dirija la nave hacia la estrella más cercana.". Es muy duro, ¿quieres que siga leyendo?"',
       'Durante la pasada noche, he gaseado a la tripulación con el GASOTRON del comedor. Yo dormiré esta noche. Estas son mis últimas palabras. En un par de días, moriremos. Será lo mejor para salvar la humanidad.',
       aConditionalResponse([
-        aCondDesc('!picked:librarykey', aPickingAction('No hay nada más escrito, aunque en las últimas páginas hay una llave. La recojo. ', 'librarykey')),
+        aCondDesc('!picked:hab108-librarykey', aPickingAction('No hay nada más escrito, aunque en las últimas páginas hay una llave. La recojo. ', 'hab108-librarykey')),
         aCondDesc('else', 'No hay nada más escrito.'),
       ]),
     ], false),

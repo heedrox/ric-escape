@@ -41,7 +41,7 @@ const ifMatchCondition = (data, scure) => (descr) => {
     const isFree = isUnlocked(itemId, data.unlocked);
     return (isNegated && !isFree) || (!isNegated && isFree);
   }
-  return false;
+  return true;
 };
 
 const getMatchingDescription = (descriptions, data, scure) => {

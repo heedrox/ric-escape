@@ -36,6 +36,22 @@ const commands = [
   c('use', ['aparato', 'robot']),
   c('look', 'diario'),
   c('use', 'diario'),
+  c('use', 'diario'),
+  c('use', 'diario'),
+  c('use', 'diario'),
+  c('use', 'diario'),
+  c('use', 'diario'),
+  c('use', 'diario'),
+  c('use', 'diario'),
+  c('use', 'diario'),
+  c('use', 'diario'),
+  c('use', 'diario'),
+  c('use', 'diario'),
+  c('walk', 'pasillo sur'),
+  c('walk', 'pasillo central'),
+  c('walk', 'biblioteca'),
+  c('look', ''),
+
 ];
 
 commands.forEach((command) => {
@@ -57,6 +73,5 @@ commands.forEach((command) => {
     console.log('RICs data', getDfaApp().data);
     console.log('\x1b[41m **** ENDING SCENE ***** \x1b[0m');
   }
-
 });
 
