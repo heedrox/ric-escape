@@ -19,7 +19,9 @@ describe('Ric Escape - when using', () => {
 
       ricEscape.ricEscape(request);
 
-      expect(getDfaApp().lastAsk).to.equal(scure.sentences.get(data.expectedSentence, {item: data.arg }));
+      expect(getDfaApp().lastAsk).to.equal(
+        scure.sentences.get(data.expectedSentence, { item: data.arg })
+      );
     });
   });
 
@@ -33,6 +35,18 @@ describe('Ric Escape - when using', () => {
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().lastAsk).to.equal(scure.sentences.get('use-cant', { item: 'diario' }));
+  });
+
+  it('tells you cannot be used if there is no usage for it', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: 'cuadro' })
+      .withData({ roomId: 'habitacion-108' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('cuadro');
   });
 
   describe('using objects ok several times', () => {
@@ -197,4 +211,5 @@ describe('Ric Escape - when using', () => {
     expect(getDfaApp().data.inventory).to.not.contains('combinacion-4815');
     expect(getDfaApp().data.usages['combinacion-4815-hab108-cajafuerte']).to.equal(1);
   });
+
 });

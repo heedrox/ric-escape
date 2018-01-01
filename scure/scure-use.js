@@ -90,7 +90,7 @@ const scureUseOneItem = (itemName, data, scure) => {
   const item = scure.items.getItemByName(itemName);
   const usage = scure.usages.getByItemId(item.id);
   if (!usage) {
-    return aResponse(scure.sentences.get('use-cant'), { item: itemName });
+    return aResponse(scure.sentences.get('use-cant', { item: itemName }));
   }
   if (usage.onlyOnce && scure.usages.isUsed(item.id, data.usages)) {
     return aResponse(scure.sentences.get('use-onlyonce'));
@@ -124,7 +124,7 @@ const scureUseTwoItems = (itemName1, itemName2, data, scure) => {
 const scureUse = (itemNames, data, scure) => {
   const invalidationSentence = validateUsability(itemNames, data, scure);
   if (invalidationSentence) {
-    return aResponse(invalidationSentence);
+    return aResponse(invalidationSentence, data);
   }
   if (itemNames.length === 1) {
     return scureUseOneItem(itemNames[0], data, scure);

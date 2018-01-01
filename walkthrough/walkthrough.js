@@ -33,6 +33,7 @@ const commands = [
 ];
 
 commands.forEach((command) => {
+  console.log('\x1b[33mcommand', command, '\x1b[0m');
   const request = aDfaRequestBuilder()
     .withIntent(command.intent)
     .withArgs({ arg: command.arg })
@@ -41,7 +42,7 @@ commands.forEach((command) => {
 
   ricEscape.ricEscape(request);
 
-  console.log('RIC says: ', getDfaApp().lastAsk);
+  console.log('RIC says: \x1b[31m', getDfaApp().lastAsk, '\x1b[0m');
   console.log('RICs data', getDfaApp().data);
 });
 
