@@ -30,6 +30,8 @@ const commands = [
   c('look', 'cuadro'),
   c('look', 'pared'),
   c('look', 'caja fuerte'),
+  c('use', ['caja fuerte', 'combinación 4815']),
+  c('pickup', 'aparato'),
 ];
 
 commands.forEach((command) => {
