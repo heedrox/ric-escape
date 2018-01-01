@@ -27,6 +27,8 @@ const getPossibleDestinationsSentence = (scure, data) => {
   return scure.sentences.get('destinations', { destinations });
 };
 
+const isUnlocked = (lockName, unlocked) => (unlocked && unlocked.indexOf(lockName) >= 0);
+
 const ifMatchCondition = (data, scure) => (descr) => {
   if (descr.condition.indexOf(':') === -1) return true;
   const [operator, itemId] = descr.condition.split(':', 2);
@@ -34,6 +36,10 @@ const ifMatchCondition = (data, scure) => (descr) => {
   if (operator === 'picked' || operator === '!picked') {
     const isPicked = scure.items.isPicked(itemId, data.picked);
     return (isNegated && !isPicked) || (!isNegated && isPicked);
+  }
+  if (operator === 'unlocked' || operator === '!unlocked') {
+    const isFree = isUnlocked(itemId, data.unlocked);
+    return (isNegated && !isFree) || (!isNegated && isFree);
   }
   return false;
 };
@@ -54,9 +60,11 @@ const buildUsageIndex = (itemId1, itemId2) => {
   return itemsSorted.join('-');
 };
 
+
 exports.joinMultipleStrings = joinMultipleStrings;
 exports.isSynonym = isSynonym;
 exports.isTextEqual = isTextEqual;
 exports.getPossibleDestinationsSentence = getPossibleDestinationsSentence;
 exports.getDescription = getDescription;
 exports.buildUsageIndex = buildUsageIndex;
+exports.isUnlocked = isUnlocked;

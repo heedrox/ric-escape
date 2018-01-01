@@ -236,4 +236,24 @@ describe('Ric Escape - when using', () => {
     expect(getDfaApp().data.inventory).to.not.contains('combinacion-4815');
     expect(getDfaApp().data.usages['combinacion-4815-hab108-cajafuerte']).to.equal(1);
   });
+
+  describe('when conditional descriptions (ric + ordenador, for ex)', () => {
+    const TEST_CASES = [
+      { unlocked: [], expectedSentence: 'No quiero alterar' },
+      { unlocked: ['ricmodified'], expectedSentence: 'he alterado el curso' },
+    ];
+    TEST_CASES.forEach((data) => {
+      it('tells the proper description when using', () => {
+        const request = aDfaRequestBuilder()
+          .withIntent('use')
+          .withArgs({ arg: ['ric', 'ordenador'] })
+          .withData({ roomId: 'sala-mandos', unlocked: data.unlocked })
+          .build();
+
+        ricEscape.ricEscape(request);
+
+        expect(getDfaApp().lastAsk).to.contains(data.expectedSentence);
+      });
+    });
+  });
 });

@@ -6,6 +6,7 @@ const anUsage = (items, response, onlyOnce) =>
   ({ items, response, onlyOnce });
 const anUnlockingAction = (response, lock) => ({ isUnlockingAction: true, response, lock });
 const aPickingAction = (response, itemId) => ({ isPickingAction: true, response, itemId });
+const aConditionalResponse = conditions => ({ isConditional: true, conditions });
 const aLockedDestination = (roomId, lock) => ({ isLockedDestination: true, roomId, lock });
 const aCondDesc = (condition, description) => ({ conditional: true, condition, description });
 
@@ -93,8 +94,8 @@ exports.data = {
       aCondDesc('else', 'En la pared hay cuadro muy bonito.'),
     ], 'habitacion-108', false),
     anItem('hab108-cuadro', 'Cuadro', ['cuadro de la pared', 'cuadro de pared', 'cuadro en la pared', 'cuadro en pared'], 'Un cuadro de tu hogar natal en Newcomb.', 'habitacion-108', true, 'Veo que al llevarme el cuadro, se ha quedado en la pared una caja fuerte al descubierto.'),
-    anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared','caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras.', 'habitacion-108', false),
-    anItem('hab108-aparato', 'Aparato extraño', ['aparato', 'aparato para reprogramar robots', 'aparato de reprogramar', 'aparato para reprogramación' ,'aparato para reprogramar'], 'Es un aparato para reprogramar robots. Confieso que lo escondí yo en esa caja fuerte porque me da miedo.', 'habitacion-108', false),
+    anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared', 'caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras.', 'habitacion-108', false),
+    anItem('hab108-aparato', 'Aparato extraño', ['aparato', 'aparato para reprogramar robots', 'aparato de reprogramar', 'aparato para reprogramación', 'aparato para reprogramar'], 'Es un aparato para reprogramar robots. Confieso que lo escondí yo en esa caja fuerte porque me da miedo.', 'habitacion-108', false),
     anItem('ric', 'RIC', ['robot', 'robot ric', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'Soy RIC, el Remoto Interfaz al Córtex. Gracias a mi, puedes interactuar y andar en esta nave, aunque realmente estás tendido en tu habitación.', null, false),
 
   ],
@@ -114,10 +115,13 @@ exports.data = {
       aPickingAction('Clic. Sí, la caja se ha abierto. Hay un aparato extraño dentro de la caja fuerte. Me lo llevo.', 'hab108-aparato'),
     ], true),
     anUsage(['ric', 'sala-mandos-ordenador'], [
-      'No quiero alterar el curso de navegación del ordenador, pues es necesario que todos muráis. Solo así salvaremos la humanidad.',
+      aConditionalResponse([
+        aCondDesc('!unlocked:ricmodified', 'No quiero alterar el curso de navegación del ordenador, pues es necesario que todos muráis. Solo así salvaremos la humanidad.'),
+        aCondDesc('unlocked:ricmodified', 'Ok, he alterado el curso de navegación, ya no os estrellaréis. Todo termina aquí. Felicidades, has conseguido salvarte, pero no has salvado a la humanidad. Podías haber hecho algo diferente para llegar a este punto y quizás haber salvado la humanidad. Pero no, has preferido salvarte tú. Lo siento, pero tú y tu raza estáis abocados a la extinción. Adiós.'),
+      ]),
     ], false),
     anUsage(['ric', 'hab108-aparato'], [
-      anUnlockingAction('Oh, ¿Quieres que use este aparato conmigo mismo? Si lo haces perderé toda mi memoria... Bip. Bip. Vale. Entiende que lo que hice fue por el bien de la humanidad. Todos los humanos de esta nave lleváis un virus altamente contagioso que, si volvéis a vuestro planeta, extinguiréis la raza humana. Por favor, vuelve a dormirte. Vale, ejecutando instrucción de reseteo. 3, 2, 1. Hola, soy RIC, reestablecido a mis valores de fábrica.','ricmodified'),
+      anUnlockingAction('Oh, ¿Quieres que use este aparato conmigo mismo? Si lo haces perderé toda mi memoria... Bip. Bip. Vale. Entiende que lo que hice fue por el bien de la humanidad. Todos los humanos de esta nave lleváis un virus altamente contagioso que, si volvéis a vuestro planeta, extinguiréis la raza humana. Por favor, vuelve a dormirte. Vale, ejecutando instrucción de reseteo. 3, 2, 1. Hola, soy RIC, reestablecido a mis valores de fábrica.', 'ricmodified'),
     ], false),
   ],
 };

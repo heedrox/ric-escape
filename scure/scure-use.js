@@ -1,6 +1,7 @@
 const isEmptyArg = require('../lib/common').isEmptyArg;
 const aResponse = require('./scure-response').aResponse;
 const buildUsageIndex = require('./scure-commons').buildUsageIndex;
+const getDescription = require('./scure-commons').getDescription;
 
 const getUsedTimes = (item, usages) =>
   (usages && usages[item.id]) || 0;
@@ -87,6 +88,13 @@ const processItemAfterUsage = (item, data, scure) => {
   return data;
 };
 
+const processIfConditionalResponse = (response, data, scure) => {
+  if (response.isConditional) {
+    return getDescription(response.conditions, data, scure);
+  }
+  return response;
+};
+
 const scureUseOneItem = (itemName, data, scure) => {
   const item = scure.items.getItemByName(itemName);
   const usage = scure.usages.getByItemId(item.id);
@@ -114,7 +122,8 @@ const scureUseTwoItems = (itemName1, itemName2, data, scure) => {
   if (usage.onlyOnce && haveBeenUsedTogether) {
     return aResponse(scure.sentences.get('use-onlyonce-two'));
   }
-  const response = currentResponseForTwo(item1, item2, usage, data.usages);
+  const rawResponse = currentResponseForTwo(item1, item2, usage, data.usages);
+  const response = processIfConditionalResponse(rawResponse, data, scure);
   data = resolveActions(response, data);
   data = processItemAfterUsage(item1, data, scure);
   data = processItemAfterUsage(item2, data, scure);
