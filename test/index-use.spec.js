@@ -167,7 +167,7 @@ describe('Ric Escape - when using', () => {
     expect(getDfaApp().data.inventory).to.contains('combinacion-4815');
   });
 
-  it('tries to use two items but fails if not work (usage not exist)', () => {
+  it('tries to use two items but fails if no usage for both', () => {
     const request = aDfaRequestBuilder()
       .withIntent('use')
       .withArgs({ arg: ['combinación', 'cartera'] })
@@ -179,6 +179,19 @@ describe('Ric Escape - when using', () => {
     expect(getDfaApp().lastAsk).to.contains('No puedo usar los objetos');
     expect(getDfaApp().lastAsk).to.contains('cartera');
     expect(getDfaApp().lastAsk).to.contains('combinación');
+  });
+
+  it('tries to use two items but fails if one not exists', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: ['noexiste', 'cartera'] })
+      .withData({ roomId: 'habitacion-108', picked: ['comedor-cartera', 'combinacion-4815'], inventory: ['comedor-cartera', 'combinacion-4815'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('No puedo usar el objeto');
+    expect(getDfaApp().lastAsk).to.contains('noexiste');
   });
 
   it('fails to use two items if were used and onlyOnce', () => {
@@ -211,5 +224,4 @@ describe('Ric Escape - when using', () => {
     expect(getDfaApp().data.inventory).to.not.contains('combinacion-4815');
     expect(getDfaApp().data.usages['combinacion-4815-hab108-cajafuerte']).to.equal(1);
   });
-
 });
