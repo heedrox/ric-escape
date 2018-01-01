@@ -140,7 +140,7 @@ exports.data = {
     ], true),
     anUsage(['ric', 'sala-mandos-ordenador'], [
       aConditionalResponse([
-        aCondDescUsage(false, '!unlocked:ricmodified', 'No quiero alterar el curso de navegación del ordenador, pues es necesario que todos muráis. Solo así salvaremos la humanidad.'),
+        aCondDescUsage(false, '!unlocked:ricmodified', 'No puedo alterar el curso de navegación del ordenador. Mi programación no me deja hacerlo, ya que la única forma de salvar la humanidad es estrellarnos y morir.'),
         aCondDescUsage(false, '!unlocked:humanitysaved', theEndingScene('Ok, he alterado el curso de navegación, ya no os estrellaréis. Todo termina aquí. Felicidades, has conseguido salvarte, pero no has salvado a la humanidad. Podías haber hecho algo diferente para llegar a este punto. Pero no, has preferido salvarte tú. Lo siento, pero tú y tu raza estáis abocados a la extinción. Adiós.')),
         aCondDescUsage(false, 'unlocked:humanitysaved', theEndingScene('He alterado el curso de navegación, ya no os estrellaréis. Y además, la humanidad está salvada, ya que el patógeno está muerto por efecto del betacaroteno. ¡Enhorabuena! Has hecho un trabajo excelente. Hasta la próxima.')),
       ]),

@@ -259,7 +259,7 @@ describe('Ric Escape - when using', () => {
 
   describe('when conditional descriptions (ric + ordenador, for ex)', () => {
     const TEST_CASES = [
-      { unlocked: [], expectedSentence: 'No quiero alterar' },
+      { unlocked: [], expectedSentence: 'No puedo alterar' },
       { unlocked: ['ricmodified'], expectedSentence: 'he alterado el curso' },
     ];
     TEST_CASES.forEach((data) => {
