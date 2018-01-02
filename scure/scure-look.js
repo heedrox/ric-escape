@@ -3,7 +3,7 @@ const aResponse = require('./scure-response').aResponse;
 const getPossibleDestinationsSentence = require('./scure-commons').getPossibleDestinationsSentence;
 const getDescription = require('./scure-commons').getDescription;
 
-const ROOM_SYNS = ['habitación', 'lugar', 'lugares'];
+const ROOM_SYNS = ['habitación', 'habitacion', 'lugar', 'lugares'];
 
 const scureLook = (itemName, data, scure) => {
   const roomId = data.roomId;
