@@ -4,10 +4,10 @@ const scure = require('../scure/scure').buildScureFor(ricEscapeData);
 
 
 describe('Ric Escape - when looking up', () => {
-  const EMPTY_ARGS = [null, undefined, '', ' ', [], {}];
+  const EMPTY_ARGS = [null, undefined, '', ' ', 'habitación', 'lugar', [], {}];
 
   EMPTY_ARGS.forEach((arg) => {
-    it(`looks the room and shows destinations when no argument given (arg: ${arg})`, () => {
+    it(`looks the room and shows destinations when no argument given or 'habitacion' or 'lugar' is said (arg: ${arg})`, () => {
       const request = aDfaRequestBuilder()
         .withIntent('look')
         .withArgs({ arg })

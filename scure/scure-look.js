@@ -3,10 +3,12 @@ const aResponse = require('./scure-response').aResponse;
 const getPossibleDestinationsSentence = require('./scure-commons').getPossibleDestinationsSentence;
 const getDescription = require('./scure-commons').getDescription;
 
+const ROOM_SYNS = ['habitación', 'lugar', 'lugares'];
+
 const scureLook = (itemName, data, scure) => {
   const roomId = data.roomId;
   const item = scure.items.getBestItem(itemName, roomId, scure);
-  if (isEmptyArg(itemName)) {
+  if (isEmptyArg(itemName) || (ROOM_SYNS.indexOf(itemName) >= 0)) {
     const room = scure.rooms.getRoom(roomId);
     return aResponse(
       `${getDescription(room.description, data, scure)} ${getPossibleDestinationsSentence(scure, data)}`
