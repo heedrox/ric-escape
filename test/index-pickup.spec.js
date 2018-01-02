@@ -22,7 +22,7 @@ describe('Ric Escape - when picking up', () => {
 
     ricEscape.ricEscape(request);
 
-    expect(getDfaApp().lastAsk).to.equal('No veo el objeto not a valid object por aquí');
+    expect(getDfaApp().lastAsk).to.contains('No veo el objeto not a valid object por aquí');
   });
 
   it('tells you item unknown when arg, but in different room', () => {
@@ -34,7 +34,7 @@ describe('Ric Escape - when picking up', () => {
 
     ricEscape.ricEscape(request);
 
-    expect(getDfaApp().lastAsk).to.equal('No veo el objeto cartera por aquí');
+    expect(getDfaApp().lastAsk).to.contains('No veo el objeto cartera por aquí');
   });
 
   it('tells you it cannot be picked when item not pickable', () => {
@@ -46,7 +46,7 @@ describe('Ric Escape - when picking up', () => {
 
     ricEscape.ricEscape(request);
 
-    expect(getDfaApp().lastAsk).to.equal('No puedo llevarme el objeto ventanas al exterior conmigo');
+    expect(getDfaApp().lastAsk).to.contains('No puedo llevarme el objeto ventanas al exterior conmigo');
   });
 
   it('tells you it cannot be picked when item already picked up', () => {
@@ -58,7 +58,7 @@ describe('Ric Escape - when picking up', () => {
 
     ricEscape.ricEscape(request);
 
-    expect(getDfaApp().lastAsk).to.equal('Ya me llevé el objeto cartera.');
+    expect(getDfaApp().lastAsk).to.contains('Ya me llevé el objeto cartera.');
   });
 
   describe('when valid objects', () => {

@@ -3,7 +3,7 @@
 A conversational escape game for Google Assistant. In Spanish.
 
 You have 35 minutes to avoid crashing your spaceship into a star, with the help of RIC, 
-a Remote Interface to your Cortex. 
+a Remote Interface to Consciousness. 
 
 Why is your spaceship going to crash into a star? Why is the robot willing to do so?
 Discover all the misteries behind this game!

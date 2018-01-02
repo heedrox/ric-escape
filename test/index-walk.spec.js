@@ -14,7 +14,7 @@ describe('Ric Escape - when walking', () => {
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().data.roomId).to.equal('comedor');
-    expect(getDfaApp().lastAsk).to.equal('Estoy en el comedor de la nave espacial. Puedo ver mesas, sillas, comida varia y varios utensilios que no entiendo para qué funcionan. También veo algo en el suelo.');
+    expect(getDfaApp().lastAsk).to.contains('Estoy en el comedor de la nave espacial. Puedo ver mesas, sillas, comida varia y varios utensilios que no entiendo para qué funcionan. También veo algo en el suelo.');
   });
 
   it('cannot change the roomId when walking to somewhere not according to map', () => {
@@ -47,7 +47,7 @@ describe('Ric Escape - when walking', () => {
       ricEscape.ricEscape(request);
 
       expect(getDfaApp().data.roomId).to.equal(data.room);
-      expect(getDfaApp().lastAsk).to.equal(`Desde aquí puedo ir a: ${data.destinations}`);
+      expect(getDfaApp().lastAsk).to.contains(`Desde aquí puedo ir a: ${data.destinations}`);
     });
   });
 
