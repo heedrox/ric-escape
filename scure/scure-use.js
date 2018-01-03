@@ -119,6 +119,9 @@ const scureUseOneItem = (itemName, data, scure) => {
 const scureUseTwoItems = (itemName1, itemName2, data, scure) => {
   const item1 = scure.items.getBestItem(itemName1, data.roomId);
   const item2 = scure.items.getBestItem(itemName2, data.roomId);
+  if (!item1 || !item2) {
+    return aResponse(scure.sentences.get('use-canttwo', { item1: itemName1, item2: itemName2 }));
+  }
   const usage = scure.usages.getByItemIds(item1.id, item2.id);
   if (!usage) {
     return aResponse(scure.sentences.get('use-canttwo', { item1: itemName1, item2: itemName2 }));
