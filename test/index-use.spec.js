@@ -5,6 +5,7 @@ const scure = require('../scure/scure').buildScureFor(ricEscapeData);
 describe('Ric Escape - when using', () => {
   const WRONG_ARG_DATA = [
     { arg: null, expectedSentence: 'use-noarg', comment: 'no arg (null)' },
+    { arg: [], expectedSentence: 'use-noarg', comment: 'no arg (null)' },
     { arg: 'Cuadro', expectedSentence: 'use-cant', comment: 'object does not exist' },
     { arg: 'sillas', expectedSentence: 'use-cant', comment: 'object cannot be used' },
   ];
@@ -20,7 +21,7 @@ describe('Ric Escape - when using', () => {
       ricEscape.ricEscape(request);
 
       expect(getDfaApp().lastAsk).to.equal(
-        scure.sentences.get(data.expectedSentence, { item: data.arg })
+        scure.sentences.get(data.expectedSentence, { item: data.arg }),
       );
     });
   });
