@@ -57,6 +57,9 @@ const markAsPickedIfPickableObjectButUsed = (item, data) => {
 };
 
 const validateUsability = (itemNames, data, scure) => {
+  if (itemNames && itemNames.length === 0) {
+    return scure.sentences.get('use-noarg');
+  }
   for (let idx = 0; idx < itemNames.length; idx += 1) {
     const itemName = itemNames[idx];
     if (isEmptyArg(itemName)) {

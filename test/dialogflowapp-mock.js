@@ -23,6 +23,10 @@ class DialogflowAppMock {
     return this.request.body.intent;
   }
 
+  getRawInput() {
+    return this.request.body.result.resolvedQuery;
+  }
+
   ask(x) {
     this.lastAsk = x;
   }
@@ -38,6 +42,7 @@ class DfaRequestBuilder {
     this.intent = '';
     this.args = [];
     this.data = {};
+    this.rawInput = null;
   }
 
   withIntent(intent) {
@@ -55,12 +60,20 @@ class DfaRequestBuilder {
     return this;
   }
 
+  withRawInput(rawInput) {
+    this.rawInput = rawInput;
+    return this;
+  }
+
   build() {
     return {
       body: {
         intent: this.intent,
         args: this.args,
         data: this.data,
+        result: {
+          resolvedQuery: this.rawInput,
+        },
       },
       headers: [],
     };

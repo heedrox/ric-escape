@@ -40,10 +40,12 @@ describe('Ric Escape - others', () => {
 
     ricEscape.ricEscape(request);
 
-    expect(getDfaApp().lastAsk).to.contains('El único que puede ayudarte soy yo, RIC. Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario.');
-    expect(getDfaApp().lastAsk).to.contains('Nos quedan');
-    expect(getDfaApp().lastAsk).to.contains('minutos y');
-    expect(getDfaApp().lastAsk).to.contains('segundos para estrellarnos.');
+    const text = getDfaApp().lastAsk.items[0].simpleResponse.textToSpeech;
+    expect(text).to.contains('Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario.');
+    expect(text).to.contains('Nos quedan');
+    expect(text).to.contains('minutos y');
+    expect(text).to.contains('segundos para estrellarnos.');
+    expect(getDfaApp().lastAsk.items[1].basicCard.image.url).to.contains('ric-escape-map.jpg');
   });
 
   it('says goodbye if bye intent', () => {

@@ -15,7 +15,7 @@ const theEndingScene = description => ({ isEndingScene: true, description });
 
 exports.data = {
   sentences: {
-    help: 'El único que puede ayudarte soy yo, RIC. Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario. Nos quedan {time} para estrellarnos. ¿Qué quieres que haga?',
+    help: 'Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario. También te paso un mapa. Nos quedan {time} para estrellarnos. ¿Qué quieres que haga?',
     fallback: 'No te entiendo. Di Ayuda si necesitas ayuda. Nos quedan {time} para estrellarnos. ¿Qué quieres que haga?',
     destinations: 'Desde aquí puedo ir a: {destinations}. ¿Qué quieres que haga?',
     'destination-unknown': 'No sé ir al sitio {destination}. ¿Qué quieres que haga?',
@@ -27,7 +27,7 @@ exports.data = {
     'item-notpickable': 'No puedo llevarme el objeto {name} conmigo. ¿Qué quieres que haga?',
     'item-alreadyinventory': 'Ya llevo conmigo el objeto {name}. ¿Qué quieres que haga?',
     'item-alreadypicked': 'Ya me llevé el objeto {name}. ¿Qué quieres que haga?',
-    'use-noarg': 'Especifíca que objeto u objetos quieres que use. Por ejemplo: usar objeto, o usar objeto con objeto.',
+    'use-noarg': 'Especifíca que objeto u objetos quieres que use. Por ejemplo: usar objeto, o usar objeto con objeto. ¿Qué hago?',
     'use-cant': 'No puedo usar el objeto {item}. ¿Qué quieres que haga?',
     'use-canttwo': 'No puedo usar los objetos {item1} y {item2} entre sí. ¿Qué quieres que haga?',
     'use-onlyonce': 'Ya utilicé ese objeto. No puedo usarlo otra vez. ¿Qué quieres que haga?',

@@ -1,4 +1,8 @@
 const getLeftTimeFrom = require('../lib/common').getLeftTimeFrom;
+const RichResponse = require('actions-on-google').Responses.RichResponse;
+const BasicCard = require('actions-on-google').Responses.BasicCard;
+
+const MAP_URL = 'https://ric-escape.firebaseapp.com/ric-escape-map.jpg';
 
 const increaseNumFallbacks = (app) => {
   const getnextNumFallbacks = num => (!num ? 1 : (num + 1));
@@ -13,10 +17,18 @@ const welcome = scure => (app) => {
 
 const help = scure => (app) => {
   const time = getLeftTimeFrom(scure, app);
-  app.ask(scure.sentences.get('help', { time }));
+  const helpText = scure.sentences.get('help', { time });
+  const mapCard = new BasicCard().setImage(MAP_URL, 'Un mapa de las habitaciones de la nave');
+  const mapImage = new RichResponse().addSimpleResponse(helpText).addBasicCard(mapCard);
+  app.ask(mapImage);
 };
 
 const fallback = scure => (app) => {
+  if (app.getRawInput() === 'activateft') {
+    app.data.testFT = true;
+    app.ask('ok. ¿y ahora qué?');
+    return;
+  }
   app = increaseNumFallbacks(app);
   const welcomeSentence = scure.getInit().welcome[app.data.numFallbacks];
   if (typeof welcomeSentence === 'undefined') {
