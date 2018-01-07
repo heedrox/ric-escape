@@ -18,6 +18,7 @@ module.exports = {
     'no-param-reassign': 0,
     'chai-friendly/no-unused-expressions': 2,
     'strict': 0,
+    'dot-notation': 0,
   },
   'env': {
     'mocha': true
