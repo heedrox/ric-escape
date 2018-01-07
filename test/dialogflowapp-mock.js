@@ -6,11 +6,16 @@ class DialogflowAppMock {
     this.request = options.request;
     this.response = options.response;
     this.data = options.request.body.data;
+    this.locale = options.request.body.locale;
     global.dfaApp = this;
   }
 
   getArgument(argName) {
     return this.request.body.args[argName];
+  }
+
+  getUserLocale() {
+    return this.locale;
   }
 
   handleRequest(map) {
@@ -43,6 +48,7 @@ class DfaRequestBuilder {
     this.args = [];
     this.data = {};
     this.rawInput = null;
+    this.locale = null;
   }
 
   withIntent(intent) {
@@ -65,6 +71,11 @@ class DfaRequestBuilder {
     return this;
   }
 
+  withLocale(locale) {
+    this.locale = locale;
+    return this;
+  }
+
   build() {
     return {
       body: {
@@ -74,6 +85,7 @@ class DfaRequestBuilder {
         result: {
           resolvedQuery: this.rawInput,
         },
+        locale: this.locale,
       },
       headers: [],
     };
