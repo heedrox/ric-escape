@@ -1,8 +1,9 @@
 const isEmptyArg = require('../lib/common').isEmptyArg;
 
-const joinMultipleStrings = (arr) => {
+const joinMultipleStrings = (arr, language) => {
   if (arr.length === 1) return arr[0];
-  return `${arr.slice(0, arr.length - 1).join(', ')} y ${arr[arr.length - 1]}`;
+  const concatenator = (language === 'en') ? 'and' : 'y';
+  return `${arr.slice(0, arr.length - 1).join(', ')} ${concatenator} ${arr[arr.length - 1]}`;
 };
 
 const baseChars = str => str.replace(/[áäàÀÁÂÃÄÅ]/g, 'a')

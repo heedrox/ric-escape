@@ -12,7 +12,9 @@ const use = scure => (app) => {
 
   const finalSentence = scureResponse.sentence;
   if (finalSentence.isEndingScene) {
-    const finalWords = `${finalSentence.description} Quedaban ${getLeftTimeFrom(scure, app)}`;
+    const endingRemainingTime = scure.sentences.get('ending-remaining-time',
+      { timeLeft: getLeftTimeFrom(scure, app) });
+    const finalWords = `${finalSentence.description} ${endingRemainingTime}`;
     app.tell(finalWords);
   } else {
     app.ask(finalSentence);

@@ -1,3 +1,5 @@
+const getLanguage = require('../lib/common').getLanguage;
+
 const initializeStartTime = (app) => {
   const newApp = app;
   newApp.data.startTime = newApp.data.startTime || JSON.stringify(new Date());
@@ -17,13 +19,20 @@ const increaseNumCommand = (app) => {
   return newApp;
 };
 
+const updateLanguage = (app) => {
+  const newApp = app;
+  newApp.data.language = getLanguage(app);
+  return newApp;
+};
+
 const initialize = (scure, app) => {
   const app0 = app;
   app0.data = app.data || {};
   const app1 = initializeStartTime(app);
   const app2 = initializeDefaultRoom(scure, app1);
   const app3 = increaseNumCommand(app2);
-  return app3;
+  const app4 = updateLanguage(app3);
+  return app4;
 };
 
 exports.initialize = initialize;

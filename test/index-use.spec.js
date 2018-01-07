@@ -301,6 +301,22 @@ describe('Ric Escape - when using', () => {
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().lastTell).to.contains('he alterado');
+    expect(getDfaApp().lastTell).to.contains('Quedaban');
     expect(getDfaApp().lastTell).to.contains('minutos');
+  });
+
+  it('ends the game when is ending scene and adds time in English', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: ['ric', 'computer'] })
+      .withData({ roomId: 'sala-mandos', unlocked: ['ricmodified'] })
+      .withLocale('en-US')
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastTell).to.contains('course');
+    expect(getDfaApp().lastTell).to.contains('You had left');
+    expect(getDfaApp().lastTell).to.contains('minutes');
   });
 });

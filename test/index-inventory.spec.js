@@ -13,6 +13,32 @@ describe('Ric Escape - inventory', () => {
     expect(getDfaApp().lastAsk).to.contains('Cartera');
   });
 
+  it('tells you your inventory with multiple items', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('inventory')
+      .withData({ inventory: ['comedor-cartera', 'hab108-cuadro'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('Llevo los siguientes objetos');
+    expect(getDfaApp().lastAsk).to.contains('Cartera y Cuadro');
+  });
+
+  it('tells you your inventory with multiple items in English', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('inventory')
+      .withData({ inventory: ['comedor-cartera', 'hab108-cuadro'] })
+      .withLocale('en-US')
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('carrying these items');
+    expect(getDfaApp().lastAsk).to.contains('Wallet and Picture');
+  });
+
+
   it('tells you that has nothing', () => {
     const request = aDfaRequestBuilder()
       .withIntent('inventory')

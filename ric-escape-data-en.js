@@ -20,6 +20,7 @@ exports.data = {
     destinations: 'From here I can go to: {destinations}. What next?',
     'destination-unknown': 'I do not know how to go to {destination}. What next?',
     'remaining-time': '{minutes} minutes and {seconds} seconds',
+    'ending-remaining-time': 'You had left {timeLeft}',
     'item-not-in-location': 'I do not find or see that item. What next?',
     'item-notseen': 'I do not see the item {name} around here. What next?',
     'item-unknown': 'I did not get what do you want me to pick up. What next?',
@@ -50,8 +51,8 @@ exports.data = {
     aRoom('pasillo-norte', 'North hall', ['hall of north', 'north'], 'I am at the north hall of this space ship. I can see different TVs on the walls, some modern furniture, the entrance to the dining room and to the controls room. What next?'),
     aRoom('pasillo-central', 'Central hall', ['central'], 'I am at the central hall of this space ship. I can see different TVs on the wallks, some modern furniture, the entrance to the library and to north and south halls. What next?'),
     aRoom('comedor', 'Dining Room', ['diner', 'dining hall', 'canteen'], [
-      aCondDesc('!picked:comedor-cartera', 'I am at the dining room of this space ship. I can see chairs, tables, some food and some applicances I do not understand. I can also see something on the floor also. What next?'),
-      aCondDesc('default', 'I am at the dining room of this space ship. I can see chairs, tables, some food and some applicances I do not understand. What next?'),
+      aCondDesc('!picked:comedor-cartera', 'I am at the dining room of this space ship. I can see chairs, tables, some food and some appliances I do not understand. I can also see something on the floor also. What next?'),
+      aCondDesc('default', 'I am at the dining room of this space ship. I can see chairs, tables, some food and some appliances I do not understand. What next?'),
     ]),
     aRoom('biblioteca', 'Library', [], 'I am at the library of this space ship. I can see many books, but these ones may be of interest: books on robotics, books on navigation and books on planets. What next?'),
     aRoom('pasillo-sur', 'South hall', ['south'], 'I am at the south hall of this space ship. I can see TVs, some modern furniture, the entrance to compartments rooms and to central hall. What next?'),
@@ -90,7 +91,7 @@ exports.data = {
     anItem('comedor-sillas', 'Chairs from the dining room', ['chairs', 'chair', 'dining chair', 'sitting chair','stools', 'stool'], 'These are sitting chairs. Nothing special. What next?', 'comedor', false),
     anItem('comedor-comida', 'Lot\'s of food', ['food', 'foods', 'several food', 'several foods'], 'There is a lot of food. Too many. Tell me what you want me to pick up specifically. What next?', 'comedor', false),
     anItem('comedor-utensilios', 'Lot\'s of home appliances', ['appliances', 'home appliances', 'tools', 'kitchen tools', 'tool'], 'There are lot of home appliances here. Tell me which one you want me to use specifically, as I see too many. What next?', 'comedor', false),
-    anItem('comedor-gasotron', 'Gasotron', ['gasotrom'], 'A gasotron allows to dilute components and molecules of a food into the air. What next?', 'comedor', true),
+    anItem('comedor-gasotron', 'Gasotron', ['gasit run', 'gas station', 'gasotrom'], 'A gasotron allows to dilute components and molecules of a food into the air. What next?', 'comedor', true),
     anItem('comedor-zanahoria', 'Carrot', ['carrots'], 'Carrots, food rich in beta carotene. What should I do?', 'comedor', true),
     anItem('combinacion-4815', '4815 number', ['4815', 'number 4815', 'combination 4815', '4815 combination', 'combination', '4815 code', 'code 4815'], 'It is the combination that you had in your wallet. What next?', '', true),
     anItem('hab108-cama', 'Bed', ['myself', 'me', 'to me', 'on bed', 'over the bed'], 'I see yourself lying on the bed. I do not want to wake you up, as you need to die. What next?', 'habitacion-108', false),
@@ -106,19 +107,19 @@ exports.data = {
     anItem('hab108-librarykey', 'Key', ['small key'], 'It is a small key. What next?', 'habitacion-108', false),
     anItem('biblio-libros', 'Books', ['book'], 'There are lots of books. The ones that may be interesting are: books on navigation, books on robotics and books on planets. What next?', 'biblioteca', false),
     anItem('biblio-librorobots', 'Books on robotics', ['robotic books', 'books on robotic', 'books on robots', 'robots books', 'robot books', 'robot book'], 'There are lots of books on robotics. I see one about programming a RIC model like me. It is called "RIC models". What next?', 'biblioteca', false),
-    anItem('biblio-libroric', 'Ric Models Book', ['rick model book', 'rick models book', 'ric model book', 'book on ric', 'book on rick', 'book on ric models', 'books on ric model', 'book on rick models', 'book on ricks models', 'rick model', 'rick models','rick book'], 'It is the book "RIC models". Say "Use RIC models book" if you want me to read it. What next?', 'biblioteca', false),
-    anItem('codigo-1893', 'code 1893', ['code', '1893 code', '1893 combination', 'number 1893', '1893 number', 'combination 1893'], 'It is the code to reprogram robots. Please do not look at me like that. What next?', 'biblioteca', false),
+    anItem('biblio-libroric', 'Ric Models Book', ['rick models', 'ric models', 'rick model book', 'rick models book', 'ric model book', 'book on ric', 'book on rick', 'book on ric models', 'books on ric model', 'book on rick models', 'book on ricks models', 'rick model', 'rick models','rick book'], 'It is the book "RIC models". Say "Use RIC models book" if you want me to read it. What next?', 'biblioteca', false),
+    anItem('codigo-1893', 'code 1893', ['code', '1893', '1893 code', '1893 combination', 'number 1893', '1893 number', 'combination 1893'], 'It is the code to reprogram robots. Please do not look at me like that. What next?', 'biblioteca', false),
     anItem('biblio-libronavegacion', 'Books on navigation', ['navigation', 'navigation books', 'books about navigation', 'book on navigation', 'books of navigation'], 'There are plenty books on navigation. Driving this ship is easy. I can do that. Do not spend time reading these books. What next?', 'biblioteca', false),
     anItem('biblio-armario', 'Bookshelf', ['bookshelf', 'shelf', 'shelf with books', 'shell with books', 'bookshell', 'book shelf'], 'This shelf has lots of interesting books about planets. What do I do?', 'biblioteca', false),
     anItem('biblio-libroplanetas', 'Books on planets', ['books on planet', 'book on planets', 'planet books'], [
       aCondDesc('!unlocked:libroplanetas', 'There are plenty books on different planets. But these books are locked inside a bookshelf. Closed knowledge? (sorry for the bad joke). What next?'),
-      aCondDesc('unlocked:libroplanetas', 'The bookshelf is open. Say "Use book on PLANET" so I read you a book on a specific planet. For example, "use book on Venus". What next?'),
+      aCondDesc('unlocked:libroplanetas', 'The bookshelf is open. Say "Use book about PLANET" so I read you a book about a specific planet. For example, "use book about Venus". What next?'),
     ], 'biblioteca', false),
-    anItem('biblio-librovenus', 'Book on Venus', ['book on planet venus', 'venus book', 'venus'], [
+    anItem('biblio-librovenus', 'Book about Venus', ['book about planet venus', 'book venus', 'venus book', 'venus'], [
       aCondDesc('!unlocked:libroplanetas', 'The bookshelf is closed. I do not reach this book. What next?'),
       aCondDesc('unlocked:libroplanetas', 'If you want me to read it, say "Use book on Venus". What next?'),
     ], 'biblioteca', false),
-    anItem('biblio-librolexus', 'Book on Lexus', ['lexus', 'lexus book', 'books on lexus', 'book on planet Lexus', 'Book about Lexus'], [
+    anItem('biblio-librolexus', 'Book about Lexus', ['book lexus', 'lexus', 'lexus book', 'books about lexus', 'book about planet Lexus', 'Book about Lexus'], [
       aCondDesc('!unlocked:libroplanetas', 'The bookshelf is closed. I do not reach this book. What next?'),
       aCondDesc('unlocked:libroplanetas', 'If you want me to read it, say "Use book on Lexus". What next?'),
     ], 'biblioteca', false),
@@ -163,11 +164,11 @@ exports.data = {
       ]),
     ], false),
     anUsage(['ric', 'hab108-aparato'], [
-      anUnlockingAction('Ok. Now the device is using a code. Are you doing what I think you are doing? What next?', 'ricpending'),
+      anUnlockingAction('Ok. Now the device is asking for a code. Are you doing what I think you are doing? What next?', 'ricpending'),
     ], true),
     anUsage('hab108-diario', [
       'In the first pages of the diary, you write about how exciting it is this trip, to boldly go where no man has gone before. What next?',
-      'In following pages, you talk about this strange planet we landed on. You write about this member of the crew got infected from a virus. This virus infected soon the rest of the passengers. What next?',
+      'In following pages, you talk about this strange planet we landed on. You write about how this member of the crew got infected from a virus. This virus infected soon the rest of the passengers. What next?',
       'The following pages, you write about how dangerous it would be if this virus got to Earth. In a moment of dispair, you write the next last words. What next?',
       'I read them to you literally: "I do not believe there is any cure. I tried but I failed. There is no time. I decided that the best thing to do is all of us to die. I programmed RIC to change the course to the closest star.". This is very tough. Do you want me to keep reading. What do I do?',
       'During last night, I gassed the crew with the Gasotron device from the dining room. I will sleep tonight. These are my last words. In a couple of days, nothing will matter anymore. And humanity will be saved. What next?',

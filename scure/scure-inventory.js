@@ -7,7 +7,7 @@ const scureInventory = (data, scure) => {
   }
   const itemIds = data.inventory.slice();
   const itemNames = itemIds.map(id => scure.items.getItem(id).name);
-  const items = joinMultipleStrings(itemNames);
+  const items = joinMultipleStrings(itemNames, data.language);
   const inventoryExplain = scure.sentences.get('inventory', { items });
   return aResponse(inventoryExplain);
 };

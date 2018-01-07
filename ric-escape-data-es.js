@@ -20,6 +20,7 @@ exports.data = {
     destinations: 'Desde aquí puedo ir a: {destinations}. ¿Qué quieres que haga?',
     'destination-unknown': 'No sé ir al sitio {destination}. ¿Qué quieres que haga?',
     'remaining-time': '{minutes} minutos y {seconds} segundos',
+    'ending-remaining-time': 'Quedaban {timeLeft}',
     'item-not-in-location': 'No encuentro o veo ese objeto. ¿Qué quieres que haga?',
     'item-notseen': 'No veo el objeto {name} por aquí. ¿Qué quieres que haga?',
     'item-unknown': 'No te he entendido qué quieres que me lleve. ¿Qué quieres que haga?',
