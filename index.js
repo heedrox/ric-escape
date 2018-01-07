@@ -3,31 +3,31 @@
 'use strict';
 
 process.env.DEBUG = 'actions-on-google:*';
-const App = require('actions-on-google').DialogflowApp;
+const DialogflowApp = require('actions-on-google').DialogflowApp;
 
 const functions = require('firebase-functions');
 const ricEscapeData = require('./ric-escape-data.js').data;
-const scure = require('./scure/scure').buildScureFor(ricEscapeData);
+const buildScureFor = require('./scure/scure').buildScureFor;
 const initialize = require('./intents/initializer').initialize;
 const isTimeOver = require('./lib/common').isTimeOver;
+const getLanguage = require('./lib/common').getLanguage;
 
-const walk = require('./intents/walk').walk(scure);
-const look = require('./intents/look').look(scure);
-const pickup = require('./intents/pickup').pickup(scure);
-const use = require('./intents/use').use(scure);
-const inventory = require('./intents/inventory').inventory(scure);
-const help = require('./intents/others').help(scure);
-const fallback = require('./intents/others').fallback(scure);
-const welcome = require('./intents/others').welcome(scure);
-const bye = require('./intents/others').bye(scure);
+const walk = require('./intents/walk').walk;
+const look = require('./intents/look').look;
+const pickup = require('./intents/pickup').pickup;
+const use = require('./intents/use').use;
+const inventory = require('./intents/inventory').inventory;
+const help = require('./intents/others').help;
+const fallback = require('./intents/others').fallback;
+const welcome = require('./intents/others').welcome;
+const bye = require('./intents/others').bye;
 
 exports.ricEscape = functions.https.onRequest((request, response) => {
-  const appInit = new App({ request, response });
+  const appInit = new DialogflowApp({ request, response });
+  const scure = buildScureFor(ricEscapeData[getLanguage(appInit)]);
   const app = initialize(scure, appInit);
 
-  console.log(`Request headers: ${JSON.stringify(request.headers)}`);
-  console.log(`Request body: ${JSON.stringify(request.body)}`);
-  console.log(`Intent: ${app.getIntent()}`);
+  console.log(`Intent: ${app.data.numCommands} / ${app.getIntent()} / ${getLanguage(app) === 'en' ? 'en' : 'es'}`);
 
   if (isTimeOver(app.data)) {
     app.tell(scure.sentences.get('end-timeover'));
@@ -35,15 +35,15 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
   }
 
   const actionMap = new Map();
-  actionMap.set('help', help);
-  actionMap.set('input.unknown', fallback);
-  actionMap.set('input.welcome', welcome);
-  actionMap.set('look', look);
-  actionMap.set('walk', walk);
-  actionMap.set('pickup', pickup);
-  actionMap.set('use', use);
-  actionMap.set('inventory', inventory);
-  actionMap.set('bye', bye);
+  actionMap.set('help', help(scure));
+  actionMap.set('input.unknown', fallback(scure));
+  actionMap.set('input.welcome', welcome(scure));
+  actionMap.set('look', look(scure));
+  actionMap.set('walk', walk(scure));
+  actionMap.set('pickup', pickup(scure));
+  actionMap.set('use', use(scure));
+  actionMap.set('inventory', inventory(scure));
+  actionMap.set('bye', bye(scure));
 
   app.handleRequest(actionMap);
 });

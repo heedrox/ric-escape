@@ -1,6 +1,6 @@
 # RIC Escape
 
-A conversational escape game for Google Assistant. In Spanish.
+A conversational escape game for Google Assistant. In English and Spanish.
 
 You have 35 minutes to avoid crashing your spaceship into a star, with the help of RIC, 
 a Remote Interface to Consciousness. 

@@ -1,5 +1,5 @@
 const ricEscape = require('../index.js');
-const ricEscapeData = require('../ric-escape-data').data;
+const ricEscapeData = require('../ric-escape-data').data['es'];
 const scure = require('../scure/scure').buildScureFor(ricEscapeData);
 
 const ABOUT_90_MINUTES_AGO = new Date(new Date().getTime() - (90 * 1000 * 60));

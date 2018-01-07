@@ -1,5 +1,5 @@
 const ricEscape = require('../index.js');
-const ricEscapeData = require('../ric-escape-data').data;
+const ricEscapeData = require('../ric-escape-data').data['es'];
 const scure = require('../scure/scure').buildScureFor(ricEscapeData);
 
 
