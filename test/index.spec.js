@@ -48,6 +48,17 @@ describe('Ric Escape - others', () => {
     expect(getDfaApp().lastAsk.items[1].basicCard.image.url).to.contains('ric-escape-map.jpg');
   });
 
+  it('tells you the map in English when help', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('help')
+      .withLocale('en-US')
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk.items[1].basicCard.image.url).to.contains('ric-escape-map-en.jpg');
+  });
+
   it('says goodbye if bye intent', () => {
     const request = aDfaRequestBuilder()
       .withIntent('bye')

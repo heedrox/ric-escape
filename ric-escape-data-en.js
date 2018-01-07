@@ -19,6 +19,7 @@ exports.data = {
     fallback: 'I don\'t undersant. Say Help if you need help. We have {time} left to die. What do you want me to do?',
     destinations: 'From here I can go to: {destinations}. What next?',
     'destination-unknown': 'I do not know how to go to {destination}. What next?',
+    'map-alt': 'A map with control room, north hall, dining room, central hall, library, south hall and compartments',
     'remaining-time': '{minutes} minutes and {seconds} seconds',
     'ending-remaining-time': 'You had left {timeLeft}',
     'item-not-in-location': 'I do not find or see that item. What next?',

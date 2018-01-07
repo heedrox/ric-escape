@@ -2,7 +2,8 @@ const getLeftTimeFrom = require('../lib/common').getLeftTimeFrom;
 const RichResponse = require('actions-on-google').Responses.RichResponse;
 const BasicCard = require('actions-on-google').Responses.BasicCard;
 
-const MAP_URL = 'https://ric-escape.firebaseapp.com/ric-escape-map.jpg';
+const MAP_URL_SPANISH = 'https://ric-escape.firebaseapp.com/ric-escape-map.jpg';
+const MAP_URL_ENGLISH = 'https://ric-escape.firebaseapp.com/ric-escape-map-en.jpg';
 
 const increaseNumFallbacks = (app) => {
   const getnextNumFallbacks = num => (!num ? 1 : (num + 1));
@@ -18,7 +19,8 @@ const welcome = scure => (app) => {
 const help = scure => (app) => {
   const time = getLeftTimeFrom(scure, app);
   const helpText = scure.sentences.get('help', { time });
-  const mapCard = new BasicCard().setImage(MAP_URL, 'Un mapa de las habitaciones de la nave');
+  const mapUrl = app.data.language === 'en' ? MAP_URL_ENGLISH : MAP_URL_SPANISH;
+  const mapCard = new BasicCard().setImage(mapUrl, scure.sentences.get('map-alt'));
   const mapImage = new RichResponse().addSimpleResponse(helpText).addBasicCard(mapCard);
   app.ask(mapImage);
 };

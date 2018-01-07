@@ -19,6 +19,7 @@ exports.data = {
     fallback: 'No te entiendo. Di Ayuda si necesitas ayuda. Nos quedan {time} para estrellarnos. ¿Qué quieres que haga?',
     destinations: 'Desde aquí puedo ir a: {destinations}. ¿Qué quieres que haga?',
     'destination-unknown': 'No sé ir al sitio {destination}. ¿Qué quieres que haga?',
+    'map-alt': 'Mapa con: sala de mandos, pasillo norte, comedor, pasillo central, biblioteca, pasillo sur y habitaciones',
     'remaining-time': '{minutes} minutos y {seconds} segundos',
     'ending-remaining-time': 'Quedaban {timeLeft}',
     'item-not-in-location': 'No encuentro o veo ese objeto. ¿Qué quieres que haga?',
