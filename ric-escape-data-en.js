@@ -16,7 +16,7 @@ const theEndingScene = description => ({ isEndingScene: true, description });
 exports.data = {
   sentences: {
     help: 'You can ask me to: Look, Use, Walk, Pick up and Inventory. Here is a map also. We have {time} left to die. What do you want me to do?',
-    fallback: 'I don\'t undersant. Say Help if you need help. We have {time} left to die. What do you want me to do?',
+    fallback: 'I don\'t understand. Say Help if you need help. We have {time} left to die. What do you want me to do?',
     destinations: 'From here I can go to: {destinations}. What next?',
     'destination-unknown': 'I do not know how to go to {destination}. What next?',
     'map-alt': 'A map with control room, north hall, dining room, central hall, library, south hall and compartments',
