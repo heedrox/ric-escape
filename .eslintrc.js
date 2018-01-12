@@ -17,7 +17,7 @@ module.exports = {
     'no-unused-expressions': 0,
     'no-param-reassign': 0,
     'chai-friendly/no-unused-expressions': 2,
-    'strict': 0,
+    strict: 0,
     'dot-notation': 0,
   },
   'env': {

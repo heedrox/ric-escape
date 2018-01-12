@@ -36,7 +36,7 @@ exports.data = {
     'use-onlyonce-two': 'Ya utilicé esos objetos. No puedo usarlos otra vez. ¿Qué quieres que haga?',
     inventory: 'Llevo los siguientes objetos conmigo: {items}. ¿Qué quieres que haga?',
     'inventory-nothing': 'No llevo nada encima. ¿Qué quieres que haga?',
-    bye: 'Vale. Será un placer morir contigo. Adiós.',
+    bye: 'Vale. Será un placer morir contigo. Nos vemos en la otra vida, hermano. Adiós.',
     'end-timeover': 'Ya no hay tiempo. Vamos a estrellarnos. Ha sido un placer trabajar junto a ti. Te veo en la otra vida, hermano.',
   },
   init: {

@@ -1,6 +1,7 @@
 const getLeftTimeFrom = require('../lib/common').getLeftTimeFrom;
 const RichResponse = require('actions-on-google').Responses.RichResponse;
 const BasicCard = require('actions-on-google').Responses.BasicCard;
+const cleanData = require('../lib/common').cleanData;
 
 const MAP_URL_SPANISH = 'https://ric-escape.firebaseapp.com/ric-escape-map.jpg';
 const MAP_URL_ENGLISH = 'https://ric-escape.firebaseapp.com/ric-escape-map-en.jpg';
@@ -42,6 +43,8 @@ const fallback = scure => (app) => {
 };
 
 const bye = scure => (app) => {
+  app = cleanData(app);
+  app.data = null;
   app.tell(scure.sentences.get('bye'));
 };
 

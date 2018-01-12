@@ -59,24 +59,28 @@ describe('Ric Escape - others', () => {
     expect(getDfaApp().lastAsk.items[1].basicCard.image.url).to.contains('ric-escape-map-en.jpg');
   });
 
-  it('says goodbye if bye intent', () => {
+  it('says goodbye if bye intent and cleans', () => {
     const request = aDfaRequestBuilder()
       .withIntent('bye')
+      .withData({ inventory: ['cartera'], startTime: JSON.stringify(new Date() - 50) })
       .build();
 
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().lastTell).to.contains('Adiós.');
+    expect(getDfaApp().data.inventory).to.eql([]);
+    expect(getDfaApp().data.startTime).to.eql(null);
   });
 
-  it('finishes when time is up', () => {
+  it('finishes when time is up and cleans', () => {
     const request = aDfaRequestBuilder()
       .withIntent('bye')
-      .withData({ startTime: JSON.stringify(ABOUT_90_MINUTES_AGO) })
+      .withData({ startTime: JSON.stringify(ABOUT_90_MINUTES_AGO), inventory: ['cartera'] })
       .build();
 
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().lastTell).to.contains(scure.sentences.get('end-timeover'));
+    expect(getDfaApp().data.inventory).to.eql([]);
   });
 });

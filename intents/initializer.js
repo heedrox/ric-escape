@@ -20,15 +20,14 @@ const increaseNumCommand = (app) => {
 };
 
 const updateLanguage = (app) => {
-  const newApp = app;
-  newApp.data.language = getLanguage(app);
-  return newApp;
+  app.data.language = getLanguage(app);
+  return app;
 };
 
 const initialize = (scure, app) => {
   const app0 = app;
   app0.data = app.data || {};
-  const app1 = initializeStartTime(app);
+  const app1 = initializeStartTime(app0);
   const app2 = initializeDefaultRoom(scure, app1);
   const app3 = increaseNumCommand(app2);
   const app4 = updateLanguage(app3);

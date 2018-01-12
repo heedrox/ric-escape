@@ -11,6 +11,7 @@ const buildScureFor = require('./scure/scure').buildScureFor;
 const initialize = require('./intents/initializer').initialize;
 const isTimeOver = require('./lib/common').isTimeOver;
 const getLanguage = require('./lib/common').getLanguage;
+const cleanData = require('./lib/common').cleanData;
 
 const walk = require('./intents/walk').walk;
 const look = require('./intents/look').look;
@@ -30,6 +31,7 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
   console.log(`Intent: ${app.data.numCommands} / ${app.getIntent()} / ${getLanguage(app) === 'en' ? 'en' : 'es'}`);
 
   if (isTimeOver(app.data)) {
+    cleanData(app);
     app.tell(scure.sentences.get('end-timeover'));
     return;
   }
@@ -44,6 +46,7 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
   actionMap.set('use', use(scure));
   actionMap.set('inventory', inventory(scure));
   actionMap.set('bye', bye(scure));
+  actionMap.set('_exit._exit-yes', bye(scure));
 
   app.handleRequest(actionMap);
 });
