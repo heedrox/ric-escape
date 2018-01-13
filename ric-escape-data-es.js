@@ -70,7 +70,7 @@ exports.data = {
   },
   items: [
     anItem('ric', 'RIC', ['rick', 'robot', 'robot ric', 'robot rick', 'rick el robot', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'Soy RIC, el Remoto Interfaz de Conciencia. Gracias a mi, puedes interactuar y andar en esta nave, aunque realmente estás tendido en tu habitación. ¿Qué quieres que haga?', null, false),
-    anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventana al exterior', 'ventana', 'ventanas', 'ventanas exteriores'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca. ¿Qué hago?', 'sala-mandos', false),
+    anItem('sala-mandos-ventanas', 'Ventanas al exterior', ['ventana al exterior', 'ventana', 'ventanas', 'ventanas exteriores', 'ventana fuera', 'ventana nave'], 'Son las ventanas al exterior. Desde aquí puedes ver planetas y estrellas. Una de esas estrellas está peligrosamente cerca. ¿Qué hago?', 'sala-mandos', false),
     anItem('sala-mandos-ordenador', 'Ordenador de navegación', ['ordenador', 'navegación', 'ordenador para navegar', 'mandos de navegación'], 'Es el ordenador de navegación. Si no hacemos nada, nos estrellaremos contra esa estrella. ¿Qué hago?', 'sala-mandos', false),
     anItem('sala-mandos-diario', 'Diario de abordo', ['diario'], 'Es el diario de abordo. Si quieres que interactúe con él, di "Usar diario". ¿Qué hago?', 'sala-mandos', false),
     anItem('pasnor-pared', 'Paredes', ['paredes del pasillo norte', 'paredes', 'pared'], 'Son las paredes del pasillo. No veo nada especial. ¿Qué hago?', 'pasillo-norte', false),
@@ -192,6 +192,9 @@ exports.data = {
         aCondDescUsage(false, '!unlocked:libroplanetas', 'El armario está cerrado. No puedo alcanzar el libro. ¿Qué más hago?'),
         aCondDescUsage(false, 'unlocked:libroplanetas', 'Hay mucha información sobre el planeta, pero quizás esto te interese: Los agentes biológicos del planeta Lexus encuentran altamente tóxicos los alimentos basados en carotenos, como por ejemplo, la zanahoria. ¿Qué más hago?'),
       ]),
+    ], false),
+    anUsage('hab108-cuadro', [
+      'No creo que tenga que USAR el cuadro, pero quizás me lo puedo llevar... ¿Qué hago?',
     ], false),
     anUsage(['hab108-cuadro', 'biblio-librarykey'], [
       'El cuadro no tiene que abrirse, está suelto. Incluso creo que me lo puedo llevar. ¿Qué hago?',

@@ -12,6 +12,7 @@ const STOPWORDS = [
   'that',
   'through',
   'your',
+  'al',
   'de',
   'desde',
   'el',
