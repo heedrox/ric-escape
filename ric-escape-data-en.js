@@ -193,6 +193,15 @@ exports.data = {
         aCondDescUsage(false, 'unlocked:libroplanetas', 'There is a lot of information about the planet, but the most interesting thing is that the biological agents of the Lexus planet are highly toxic to betacarotene based food, as, for example, carrots. What next?'),
       ]),
     ], false),
+    anUsage(['hab108-cuadro', 'biblio-librarykey'], [
+      'The picture does not open, as it is quite loose. I think I could even take it with me. What next?',
+    ], false),
+    anUsage(['comedor-gasotron', 'biblio-librarykey'], [
+      'Gasotron does not need any key to be used. Use it with some specific food. What next?',
+    ], false),
+    anUsage(['comedor-gasotron', 'comedor-comida'], [
+      'There is too much food I could use with the Gasotron. Tell me exactly what food do you want me to use it with. What next?',
+    ], false),
     anUsage(['comedor-gasotron', 'comedor-zanahoria'], [
       anUnlockingAction('I am putting down the carrot into the Gasotron. I see a gas coming out of the Gasotron, and it dilutes into the air and to the compartments. Yes! I can guarantee now that this betacarotene has affected the organism of the passengers, and they are free of the virus. Well done! But do not celebrate yet, as we have to change course of this ship. Tell me quick, what next?', 'humanitysaved'),
     ], true),

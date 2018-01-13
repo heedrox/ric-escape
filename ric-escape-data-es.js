@@ -48,7 +48,7 @@ exports.data = {
     ],
   },
   rooms: [
-    aRoom('sala-mandos', 'Sala de mandos', [], 'Estoy en la sala de mandos de la nave espacial. Desde aquí puedo ver un ordenador, el diario de abordo y las ventanas al exterior. ¿Qué hago?'),
+    aRoom('sala-mandos', 'Sala de mandos', ['sala de mando'], 'Estoy en la sala de mandos de la nave espacial. Desde aquí puedo ver un ordenador, el diario de abordo y las ventanas al exterior. ¿Qué hago?'),
     aRoom('pasillo-norte', 'Pasillo norte', ['norte'], 'Estoy en el pasillo norte de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada al comedor. ¿Qué hago?'),
     aRoom('pasillo-central', 'Pasillo central', ['central'], 'Estoy en el pasillo central de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada a la biblioteca. ¿Qué hago?'),
     aRoom('comedor', 'Comedor', [], [
@@ -92,7 +92,7 @@ exports.data = {
     anItem('comedor-sillas', 'Sillas en el comedor', ['sillas', 'silla', 'silla del comedor', 'sillas del comedor'], 'Son las sillas del comedor. No veo nada interesante. ¿Qué hago?', 'comedor', false),
     anItem('comedor-comida', 'Mucha comida', ['comida', 'comida varia', 'comidas varias', 'comidas', 'restos de comida'], 'Aquí hay mucha comida. Demasiada. Dime qué quieres que coja exáctamente. ¿Qué hago?', 'comedor', false),
     anItem('comedor-utensilios', 'Muchos utensilios', ['utensilios', 'utensilios varios', 'electrodomésticos', 'aparatos de cocina', 'aparatos'], 'Aquí hay muchísimos aparatos de cocina. Si quieres que use alguno, dime cuál exáctamente, ya que no me sé los nombres de los que hay. ¿Qué hago?', 'comedor', false),
-    anItem('comedor-gasotron', 'Gasotrón', ['gasotrom'], 'Un Gasotrón, que sirve para diluir en el aire un alimento. ¿Qué hago?', 'comedor', true),
+    anItem('comedor-gasotron', 'Gasotrón', ['gasotrom', 'gas o tron'], 'Un Gasotrón, que sirve para diluir en el aire un alimento. ¿Qué hago?', 'comedor', true),
     anItem('comedor-zanahoria', 'Zanahoria', ['zanaoria', 'zanahorias'], 'Zanahorias, alimentos ricos en betacarotenos. ¿Qué hago?', 'comedor', true),
     anItem('combinacion-4815', 'Combinación 4815', ['4815', 'combinación 4 8 1 5', 'combinación', 'combinación cuatro mil ochocientos quince'], 'Es la combinación que tenías apuntada en la cartera. ¿Qué hago?', '', true),
     anItem('hab108-cama', 'Cama', ['mi', 'yo', 'encima de la cama'], 'Encima de la cama estás tú. No te quiero despertar, pues tienes que morir. ¿Qué hago?', 'habitacion-108', false),
@@ -102,7 +102,7 @@ exports.data = {
       aCondDesc('picked:hab108-cuadro', 'En la pared hay una caja fuerte. ¿Qué hago?'),
       aCondDesc('else', 'En la pared hay un cuadro muy bonito. ¿Qué hago?'),
     ], 'habitacion-108', false),
-    anItem('hab108-cuadro', 'Cuadro', ['cuadro de la pared', 'cuadro de pared', 'cuadro en la pared', 'cuadro en pared'], 'Un cuadro de tu hogar natal en Newcomb.', 'habitacion-108', true, 'Veo que al llevarme el cuadro, se ha quedado en la pared una caja fuerte al descubierto. ¿Qué hago?'),
+    anItem('hab108-cuadro', 'Cuadro', ['cuadro personal', 'cuadro de la pared', 'cuadro de pared', 'cuadro en la pared', 'cuadro en pared'], 'Un cuadro de tu hogar natal en Newcomb.', 'habitacion-108', true, 'Veo que al llevarme el cuadro, se ha quedado en la pared una caja fuerte al descubierto. ¿Qué hago?'),
     anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared', 'caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras. ¿Qué hago?', 'habitacion-108', false),
     anItem('hab108-aparato', 'Aparato extraño', ['aparato', 'aparato para reprogramar robots', 'aparato de reprogramar', 'aparato para reprogramación', 'aparato para reprogramar'], 'Es un aparato para reprogramar robots. Confieso que lo escondí yo en esa caja fuerte porque me da miedo. ¿Qué hago?', 'habitacion-108', false),
     anItem('hab108-librarykey', 'Llave', ['llave pequeña'], 'Es una llave pequeña. ¿Qué hago?', 'habitacion-108', false),
@@ -192,6 +192,15 @@ exports.data = {
         aCondDescUsage(false, '!unlocked:libroplanetas', 'El armario está cerrado. No puedo alcanzar el libro. ¿Qué más hago?'),
         aCondDescUsage(false, 'unlocked:libroplanetas', 'Hay mucha información sobre el planeta, pero quizás esto te interese: Los agentes biológicos del planeta Lexus encuentran altamente tóxicos los alimentos basados en carotenos, como por ejemplo, la zanahoria. ¿Qué más hago?'),
       ]),
+    ], false),
+    anUsage(['hab108-cuadro', 'biblio-librarykey'], [
+      'El cuadro no tiene que abrirse, está suelto. Incluso creo que me lo puedo llevar. ¿Qué hago?',
+    ], false),
+    anUsage(['comedor-gasotron', 'biblio-librarykey'], [
+      'El Gasotrón no necesita ninguna llave para ser usado. Úsalo con una comida específica. ¿Qué hago?',
+    ], false),
+    anUsage(['comedor-gasotron', 'comedor-comida'], [
+      'Hay demasiada comida que puedo usar con el Gasotrón. Especifica exactamente la comida que tengo que usar. ¿Qué más hago?',
     ], false),
     anUsage(['comedor-gasotron', 'comedor-zanahoria'], [
       anUnlockingAction('Introduzco la zanahoria en el gasotrón. Veo que un gas sale del gasotrón y se diluye por la nave. Puedo garantizar que el caroteno de la zanahoria se ha introducido en el organismo de todos los pasajeros, incluyendo en el tuyo. ¡Estáis salvados! Pero no lo celebres, todavía tenemos que desviar esta nave. Dime, rápido, ¿Qué más hago?', 'humanitysaved'),
