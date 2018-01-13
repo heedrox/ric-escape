@@ -49,7 +49,7 @@ exports.data = {
   },
   rooms: [
     aRoom('sala-mandos', 'Control room', ['controls room'], 'I am at the control room of this space ship. From here I can see a computer, the onboard diary and the windows to outside. What next?'),
-    aRoom('pasillo-norte', 'North hall', ['north pole', 'hall of north', 'north'], 'I am at the north hall of this space ship. I can see different TVs on the walls, some modern furniture, the entrance to the dining room and to the controls room. What next?'),
+    aRoom('pasillo-norte', 'North hall', ['north pole', 'northhall', 'northall', 'hall of north', 'north'], 'I am at the north hall of this space ship. I can see different TVs on the walls, some modern furniture, the entrance to the dining room and to the controls room. What next?'),
     aRoom('pasillo-central', 'Central hall', ['central', 'center'], 'I am at the central hall of this space ship. I can see different TVs on the wallks, some modern furniture, the entrance to the library and to north and south halls. What next?'),
     aRoom('comedor', 'Dining Room', ['the dining room', 'diner', 'dining hall', 'canteen'], [
       aCondDesc('!picked:comedor-cartera', 'I am at the dining room of this space ship. I can see chairs, tables, some food and some appliances I do not understand. I can also see something on the floor also. What next?'),
@@ -87,7 +87,7 @@ exports.data = {
         aCondDesc('!picked:comedor-cartera', 'I see a wallet on the floor. It looks like it is yours. What next?'),
         aCondDesc('else', 'It is the floor. I see nothing. What next?'),
       ], 'comedor', false),
-    anItem('comedor-cartera', 'Wallet', ['purse', 'bag', 'briefcase'], 'It is a wallet. I think it is yours. What next?', 'comedor', true),
+    anItem('comedor-cartera', 'Wallet', ['item on the floor', 'purse', 'bag', 'briefcase'], 'It is a wallet. I think it is yours. What next?', 'comedor', true),
     anItem('comedor-mesas', 'Tables from the dining room', ['tables', 'table', 'dining table'], 'These are the tables of the dining room. Nothing out of the ordinary. What next?', 'comedor', false),
     anItem('comedor-sillas', 'Chairs from the dining room', ['chairs', 'chair', 'dining chair', 'sitting chair','stools', 'stool'], 'These are sitting chairs. Nothing special. What next?', 'comedor', false),
     anItem('comedor-comida', 'Lot\'s of food', ['food', 'foods', 'several food', 'several foods'], 'There is a lot of food. Too many. Tell me what you want me to pick up specifically. What next?', 'comedor', false),
@@ -109,7 +109,7 @@ exports.data = {
     anItem('biblio-libros', 'Books', ['book'], 'There are lots of books. The ones that may be interesting are: books on navigation, books on robotics and books on planets. What next?', 'biblioteca', false),
     anItem('biblio-librorobots', 'Books on robotics', ['book robotics', 'book robotic', 'robotic books', 'books on robotic', 'books on robots', 'robots books', 'robot books', 'robot book'], 'There are lots of books on robotics. I see one about programming a RIC model like me. It is called "RIC models". What next?', 'biblioteca', false),
     anItem('biblio-libroric', 'Ric Models Book', ['rick models', 'ric models', 'rick model book', 'rick models book', 'ric model book', 'book on ric', 'book on rick', 'book on ric models', 'books on ric model', 'book on rick models', 'book on ricks models', 'rick model', 'rick models','rick book'], 'It is the book "RIC models". Say "Use RIC models book" if you want me to read it. What next?', 'biblioteca', false),
-    anItem('codigo-1893', 'code 1893', ['programming code 1893', 'programming code', 'code', '1893', '1893 code', '1893 combination', 'number 1893', '1893 number', 'combination 1893'], 'It is the code to reprogram robots. Please do not look at me like that. What next?', 'biblioteca', false),
+    anItem('codigo-1893', 'code 1893', ['programming code 1893', 'programming code', 'code', '18 93', 'code 18 93', '1893', '1893 code', '1893 combination', 'number 1893', '1893 number', 'combination 1893'], 'It is the code to reprogram robots. Please do not look at me like that. What next?', 'biblioteca', false),
     anItem('biblio-libronavegacion', 'Books on navigation', ['book on navigation', 'book of navigation', 'navigation', 'navigation books', 'books about navigation', 'book on navigation', 'books of navigation', 'book for navigation', 'books for navigation'], 'There are plenty books on navigation. Driving this ship is easy. I can do that. Do not spend time reading these books. What next?', 'biblioteca', false),
     anItem('biblio-armario', 'Bookshelf', ['bookshelf', 'shelf', 'shelf with books', 'shell with books', 'bookshell', 'book shelf'], 'This shelf has lots of interesting books about planets. What do I do?', 'biblioteca', false),
     anItem('biblio-libroplanetas', 'Books on planets', ['book of planets', 'book of planet', 'books on planet', 'book on planets', 'planet books'], [
