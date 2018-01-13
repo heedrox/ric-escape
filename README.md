@@ -37,6 +37,12 @@ successfully. A nice side effect created by developing the game through tdd!
 
 The TDD cycle accelerated the development of the game. Practice TDD!
 
+# How is the development of a Google Assistant app?
+
+You can read all about it here:
+
+https://medium.com/@itortv/desarrollando-ric-escape-una-aventura-conversacional-para-googleassistant-56d86a9d88c5
+
 # History 
 
 The first version of the game was built in 3 days!
