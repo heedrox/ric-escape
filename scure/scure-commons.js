@@ -1,4 +1,5 @@
 const isEmptyArg = require('../lib/common').isEmptyArg;
+const removeStopwords = require('./scure-stopwords').removeStopwords;
 
 const joinMultipleStrings = (arr, language) => {
   if (arr.length === 1) return arr[0];
@@ -13,14 +14,19 @@ const baseChars = str => str.replace(/[áäàÀÁÂÃÄÅ]/g, 'a')
   .replace(/[úùüÙ]/g, 'u')
   .replace(/[çÇ]/g, 'c');
 
+const removeExtraSpaces = word => word.replace(/\s+/g, ' ').trim();
+const cleanText = name => removeExtraSpaces(removeStopwords(baseChars(name.toLowerCase())));
+
 const isSynonym = (synonyms, name) => {
-  const lcSyns = synonyms.map(it => baseChars(it.toLowerCase()));
-  return lcSyns.indexOf(baseChars(name.toLowerCase())) >= 0;
+  const lcSyns = synonyms.map(cleanText);
+  return lcSyns.indexOf(cleanText(name)) >= 0;
 };
 
 const isTextEqual = (name1, name2) => {
-  if (isEmptyArg(name1) || isEmptyArg(name2)) return false;
-  return baseChars(name1.toLowerCase()) === baseChars(name2.toLowerCase());
+  const cleanName1 = cleanText(name1);
+  const cleanName2 = cleanText(name2);
+  if (isEmptyArg(cleanName1) || isEmptyArg(cleanName2)) return false;
+  return cleanName1 === cleanName2;
 };
 
 const getPossibleDestinationsSentence = (scure, data) => {
