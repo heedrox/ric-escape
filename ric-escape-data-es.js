@@ -178,6 +178,9 @@ exports.data = {
         aCondDescUsage(false, 'else', 'No hay nada más escrito a excepción de "Lexus nos ha traido la muerte, así encierro yo esta muerte". ¿Qué más hago?'),
       ]),
     ], false),
+    anUsage('hab108-librarykey', [
+      '¿Con qué quieres usar la llave? Di Usar llave con objeto',
+    ], false),
     anUsage(['hab108-librarykey', 'biblio-armario'], [
       anUnlockingAction('Ok, armario abierto. Ya puedo llegar a los libros sobre planetas. ¿Qué más hago?', 'libroplanetas'),
     ], true),

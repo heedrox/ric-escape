@@ -50,7 +50,7 @@ exports.data = {
   rooms: [
     aRoom('sala-mandos', 'Control room', ['controls room'], 'I am at the control room of this space ship. From here I can see a computer, the onboard diary and the windows to outside. What next?'),
     aRoom('pasillo-norte', 'North hall', ['north pole', 'hall of north', 'north'], 'I am at the north hall of this space ship. I can see different TVs on the walls, some modern furniture, the entrance to the dining room and to the controls room. What next?'),
-    aRoom('pasillo-central', 'Central hall', ['central'], 'I am at the central hall of this space ship. I can see different TVs on the wallks, some modern furniture, the entrance to the library and to north and south halls. What next?'),
+    aRoom('pasillo-central', 'Central hall', ['central', 'center'], 'I am at the central hall of this space ship. I can see different TVs on the wallks, some modern furniture, the entrance to the library and to north and south halls. What next?'),
     aRoom('comedor', 'Dining Room', ['the dining room', 'diner', 'dining hall', 'canteen'], [
       aCondDesc('!picked:comedor-cartera', 'I am at the dining room of this space ship. I can see chairs, tables, some food and some appliances I do not understand. I can also see something on the floor also. What next?'),
       aCondDesc('default', 'I am at the dining room of this space ship. I can see chairs, tables, some food and some appliances I do not understand. What next?'),
@@ -177,6 +177,9 @@ exports.data = {
         aCondDescUsage(false, '!picked:hab108-librarykey', aPickingAction('In the last pages I see a small key with this message: "Lexus brought us death, so I lock it into the bookshelf". I am picking this key. What next?', 'hab108-librarykey')),
         aCondDescUsage(false, 'else', 'There is nothing else but "Lexus brought us death, so I lock into into the bookshelf". What next?'),
       ]),
+    ], false),
+    anUsage('hab108-librarykey', [
+      'What do you want to use the key with? Tell me: "use key with item"',
     ], false),
     anUsage(['hab108-librarykey', 'biblio-armario'], [
       anUnlockingAction('Ok, the bookshelf is open. I can read the books on planets now. What next?', 'libroplanetas'),
