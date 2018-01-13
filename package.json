@@ -14,7 +14,13 @@
   },
   "watch": {
     "walkthrough": {
-      "patterns": [".", "walkthrough", "intents", "lib", "scure"],
+      "patterns": [
+        ".",
+        "walkthrough",
+        "intents",
+        "lib",
+        "scure"
+      ],
       "extensions": "js",
       "quiet": true,
       "legacyWatch": true,
@@ -24,7 +30,8 @@
   "dependencies": {
     "actions-on-google": "^1.6.1",
     "firebase-admin": "~5.5.0",
-    "firebase-functions": "^0.7.5"
+    "firebase-functions": "^0.7.5",
+    "pluralize": "^7.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.1.2",

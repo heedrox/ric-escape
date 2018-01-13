@@ -1,5 +1,6 @@
 const isEmptyArg = require('../lib/common').isEmptyArg;
 const removeStopwords = require('./scure-stopwords').removeStopwords;
+const singularizeWords = require('./scure-singular').singularizeWords;
 
 const joinMultipleStrings = (arr, language) => {
   if (arr.length === 1) return arr[0];
@@ -15,7 +16,15 @@ const baseChars = str => str.replace(/[áäàÀÁÂÃÄÅ]/g, 'a')
   .replace(/[çÇ]/g, 'c');
 
 const removeExtraSpaces = word => word.replace(/\s+/g, ' ').trim();
-const cleanText = name => removeExtraSpaces(removeStopwords(baseChars(name.toLowerCase())));
+
+const cleanText = name =>
+  removeExtraSpaces(
+    singularizeWords(
+      removeStopwords(
+        baseChars(name.toLowerCase())
+      )
+    )
+  );
 
 const isSynonym = (synonyms, name) => {
   const lcSyns = synonyms.map(cleanText);

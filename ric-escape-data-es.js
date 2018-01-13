@@ -48,7 +48,7 @@ exports.data = {
     ],
   },
   rooms: [
-    aRoom('sala-mandos', 'Sala de mandos', ['sala de mando'], 'Estoy en la sala de mandos de la nave espacial. Desde aquí puedo ver un ordenador, el diario de abordo y las ventanas al exterior. ¿Qué hago?'),
+    aRoom('sala-mandos', 'Sala de mandos', ['sala mandos'], 'Estoy en la sala de mandos de la nave espacial. Desde aquí puedo ver un ordenador, el diario de abordo y las ventanas al exterior. ¿Qué hago?'),
     aRoom('pasillo-norte', 'Pasillo norte', ['norte'], 'Estoy en el pasillo norte de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada al comedor. ¿Qué hago?'),
     aRoom('pasillo-central', 'Pasillo central', ['central'], 'Estoy en el pasillo central de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada a la biblioteca. ¿Qué hago?'),
     aRoom('comedor', 'Comedor', [], [
@@ -91,7 +91,7 @@ exports.data = {
     anItem('comedor-mesas', 'Mesas del comedor', ['mesas', 'mesa', 'mesa del comedor'], 'Son las mesas del comedor. No veo nada interesante. ¿Qué hago?', 'comedor', false),
     anItem('comedor-sillas', 'Sillas en el comedor', ['sillas', 'silla', 'silla del comedor', 'sillas del comedor'], 'Son las sillas del comedor. No veo nada interesante. ¿Qué hago?', 'comedor', false),
     anItem('comedor-comida', 'Mucha comida', ['comida', 'comida varia', 'comidas varias', 'comidas', 'restos de comida'], 'Aquí hay mucha comida. Demasiada. Dime qué quieres que coja exáctamente. ¿Qué hago?', 'comedor', false),
-    anItem('comedor-utensilios', 'Muchos utensilios', ['utensilios', 'utensilios varios', 'electrodomésticos', 'aparatos de cocina', 'aparatos'], 'Aquí hay muchísimos aparatos de cocina. Si quieres que use alguno, dime cuál exáctamente, ya que no me sé los nombres de los que hay. ¿Qué hago?', 'comedor', false),
+    anItem('comedor-utensilios', 'Muchos utensilios', ['utensilios', 'utensilios varios', 'electrodomésticos', 'aparatos de cocina'], 'Aquí hay muchísimos aparatos de cocina. Si quieres que use alguno, dime cuál exáctamente, ya que no me sé los nombres de los que hay. ¿Qué hago?', 'comedor', false),
     anItem('comedor-gasotron', 'Gasotrón', ['gasotrom', 'gas o tron'], 'Un Gasotrón, que sirve para diluir en el aire un alimento. ¿Qué hago?', 'comedor', true),
     anItem('comedor-zanahoria', 'Zanahoria', ['zanaoria', 'zanahorias'], 'Zanahorias, alimentos ricos en betacarotenos. ¿Qué hago?', 'comedor', true),
     anItem('combinacion-4815', 'Combinación 4815', ['4815', 'combinación 4 8 1 5', 'combinación', 'combinación cuatro mil ochocientos quince'], 'Es la combinación que tenías apuntada en la cartera. ¿Qué hago?', '', true),
