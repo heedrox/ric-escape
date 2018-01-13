@@ -13,18 +13,13 @@ const baseChars = str => str.replace(/[áäàÀÁÂÃÄÅ]/g, 'a')
   .replace(/[íìIÎ]/g, 'i')
   .replace(/[óòÓÔ]/g, 'o')
   .replace(/[úùüÙ]/g, 'u')
-  .replace(/[çÇ]/g, 'c');
+  .replace(/[çÇ]/g, 'c')
+  .replace(/[-]/g, '');
 
 const removeExtraSpaces = word => word.replace(/\s+/g, ' ').trim();
 
 const cleanText = name =>
-  removeExtraSpaces(
-    singularizeWords(
-      removeStopwords(
-        baseChars(name.toLowerCase())
-      )
-    )
-  );
+  removeExtraSpaces(singularizeWords(removeStopwords(baseChars(name.toLowerCase()))));
 
 const isSynonym = (synonyms, name) => {
   const lcSyns = synonyms.map(cleanText);
