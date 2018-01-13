@@ -70,7 +70,7 @@ exports.data = {
   },
   items: [
     anItem('ric', 'RIC', ['yourself', 'you', 'rick', 'robot', 'robot ric', 'robot rick', 'rick the robot', 'ric the robot', 'rick el robot', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'I am RIC, your Remote Interface to Consciousness. Through me you can interact with this ship, while you are laying on your bed. What next?', null, false),
-    anItem('sala-mandos-ventanas', 'windows', ['window', 'window to the outside', 'outside windows', 'windows to outside', 'windows to the outside', 'outside'], 'These are the windows to the ouside. You can see planets and stars from here, and one of those stars is really close. What next?', 'sala-mandos', false),
+    anItem('sala-mandos-ventanas', 'windows', ['window', 'window to the outside', 'outside windows', 'windows to outside', 'windows to the outside', 'outside', 'outside the window'], 'These are the windows to the ouside. You can see planets and stars from here, and one of those stars is really close. What next?', 'sala-mandos', false),
     anItem('sala-mandos-ordenador', 'Navigation computer', ['computer', 'navigation', 'control computer', 'control'], 'It is the navigation computer. If we do nothing, we will collide into that star. What next?', 'sala-mandos', false),
     anItem('sala-mandos-diario', 'Onboard diary', ['diary'], 'It is the onboard diary. If you want me to interact with it, say "Use diary". What next?', 'sala-mandos', false),
     anItem('pasnor-pared', 'Walls', ['walls on north hall','Walls on halls', 'wall', 'wall on the hall'], 'These are the walls on the hall. Nothing out of the ordinary. What next?', 'pasillo-norte', false),
