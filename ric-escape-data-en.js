@@ -49,9 +49,9 @@ exports.data = {
   },
   rooms: [
     aRoom('sala-mandos', 'Control room', ['controls room'], 'I am at the control room of this space ship. From here I can see a computer, the onboard diary and the windows to outside. What next?'),
-    aRoom('pasillo-norte', 'North hall', ['hall of north', 'north'], 'I am at the north hall of this space ship. I can see different TVs on the walls, some modern furniture, the entrance to the dining room and to the controls room. What next?'),
+    aRoom('pasillo-norte', 'North hall', ['north pole', 'hall of north', 'north'], 'I am at the north hall of this space ship. I can see different TVs on the walls, some modern furniture, the entrance to the dining room and to the controls room. What next?'),
     aRoom('pasillo-central', 'Central hall', ['central'], 'I am at the central hall of this space ship. I can see different TVs on the wallks, some modern furniture, the entrance to the library and to north and south halls. What next?'),
-    aRoom('comedor', 'Dining Room', ['diner', 'dining hall', 'canteen'], [
+    aRoom('comedor', 'Dining Room', ['the dining room', 'diner', 'dining hall', 'canteen'], [
       aCondDesc('!picked:comedor-cartera', 'I am at the dining room of this space ship. I can see chairs, tables, some food and some appliances I do not understand. I can also see something on the floor also. What next?'),
       aCondDesc('default', 'I am at the dining room of this space ship. I can see chairs, tables, some food and some appliances I do not understand. What next?'),
     ]),
@@ -71,8 +71,8 @@ exports.data = {
   items: [
     anItem('ric', 'RIC', ['yourself', 'you', 'rick', 'robot', 'robot ric', 'robot rick', 'rick the robot', 'ric the robot', 'rick el robot', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'I am RIC, your Remote Interface to Consciousness. Through me you can interact with this ship, while you are laying on your bed. What next?', null, false),
     anItem('sala-mandos-ventanas', 'windows', ['window', 'window to the outside', 'outside windows', 'windows to outside', 'windows to the outside', 'outside', 'outside the window'], 'These are the windows to the ouside. You can see planets and stars from here, and one of those stars is really close. What next?', 'sala-mandos', false),
-    anItem('sala-mandos-ordenador', 'Navigation computer', ['computer', 'navigation', 'control computer', 'control'], 'It is the navigation computer. If we do nothing, we will collide into that star. What next?', 'sala-mandos', false),
-    anItem('sala-mandos-diario', 'Onboard diary', ['diary'], 'It is the onboard diary. If you want me to interact with it, say "Use diary". What next?', 'sala-mandos', false),
+    anItem('sala-mandos-ordenador', 'Navigation computer', ['the computer', 'computer', 'navigation', 'control computer', 'control'], 'It is the navigation computer. If we do nothing, we will collide into that star. What next?', 'sala-mandos', false),
+    anItem('sala-mandos-diario', 'Onboard diary', ['the diary', 'diary'], 'It is the onboard diary. If you want me to interact with it, say "Use diary". What next?', 'sala-mandos', false),
     anItem('pasnor-pared', 'Walls', ['walls on north hall','Walls on halls', 'wall', 'wall on the hall'], 'These are the walls on the hall. Nothing out of the ordinary. What next?', 'pasillo-norte', false),
     anItem('pasnor-muebles', 'Furniture', ['furniture on the halls', 'furniture on the hall', 'furniture on hall'], 'There is some furniture. Everything is too complex and futuristic for you. What next?', 'pasillo-norte', false),
     anItem('pasnor-televisor', 'TVs', ['televisions', 'TV', 'tvs', 'television'], 'There is a television that shows numbers. I do not know how to read it, but I do not think it is important. What next?', 'pasillo-norte', false),
