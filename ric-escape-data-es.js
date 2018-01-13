@@ -128,8 +128,8 @@ exports.data = {
   ],
   usages: [
     anUsage('sala-mandos-diario', [
-      'Los primeros minutos del diario te muestran a tí en el comedor. Se ve cómo se te cae la cartera al suelo. ¿Qué quieres que haga?',
-      anUnlockingAction('Los siguientes minutos del diario muestran cómo te diriges hacia tu habitación, la habitación número 108. ¿Qué hago?', 'hab108'),
+      'Los primeros minutos del diario te muestran a tí en el comedor. Se ve cómo se te cae la cartera al suelo. Veo que este diario tiene más información. ¿Qué quieres que haga?',
+      anUnlockingAction('Los siguientes minutos del diario muestran cómo te diriges hacia tu habitación, la habitación número 108. Veo que este diario tiene más información. ¿Qué hago?', 'hab108'),
       'Los últimos minutos del diario me muestran a mi, RIC, forzando el modo de hibernación, y haciendo que todos cayerais dormidos. También se me ve modificando las coordenadas para dirigir la nave hacia la estrella. Lo hice por vuestro bien... ¿Qué quieres que haga?',
     ], false),
     anUsage('ric', [

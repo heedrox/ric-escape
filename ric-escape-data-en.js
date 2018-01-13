@@ -128,8 +128,8 @@ exports.data = {
   ],
   usages: [
     anUsage('sala-mandos-diario', [
-      'The first minutes of the diary show you in the dining room. I can see how you loose your wallet. What next?',
-      anUnlockingAction('The following minutes of the diary show how you go to your room, the room number 108. What next?', 'hab108'),
+      'The first minutes of the diary show you in the dining room. I can see how you loose your wallet. There is more in this diary. What next?',
+      anUnlockingAction('The following minutes of the diary show how you go to your room, the room number 108. There is more in this diary. What next?', 'hab108'),
       'The last minutes of the diary show how I am setting the hibernation mode to set you all to sleep. I can see myself changing the course of the ship through the navigation computer, so we collide into the star. Please, let me explain that I did this for the good of humanity. What next?',
     ], false),
     anUsage('ric', [
