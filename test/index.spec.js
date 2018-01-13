@@ -68,8 +68,7 @@ describe('Ric Escape - others', () => {
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().lastTell).to.contains('Adiós.');
-    expect(getDfaApp().data.inventory).to.eql([]);
-    expect(getDfaApp().data.startTime).to.eql(null);
+    expect(getDfaApp().data).to.eql(null);
   });
 
   it('finishes when time is up and cleans', () => {
