@@ -33,4 +33,11 @@ describe('Ric Escape - item extended getByName', () => {
     expect(item3).to.eql(undefined);
     expect(item4).to.eql(undefined);
   });
+
+  it('ignores - symbols', () => {
+    const item = scure.items.getItemByName('diario de a-bordo');
+    const item2 = scure.items.getItemByName('diario de abordo');
+
+    expect(item).to.eql(item2);
+  });
 });
