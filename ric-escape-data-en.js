@@ -57,7 +57,7 @@ exports.data = {
     ]),
     aRoom('biblioteca', 'Library', [], 'I am at the library of this space ship. I can see many books, but these ones may be of interest: books on robotics, books on navigation and books on planets. What next?'),
     aRoom('pasillo-sur', 'South hall', ['south hole', 'south pole', 'south', 'southall'], 'I am at the south hall of this space ship. I can see TVs, some modern furniture, the entrance to compartments rooms and to central hall. What next?'),
-    aRoom('habitacion-108', 'Compartment number 108', ['Compartment 108', 'compartment room 108', 'compartment number 108', 'room 108', 'room number 108', '108 compartment', '108 room'], 'I am at the compartment number 108, your room. I can see you sleeping on the bed, a bedside table, and a picture on the wall. What next?'),
+    aRoom('habitacion-108', 'Compartment number 108', ['department 108', 'Compartment 108', 'compartment room 108', 'compartment number 108', 'room 108', 'room number 108', '108 compartment', '108 room'], 'I am at the compartment number 108, your room. I can see you sleeping on the bed, a bedside table, and a picture on the wall. What next?'),
   ],
   map: {
     'sala-mandos': ['pasillo-norte'],
