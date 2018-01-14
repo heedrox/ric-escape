@@ -48,15 +48,15 @@ exports.data = {
     ],
   },
   rooms: [
-    aRoom('sala-mandos', 'Control room', ['controls room'], 'I am at the control room of this space ship. From here I can see a computer, the onboard diary and the windows to outside. What next?'),
-    aRoom('pasillo-norte', 'North hall', ['north pole', 'northhall', 'northall', 'hall of north', 'north'], 'I am at the north hall of this space ship. I can see different TVs on the walls, some modern furniture, the entrance to the dining room and to the controls room. What next?'),
-    aRoom('pasillo-central', 'Central hall', ['central', 'center'], 'I am at the central hall of this space ship. I can see different TVs on the wallks, some modern furniture, the entrance to the library and to north and south halls. What next?'),
+    aRoom('sala-mandos', 'Control room', ['controls room', 'controls'], 'I am at the control room of this space ship. From here I can see a computer, the onboard diary and the windows to outside. What next?'),
+    aRoom('pasillo-norte', 'North hall', ['north hole', 'north pole', 'northhall', 'northall', 'hall of north', 'north'], 'I am at the north hall of this space ship. I can see different TVs on the walls, some modern furniture, the entrance to the dining room and to the controls room. What next?'),
+    aRoom('pasillo-central', 'Central hall', ['central hole', 'central pole', 'central', 'center'], 'I am at the central hall of this space ship. I can see different TVs on the wallks, some modern furniture, the entrance to the library and to north and south halls. What next?'),
     aRoom('comedor', 'Dining Room', ['the dining room', 'diner', 'dining hall', 'canteen'], [
       aCondDesc('!picked:comedor-cartera', 'I am at the dining room of this space ship. I can see chairs, tables, some food and some appliances I do not understand. I can also see something on the floor also. What next?'),
       aCondDesc('default', 'I am at the dining room of this space ship. I can see chairs, tables, some food and some appliances I do not understand. What next?'),
     ]),
     aRoom('biblioteca', 'Library', [], 'I am at the library of this space ship. I can see many books, but these ones may be of interest: books on robotics, books on navigation and books on planets. What next?'),
-    aRoom('pasillo-sur', 'South hall', ['south', 'southall'], 'I am at the south hall of this space ship. I can see TVs, some modern furniture, the entrance to compartments rooms and to central hall. What next?'),
+    aRoom('pasillo-sur', 'South hall', ['south hole', 'south pole', 'south', 'southall'], 'I am at the south hall of this space ship. I can see TVs, some modern furniture, the entrance to compartments rooms and to central hall. What next?'),
     aRoom('habitacion-108', 'Compartment number 108', ['Compartment 108', 'compartment room 108', 'compartment number 108', 'room 108', 'room number 108', '108 compartment', '108 room'], 'I am at the compartment number 108, your room. I can see you sleeping on the bed, a bedside table, and a picture on the wall. What next?'),
   ],
   map: {
@@ -107,9 +107,9 @@ exports.data = {
     anItem('hab108-aparato', 'Strange device', ['device', 'device to program robots', 'robot device', 'devices', 'reprogramming device'], 'It is a device to reprogram robots. I must confess I hid it because I got scared of it. What next?', 'habitacion-108', false),
     anItem('hab108-librarykey', 'Key', ['small key'], 'It is a small key. What next?', 'habitacion-108', false),
     anItem('biblio-libros', 'Books', ['book'], 'There are lots of books. The ones that may be interesting are: books on navigation, books on robotics and books on planets. What next?', 'biblioteca', false),
-    anItem('biblio-librorobots', 'Books on robotics', ['book robotics', 'book robotic', 'robotic books', 'books on robotic', 'books on robots', 'robots books', 'robot books', 'robot book'], 'There are lots of books on robotics. I see one about programming a RIC model like me. It is called "RIC models". What next?', 'biblioteca', false),
+    anItem('biblio-librorobots', 'Books on robotics', ['robotic handbook', 'book robotics', 'book robotic', 'robotic book', 'robotic books', 'books on robotic', 'books on robots', 'robots books', 'robot books', 'robot book'], 'There are lots of books on robotics. I see one about programming a RIC model like me. It is called "RIC models". What next?', 'biblioteca', false),
     anItem('biblio-libroric', 'Ric Models Book', ['rick models', 'ric models', 'rick model book', 'rick models book', 'ric model book', 'book on ric', 'book on rick', 'book on ric models', 'books on ric model', 'book on rick models', 'book on ricks models', 'rick model', 'rick models','rick book'], 'It is the book "RIC models". Say "Use RIC models book" if you want me to read it. What next?', 'biblioteca', false),
-    anItem('codigo-1893', 'code 1893', ['programming code 1893', 'programming code', 'code', '18 93', 'code 18 93', '1893', '1893 code', '1893 combination', 'number 1893', '1893 number', 'combination 1893'], 'It is the code to reprogram robots. Please do not look at me like that. What next?', 'biblioteca', false),
+    anItem('codigo-1893', 'code 1893', ['good 1893', 'programming code 1893', 'programming code', 'code', '18 93', 'code 18 93', '1893', '1893 code', '1893 combination', 'number 1893', '1893 number', 'combination 1893'], 'It is the code to reprogram robots. Please do not look at me like that. What next?', 'biblioteca', false),
     anItem('biblio-libronavegacion', 'Books on navigation', ['book on navigation', 'book of navigation', 'navigation', 'navigation books', 'books about navigation', 'book on navigation', 'books of navigation', 'book for navigation', 'books for navigation'], 'There are plenty books on navigation. Driving this ship is easy. I can do that. Do not spend time reading these books. What next?', 'biblioteca', false),
     anItem('biblio-armario', 'Bookshelf', ['bookshelf', 'shelf', 'shelf with books', 'shell with books', 'bookshell', 'book shelf'], 'This shelf has lots of interesting books about planets. What do I do?', 'biblioteca', false),
     anItem('biblio-libroplanetas', 'Books on planets', ['book of planets', 'book of planet', 'books on planet', 'book on planets', 'planet books'], [
