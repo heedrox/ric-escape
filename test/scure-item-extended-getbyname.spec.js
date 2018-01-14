@@ -40,4 +40,11 @@ describe('Ric Escape - item extended getByName', () => {
 
     expect(item).to.eql(item2);
   });
+
+  it('puts numbers together', () => {
+    const item = scure.items.getItemByName('combinación 4 8 15');
+    const item2 = scure.items.getItemByName('combinación 4815');
+
+    expect(item.name).to.eql(item2.name);
+  });
 });

@@ -16,10 +16,11 @@ const baseChars = str => str.replace(/[áäàÀÁÂÃÄÅ]/g, 'a')
   .replace(/[çÇ]/g, 'c')
   .replace(/[-]/g, '');
 
-const removeExtraSpaces = word => word.replace(/\s+/g, ' ').trim();
+const removeExtraSpaces = phrase => phrase.replace(/\s+/g, ' ').trim();
+const joinNumbers = phrase => phrase.replace(/\d\s+\d/g, digits => digits.replace(/\s+/g, ''));
 
 const cleanText = name =>
-  removeExtraSpaces(singularizeWords(removeStopwords(baseChars(name.toLowerCase()))));
+  joinNumbers(removeExtraSpaces(singularizeWords(removeStopwords(baseChars(name.toLowerCase())))));
 
 const isSynonym = (synonyms, name) => {
   const lcSyns = synonyms.map(cleanText);
