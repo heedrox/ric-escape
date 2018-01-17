@@ -63,6 +63,7 @@ class DfaRequestBuilder {
 
   withData(data) {
     this.data = data;
+    if (this.data && !this.data.numCommands) this.data.numCommands = 20;
     return this;
   }
 

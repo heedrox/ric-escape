@@ -32,14 +32,13 @@ const fallback = scure => (app) => {
     app.ask('ok. ¿y ahora qué?');
     return;
   }
-  app = increaseNumFallbacks(app);
-  const welcomeSentence = scure.getInit().welcome[app.data.numFallbacks];
-  if (typeof welcomeSentence === 'undefined') {
-    const time = getLeftTimeFrom(scure, app);
-    app.ask(scure.sentences.get('fallback', { time }));
-  } else {
+  if (app.data.numCommands < scure.getInit().welcome.length) {
+    const welcomeSentence = scure.getInit().welcome[app.data.numCommands];
     app.ask(welcomeSentence);
+    return;
   }
+  const time = getLeftTimeFrom(scure, app);
+  app.ask(scure.sentences.get('fallback', { time }));
 };
 
 const bye = scure => (app) => {

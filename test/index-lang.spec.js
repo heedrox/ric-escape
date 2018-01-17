@@ -5,6 +5,7 @@ describe('Ric Escape - handles language', () => {
     const request = aDfaRequestBuilder()
       .withIntent('walk')
       .withLocale('en-US')
+      .withData({ numCommands: 10 })
       .build();
 
     ricEscape.ricEscape(request);

@@ -6,6 +6,7 @@ describe('Ric Escape - when picking up', () => {
   it('tells you item unknown when no arg', () => {
     const request = aDfaRequestBuilder()
       .withIntent('pickup')
+      .withData({ numCommands: 23 })
       .build();
 
     ricEscape.ricEscape(request);

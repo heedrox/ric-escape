@@ -36,6 +36,10 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
     return;
   }
 
+  if (app.data.numCommands < scure.getInit().welcome.length) {
+    fallback(scure)(app);
+    return;
+  }
   const actionMap = new Map();
   actionMap.set('help', help(scure));
   actionMap.set('input.unknown', fallback(scure));

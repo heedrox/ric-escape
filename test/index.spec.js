@@ -30,12 +30,13 @@ describe('Ric Escape - others', () => {
 
     ricEscape.ricEscape(request);
 
-    expect(getDfaApp().lastAsk).to.contains('¡Hola!');
+    expect(getDfaApp().lastAsk).to.contains('Oh, ');
   });
 
   it('tells you the time when help', () => {
     const request = aDfaRequestBuilder()
       .withIntent('help')
+      .withData({ numCommands: 10 })
       .build();
 
     ricEscape.ricEscape(request);
@@ -52,6 +53,7 @@ describe('Ric Escape - others', () => {
     const request = aDfaRequestBuilder()
       .withIntent('help')
       .withLocale('en-US')
+      .withData({ numCommands: 10 })
       .build();
 
     ricEscape.ricEscape(request);
