@@ -7,6 +7,8 @@ class DialogflowAppMock {
     this.response = options.response;
     this.data = options.request.body.data;
     this.locale = options.request.body.locale;
+    this.SurfaceCapabilities = { AUDIO_OUTPUT: 'AUDIO_OUTPUT', SCREEN_OUTPUT: 'SCREEN_OUTPUT' };
+    this.capabilities = options.request.body.capabilities;
     global.dfaApp = this;
   }
 
@@ -40,6 +42,9 @@ class DialogflowAppMock {
     this.lastTell = x;
   }
 
+  hasSurfaceCapability(capability) {
+    return this.capabilities.indexOf(capability) > -1;
+  }
 }
 
 class DfaRequestBuilder {
@@ -49,6 +54,12 @@ class DfaRequestBuilder {
     this.data = {};
     this.rawInput = null;
     this.locale = null;
+    this.capabilities = ['AUDIO_OUTPUT', 'SCREEN_OUTPUT'];
+  }
+
+  withSurfaceCapabilities(capabilities) {
+    this.capabilities = capabilities;
+    return this;
   }
 
   withIntent(intent) {
@@ -87,6 +98,7 @@ class DfaRequestBuilder {
           resolvedQuery: this.rawInput,
         },
         locale: this.locale,
+        capabilities: this.capabilities,
       },
       headers: [],
     };

@@ -33,7 +33,7 @@ describe('Ric Escape - others', () => {
     expect(getDfaApp().lastAsk).to.contains('Oh, ');
   });
 
-  it('tells you the time when help', () => {
+  it('tells you the time and map when help', () => {
     const request = aDfaRequestBuilder()
       .withIntent('help')
       .withData({ numCommands: 10 })
@@ -59,6 +59,19 @@ describe('Ric Escape - others', () => {
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().lastAsk.items[1].basicCard.image.url).to.contains('ric-escape-map-en.jpg');
+  });
+
+  it('does not tell you the map when no screen capability', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('help')
+      .withLocale('en-US')
+      .withSurfaceCapabilities(['AUDIO_OUTPUT'])
+      .withData({ numCommands: 10 })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('You can ask me to');
   });
 
   it('says goodbye if bye intent and cleans', () => {
