@@ -67,6 +67,12 @@ const getDescription = (descriptions, data, scure) => {
   return match ? match.description : descriptions[descriptions.length - 1].description;
 };
 
+const getConsumesObjects = (descriptions, data, scure) => {
+  if (typeof descriptions === 'string') return false;
+  const match = getMatchingDescription(descriptions, data, scure);
+  return match ? match.consumesObjects : descriptions[descriptions.length - 1].consumesObjects;
+};
+
 const buildUsageIndex = (itemId1, itemId2) => {
   const itemsSorted = [itemId1, itemId2].sort();
   return itemsSorted.join('-');
@@ -78,5 +84,6 @@ exports.isSynonym = isSynonym;
 exports.isTextEqual = isTextEqual;
 exports.getPossibleDestinationsSentence = getPossibleDestinationsSentence;
 exports.getDescription = getDescription;
+exports.getConsumesObjects = getConsumesObjects;
 exports.buildUsageIndex = buildUsageIndex;
 exports.isUnlocked = isUnlocked;

@@ -50,6 +50,19 @@ describe('Ric Escape - when using', () => {
     expect(getDfaApp().lastAsk).to.contains('cuadro');
   });
 
+  it('uses items on inventory, but does not dispose them if onlyOnce = false', () => {
+    const request = aDfaRequestBuilder()
+      .withIntent('use')
+      .withArgs({ arg: 'llave' })
+      .withData({ roomId: 'habitacion-108', inventory: ['hab108-librarykey'], picked: ['hab108-librarykey'] })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().lastAsk).to.contains('quieres usar la llave?');
+    expect(getDfaApp().data.inventory).to.contains('hab108-librarykey');
+  });
+
   describe('using objects ok several times', () => {
     const TEST_DATA = [
       { usages: null, expectedText: 'Los primeros minutos del diario', nextUsage: 1 },
@@ -277,17 +290,32 @@ describe('Ric Escape - when using', () => {
       });
     });
 
-    it('consumes the objects only if said so (consumesObjects = true and conditional)', () => {
-      const request = aDfaRequestBuilder()
-        .withIntent('use')
-        .withArgs({ arg: ['ric', 'codigo'] })
-        .withData({ roomId: 'sala-mandos', inventory: ['codigo-1893'], unlocked: [] })
-        .build();
+    describe('consumes the objects when consumesObjects = true and conditional', () => {
+      it('does not consume the objects when consumesObjets = false', () => {
+        const request = aDfaRequestBuilder()
+          .withIntent('use')
+          .withArgs({ arg: ['codigo', 'ric'] })
+          .withData({ roomId: 'sala-mandos', inventory: ['codigo-1893'], unlocked: [] })
+          .build();
 
-      ricEscape.ricEscape(request);
+        ricEscape.ricEscape(request);
 
-      expect(getDfaApp().lastAsk).to.contains('Antes de introducir');
-      expect(getDfaApp().data.inventory).to.contains('codigo-1893');
+        expect(getDfaApp().lastAsk).to.contains('Antes de introducir');
+        expect(getDfaApp().data.inventory).to.contains('codigo-1893');
+      });
+
+      it('consumes the objects when consumesObjets = true', () => {
+        const request = aDfaRequestBuilder()
+          .withIntent('use')
+          .withArgs({ arg: ['codigo', 'ric'] })
+          .withData({ roomId: 'sala-mandos', inventory: ['codigo-1893'], unlocked: ['ricpending'] })
+          .build();
+
+        ricEscape.ricEscape(request);
+
+        expect(getDfaApp().lastAsk).to.contains('Hola, soy RIC, reestablecido a mis valores de fábrica. ');
+        expect(getDfaApp().data.inventory).to.not.contains('codigo-1893');
+      });
     });
   });
 

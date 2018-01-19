@@ -2,6 +2,7 @@ const isEmptyArg = require('../lib/common').isEmptyArg;
 const aResponse = require('./scure-response').aResponse;
 const buildUsageIndex = require('./scure-commons').buildUsageIndex;
 const getDescription = require('./scure-commons').getDescription;
+const getConsumesObjects = require('./scure-commons').getConsumesObjects;
 
 const getUsedTimes = (item, usages) =>
   (usages && usages[item.id]) || 0;
@@ -85,11 +86,14 @@ const resolveActions = (response, data) => {
   return data;
 };
 
-const processItemAfterUsage = (item, rawResponse, response, data, scure) => {
+const shouldDisposeItem = (usage, rawResponse, data, scure) => {
+  if (!rawResponse.isConditional) return usage.onlyOnce;
+  return getConsumesObjects(rawResponse.conditions, data, scure);
+};
+
+const processItemAfterUsage = (item, usage, rawResponse, response, data, scure) => {
   data = markAsPickedIfPickableObjectButUsed(item, data);
-  const shouldDispose = (!rawResponse.isConditional) ||
-    (rawResponse.isConditional && response.consumesObjects);
-  if (shouldDispose) {
+  if (shouldDisposeItem(usage, rawResponse, data, scure)) {
     data = disposeIfItemInInventory(item.id, data, scure);
   }
   return data;
@@ -114,7 +118,7 @@ const scureUseOneItem = (itemName, data, scure) => {
   const rawResponse = currentResponse(item, usage, data.usages);
   const response = processIfConditionalResponse(rawResponse, data, scure);
   data = resolveActions(response, data);
-  data = processItemAfterUsage(item, rawResponse, response, data, scure);
+  data = processItemAfterUsage(item, usage, rawResponse, response, data, scure);
   data.usages = scure.usages.increaseUsage(item, data.usages);
   return aResponse(getSentence(response), data);
 };
@@ -136,8 +140,8 @@ const scureUseTwoItems = (itemName1, itemName2, data, scure) => {
   const rawResponse = currentResponseForTwo(item1, item2, usage, data.usages);
   const response = processIfConditionalResponse(rawResponse, data, scure);
   data = resolveActions(response, data);
-  data = processItemAfterUsage(item1, rawResponse, response, data, scure);
-  data = processItemAfterUsage(item2, rawResponse, response, data, scure);
+  data = processItemAfterUsage(item1, usage, rawResponse, response, data, scure);
+  data = processItemAfterUsage(item2, usage, rawResponse, response, data, scure);
   data.usages = scure.usages.increaseUsageForTwo(item1, item2, data.usages);
   return aResponse(getSentence(response), data);
 };
