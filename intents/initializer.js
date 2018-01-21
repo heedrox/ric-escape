@@ -24,14 +24,27 @@ const updateLanguage = (app) => {
   return app;
 };
 
-const initialize = (scure, app) => {
-  const app0 = app;
-  app0.data = app.data || {};
-  const app1 = initializeStartTime(app0);
-  const app2 = initializeDefaultRoom(scure, app1);
-  const app3 = increaseNumCommand(app2);
-  const app4 = updateLanguage(app3);
-  return app4;
+const isWelcomeRequest = request => request && request.body && request.body.result
+  && request.body.result.resolvedQuery && request.body.result.resolvedQuery.indexOf('_WECOME');
+
+const substringBefore = (str, needle) => str.substring(0, str.indexOf(needle));
+
+const updatePlatform = (app, request) => {
+  if (isWelcomeRequest(request)) {
+    app.data.platform = substringBefore(request.body.result.resolvedQuery, '_WELCOME');
+  }
+  return app;
+};
+
+const initialize = (scure, app, request) => {
+  let newApp = app;
+  newApp.data = app.data || {};
+  newApp = initializeStartTime(newApp);
+  newApp = initializeDefaultRoom(scure, newApp);
+  newApp = increaseNumCommand(newApp);
+  newApp = updateLanguage(newApp);
+  newApp = updatePlatform(newApp, request);
+  return newApp;
 };
 
 exports.initialize = initialize;

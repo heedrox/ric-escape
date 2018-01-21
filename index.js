@@ -26,7 +26,7 @@ const bye = require('./intents/others').bye;
 exports.ricEscape = functions.https.onRequest((request, response) => {
   const appInit = new DialogflowApp({ request, response });
   const scure = buildScureFor(ricEscapeData[getLanguage(appInit)]);
-  const app = initialize(scure, appInit);
+  const app = initialize(scure, appInit, request);
 
   console.log(`Intent: ${app.data.numCommands} / ${app.getIntent()} / ${getLanguage(app) === 'en' ? 'en' : 'es'} / `);
 
