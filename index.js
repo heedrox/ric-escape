@@ -21,7 +21,7 @@ const inventory = require('./intents/inventory').inventory;
 const help = require('./intents/others').help;
 const fallback = require('./intents/others').fallback;
 const welcome = require('./intents/others').welcome;
-const language = require('./intents/language').language;
+const checkAndChangeLanguage = require('./intents/language').checkAndChangeLanguage;
 const bye = require('./intents/others').bye;
 
 exports.ricEscape = functions.https.onRequest((request, response) => {
@@ -32,6 +32,12 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
   // console.log(`Body: ${JSON.stringify(request.body)}`);
   // console.log(`Headers: ${JSON.stringify(request.headers)}`);
   console.log(`Intent: ${app.data.numCommands} / ${app.getIntent()} / ${getLanguage(app, request) === 'en' ? 'en' : 'es'} / Platform: ${app.data.platform} / `);
+
+  const languageChanged = checkAndChangeLanguage(scure, app);
+  if (languageChanged) {
+    app.data.numCommands -= 1;
+    return;
+  }
 
   if (isTimeOver(app.data)) {
     cleanData(app);
@@ -52,7 +58,6 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
   actionMap.set('pickup', pickup(scure));
   actionMap.set('use', use(scure));
   actionMap.set('inventory', inventory(scure));
-  actionMap.set('language', language(scure));
   actionMap.set('bye', bye(scure));
   actionMap.set('_exit._exit-yes', bye(scure));
 
