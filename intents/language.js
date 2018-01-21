@@ -15,6 +15,7 @@ const VALID_LANGUAGES = {
 };
 
 const getLanguageBasedOnArg = (lang) => {
+  if (!lang) return false;
   const baseLang = baseChars(lang);
   return VALID_LANGUAGES[baseLang];
 };
