@@ -4,7 +4,7 @@ const scure = require('../scure/scure').buildScureFor(ricEscapeData);
 
 describe('Ric Escape - when picking up', () => {
   it('tells you item unknown when no arg', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('pickup')
       .withData({ numCommands: 23 })
       .build();
@@ -15,7 +15,7 @@ describe('Ric Escape - when picking up', () => {
   });
 
   it('tells you item unknown when invalid arg', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('pickup')
       .withArgs({ arg: 'not a valid object' })
       .withData({ roomId: 'pasillo-norte' })
@@ -27,7 +27,7 @@ describe('Ric Escape - when picking up', () => {
   });
 
   it('tells you item unknown when arg, but in different room', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('pickup')
       .withArgs({ arg: 'cartera' })
       .withData({ roomId: 'pasillo-norte' })
@@ -39,7 +39,7 @@ describe('Ric Escape - when picking up', () => {
   });
 
   it('tells you it cannot be picked when item not pickable', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('pickup')
       .withArgs({ arg: 'ventanas' })
       .withData({ roomId: 'sala-mandos' })
@@ -51,7 +51,7 @@ describe('Ric Escape - when picking up', () => {
   });
 
   it('tells you it cannot be picked when item already picked up', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('pickup')
       .withArgs({ arg: 'cartera' })
       .withData({ roomId: 'comedor', picked: ['comedor-cartera'] })
@@ -64,7 +64,7 @@ describe('Ric Escape - when picking up', () => {
 
   describe('when valid objects', () => {
     beforeEach(() => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('pickup')
         .withArgs({ arg: 'cartera' })
         .withData({ roomId: 'comedor' })
@@ -86,7 +86,7 @@ describe('Ric Escape - when picking up', () => {
   });
 
   it('tells an aditional response if the item has an aditional picking response', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('pickup')
       .withArgs({ arg: 'cuadro' })
       .withData({ roomId: 'habitacion-108' })
@@ -99,7 +99,7 @@ describe('Ric Escape - when picking up', () => {
   });
 
   it('tells you first that it has it, if item already in inventory', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('pickup')
       .withArgs({ arg: 'aparato' })
       .withData({ roomId: 'habitacion-108', inventory: ['hab108-aparato'] })

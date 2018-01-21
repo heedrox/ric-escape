@@ -5,7 +5,7 @@ const scure = require('../scure/scure').buildScureFor(ricEscapeData);
 
 describe('Ric Escape - when walking', () => {
   it('changes the roomId when walking', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('walk')
       .withArgs({ arg: 'comedor' })
       .withData({ roomId: 'pasillo-norte' })
@@ -18,7 +18,7 @@ describe('Ric Escape - when walking', () => {
   });
 
   it('cannot change the roomId when walking to somewhere not according to map', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('walk')
       .withArgs({ arg: 'biblioteca' })
       .withData({ roomId: 'sala-mandos' })
@@ -38,7 +38,7 @@ describe('Ric Escape - when walking', () => {
 
   TEST_DATA.forEach((data) => {
     it('explains places to go when no arg is given', () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('walk')
         .withArgs({})
         .withData({ roomId: data.room })
@@ -52,7 +52,7 @@ describe('Ric Escape - when walking', () => {
   });
 
   it('does not change if the room cannot be found', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('walk')
       .withArgs({ arg: 'pasillo de la muerte' })
       .withData({ roomId: 'sala-mandos' })
@@ -66,7 +66,7 @@ describe('Ric Escape - when walking', () => {
 
   describe('handles locks', () => {
     it('does not show a room if not unlocked', () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('walk')
         .withArgs({})
         .withData({ roomId: 'pasillo-sur' })
@@ -78,7 +78,7 @@ describe('Ric Escape - when walking', () => {
     });
 
     it('shows a room if unlocked', () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('walk')
         .withArgs({})
         .withData({ roomId: 'pasillo-sur', unlocked: ['hab108'] })
@@ -90,7 +90,7 @@ describe('Ric Escape - when walking', () => {
     });
 
     it('does not change if the room is locked', () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('walk')
         .withArgs({ arg: 'habitación 108' })
         .withData({ roomId: 'pasillo-sur' })
@@ -103,7 +103,7 @@ describe('Ric Escape - when walking', () => {
     });
 
     it('changes room when room is unlocked', () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('walk')
         .withArgs({ arg: 'habitación 108' })
         .withData({ roomId: 'pasillo-sur', unlocked: ['hab108'] })
@@ -116,7 +116,7 @@ describe('Ric Escape - when walking', () => {
     });
   });
   it('works with unaccented words', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('walk')
       .withArgs({ arg: 'habitacion 108' })
       .withData({ roomId: 'pasillo-sur', unlocked: ['hab108'] })

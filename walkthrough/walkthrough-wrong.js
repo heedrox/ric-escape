@@ -51,7 +51,7 @@ const commands = [
 
 commands.forEach((command) => {
   console.log('\x1b[33mcommand', command, '\x1b[0m');
-  const request = aDfaRequestBuilder()
+  const request = aDfaRequest()
     .withIntent(command.intent)
     .withArgs({ arg: command.arg })
     .withData(getDfaApp() ? getDfaApp().data : null)

@@ -2,7 +2,7 @@ const ricEscape = require('../index.js');
 
 describe('when fallback', () => {
   it('gives you introduction the first time in any intent', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .build();
 
@@ -13,7 +13,7 @@ describe('when fallback', () => {
   });
 
   it('gives you another introduction the second time', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withData({ numCommands: 1 })
       .build();
@@ -25,7 +25,7 @@ describe('when fallback', () => {
   });
 
   it('tells you the time ', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('input.unknown')
       .withData({ numCommands: 2 })
       .build();

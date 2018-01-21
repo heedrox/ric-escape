@@ -16,7 +16,7 @@ const theEndingScene = description => ({ isEndingScene: true, description });
 exports.data = {
   sentences: {
     help: 'Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario. También te paso un mapa. Nos quedan {time} para estrellarnos. ¿Qué quieres que haga?',
-    'help-no-screen': 'Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario. Nos quedan {time} para estrellarnos. ¿Qué quieres que haga?',
+    'help-no-screen': 'Me puedes dar las siguientes instrucciones: Mirar, Usar, Ir, Coger e Inventario. Aquí puedes ver un mapa: https://www.ric-escape.com/ric-escape-map.jpg . Nos quedan {time} para estrellarnos. ¿Qué quieres que haga?',
     fallback: 'No te entiendo. Di Ayuda si necesitas ayuda. Nos quedan {time} para estrellarnos. ¿Qué quieres que haga?',
     destinations: 'Desde aquí puedo ir a: {destinations}. ¿Qué quieres que haga?',
     'destination-unknown': 'No sé ir al sitio {destination}. ¿Qué quieres que haga?',
@@ -197,9 +197,10 @@ exports.data = {
         aCondDescUsage(false, 'unlocked:libroplanetas', 'Hay mucha información sobre el planeta, pero quizás esto te interese: Los agentes biológicos del planeta Lexus encuentran altamente tóxicos los alimentos basados en carotenos, como por ejemplo, la zanahoria. ¿Qué más hago?'),
       ]),
     ], false),
-    anUsage('hab108-cuadro', [
-      'No creo que tenga que USAR el cuadro, pero quizás me lo puedo llevar... ¿Qué hago?',
-    ], false),
+    /* anUsage('hab108-cuadro', [
+      'No creo que tenga que USAR el cuadro,
+      pero quizás me lo puedo llevar... ¿Qué hago?',
+    ], false), */
     anUsage(['hab108-cuadro', 'biblio-librarykey'], [
       'El cuadro no tiene que abrirse, está suelto. Incluso creo que me lo puedo llevar. ¿Qué hago?',
     ], false),

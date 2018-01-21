@@ -12,7 +12,7 @@ describe('Ric Escape - others', () => {
 
   TEST_CASES.forEach((testCase) => {
     it(`Counts num of commands for expected ${testCase.expectedNumCommands}: `, () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('help')
         .withData(testCase.data)
         .build();
@@ -24,7 +24,7 @@ describe('Ric Escape - others', () => {
   });
 
   it('welcomes you', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('input.welcome')
       .build();
 
@@ -34,7 +34,7 @@ describe('Ric Escape - others', () => {
   });
 
   it('tells you the time and map when help', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('help')
       .withData({ numCommands: 10 })
       .build();
@@ -50,7 +50,7 @@ describe('Ric Escape - others', () => {
   });
 
   it('tells you the map in English when help', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('help')
       .withLocale('en-US')
       .withData({ numCommands: 10 })
@@ -62,7 +62,7 @@ describe('Ric Escape - others', () => {
   });
 
   it('does not tell you the map when no screen capability', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('help')
       .withLocale('en-US')
       .withSurfaceCapabilities(['AUDIO_OUTPUT'])
@@ -75,7 +75,7 @@ describe('Ric Escape - others', () => {
   });
 
   it('says goodbye if bye intent and cleans', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('bye')
       .withData({ inventory: ['cartera'], startTime: JSON.stringify(new Date() - 50) })
       .build();
@@ -87,7 +87,7 @@ describe('Ric Escape - others', () => {
   });
 
   it('finishes when time is up and cleans', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('bye')
       .withData({ startTime: JSON.stringify(ABOUT_90_MINUTES_AGO), inventory: ['cartera'] })
       .build();

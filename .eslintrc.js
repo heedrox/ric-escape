@@ -28,6 +28,6 @@ module.exports = {
     'sinon': true,
     'window': true,
     'getDfaApp': true,
-    'aDfaRequestBuilder': true,
+    "aDfaRequest": true,
   }
 };

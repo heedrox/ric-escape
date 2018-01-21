@@ -105,10 +105,10 @@ class DfaRequestBuilder {
   }
 }
 
-const aDfaRequestBuilder = () => new DfaRequestBuilder();
+const aDfaRequest = () => new DfaRequestBuilder();
 
 exports.DialogflowAppMock = DialogflowAppMock;
 exports.DfaRequestBuilder = DfaRequestBuilder;
 
-exports.aDfaRequestBuilder = aDfaRequestBuilder;
+exports.aDfaRequest = aDfaRequest;
 exports.getDfaApp = () => global.dfaApp;

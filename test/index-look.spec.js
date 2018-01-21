@@ -8,7 +8,7 @@ describe('Ric Escape - when looking up', () => {
 
   EMPTY_ARGS.forEach((arg) => {
     it(`looks the room and shows destinations when no argument given or 'habitacion' or 'lugar' is said (arg: ${arg})`, () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('look')
         .withArgs({ arg })
         .withData({ roomId: 'sala-mandos' })
@@ -22,7 +22,7 @@ describe('Ric Escape - when looking up', () => {
   });
 
   it('looks the room depending on conditions', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('look')
       .withArgs({ arg: null })
       .withData({ roomId: 'comedor', picked: ['comedor-cartera'] })
@@ -38,7 +38,7 @@ describe('Ric Escape - when looking up', () => {
 
   ARGS.forEach((arg) => {
     it(`looks the description of the object when argument is given - ${JSON.stringify(arg)}`, () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('look')
         .withArgs({ arg })
         .withData({ roomId: 'sala-mandos' })
@@ -51,7 +51,7 @@ describe('Ric Escape - when looking up', () => {
   });
 
   it('looks the description of the item when in inventory', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('look')
       .withArgs({ arg: 'combinación 4815' })
       .withData({ roomId: 'sala-mandos', inventory: ['combinacion-4815'] })
@@ -63,7 +63,7 @@ describe('Ric Escape - when looking up', () => {
   });
 
   it('looks the description of the proper item when in room', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('look')
       .withArgs({ arg: 'paredes' })
       .withData({ roomId: 'pasillo-sur' })
@@ -75,7 +75,7 @@ describe('Ric Escape - when looking up', () => {
   });
 
   it('looks the description of the proper item in a universally located item (item.location == null)', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('look')
       .withArgs({ arg: 'robot' })
       .withData({ roomId: 'habitacion-108' })
@@ -90,7 +90,7 @@ describe('Ric Escape - when looking up', () => {
 
   INVALID_ARGS.forEach((arg) => {
     it(`cannot look an object when not in place or not valid obj - ${JSON.stringify(arg)}`, () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('look')
         .withArgs({ arg })
         .withData({ roomId: 'pasillo-central' })
@@ -104,7 +104,7 @@ describe('Ric Escape - when looking up', () => {
 
   describe('changes description of things depending on condition picked', () => {
     it('shows default description when object is not picked up', () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('look')
         .withArgs({ arg: 'suelo' })
         .withData({ roomId: 'comedor' })
@@ -116,7 +116,7 @@ describe('Ric Escape - when looking up', () => {
     });
 
     it('shows another description when object is picked up', () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('look')
         .withArgs({ arg: 'suelo' })
         .withData({ roomId: 'comedor', picked: ['comedor-cartera'] })

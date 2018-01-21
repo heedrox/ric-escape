@@ -2,7 +2,7 @@ const ricEscape = require('../index.js');
 
 describe('Ric Escape - inventory', () => {
   it('tells you your inventory', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('inventory')
       .withData({ inventory: ['comedor-cartera'] })
       .build();
@@ -14,7 +14,7 @@ describe('Ric Escape - inventory', () => {
   });
 
   it('tells you your inventory with multiple items', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('inventory')
       .withData({ inventory: ['comedor-cartera', 'hab108-cuadro'] })
       .build();
@@ -26,7 +26,7 @@ describe('Ric Escape - inventory', () => {
   });
 
   it('tells you your inventory with multiple items in English', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('inventory')
       .withData({ inventory: ['comedor-cartera', 'hab108-cuadro'] })
       .withLocale('en-US')
@@ -40,7 +40,7 @@ describe('Ric Escape - inventory', () => {
 
 
   it('tells you that has nothing', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('inventory')
       .withData({ })
       .build();

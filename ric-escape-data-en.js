@@ -197,9 +197,10 @@ exports.data = {
         aCondDescUsage(false, 'unlocked:libroplanetas', 'There is a lot of information about the planet, but the most interesting thing is that the biological agents of the Lexus planet are highly toxic to betacarotene based food, as, for example, carrots. What next?'),
       ]),
     ], false),
-    anUsage(['hab108-cuadro', 'biblio-librarykey'], [
-      'The picture does not open, as it is quite loose. I think I could even take it with me. What next?',
-    ], false),
+    /* anUsage(['hab108-cuadro', 'biblio-librarykey'], [
+      'The picture does not open, as it is quite loose.
+       I think I could even take it with me. What next?',
+    ], false), */
     anUsage(['comedor-gasotron', 'biblio-librarykey'], [
       'Gasotron does not need any key to be used. Use it with some specific food. What next?',
     ], false),

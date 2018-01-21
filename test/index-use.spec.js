@@ -12,7 +12,7 @@ describe('Ric Escape - when using', () => {
 
   WRONG_ARG_DATA.forEach((data) => {
     it(`tells you cannot be used or wrong object when: ${data.comment}`, () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('use')
         .withArgs({ arg: data.arg })
         .withData({ roomId: 'sala-mandos' })
@@ -27,7 +27,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('tells you cannot be used if not in room', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: 'diario' })
       .withData({ roomId: 'pasillo-norte' })
@@ -39,7 +39,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('tells you cannot be used if there is no usage for it', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: 'cuadro' })
       .withData({ roomId: 'habitacion-108' })
@@ -51,7 +51,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses items on inventory, but does not dispose them if onlyOnce = false', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: 'llave' })
       .withData({ roomId: 'habitacion-108', inventory: ['hab108-librarykey'], picked: ['hab108-librarykey'] })
@@ -74,7 +74,7 @@ describe('Ric Escape - when using', () => {
 
     TEST_DATA.forEach((data) => {
       it(`responds depending of number of times used ${data.usages && data.usages['sala-mandos-diario']}`, () => {
-        const request = aDfaRequestBuilder()
+        const request = aDfaRequest()
           .withIntent('use')
           .withArgs({ arg: 'diario' })
           .withData({ roomId: 'sala-mandos', usages: data.usages })
@@ -90,7 +90,7 @@ describe('Ric Escape - when using', () => {
 
   describe('when unlocking actions', () => {
     it('adds to unlocked array', () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('use')
         .withArgs({ arg: 'diario de abordo' })
         .withData({ roomId: 'sala-mandos', usages: { 'sala-mandos-diario': 1 } })
@@ -101,7 +101,7 @@ describe('Ric Escape - when using', () => {
       expect(getDfaApp().data.unlocked).to.eql(['hab108']);
     });
     it('does not add it twice', () => {
-      const request = aDfaRequestBuilder()
+      const request = aDfaRequest()
         .withIntent('use')
         .withArgs({ arg: 'diario de abordo' })
         .withData({ roomId: 'sala-mandos', unlocked: ['hab108'], usages: { 'sala-mandos-diario': 4 } })
@@ -114,7 +114,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses items even if wrongly accented', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: 'diário' })
       .withData({ roomId: 'sala-mandos' })
@@ -126,7 +126,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses items that are in two different rooms, but chooses the right one depending on current roomId', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: 'diario' })
       .withData({ roomId: 'habitacion-108' })
@@ -138,7 +138,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses item from the inventory', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: 'cartera' })
       .withData({ roomId: 'sala-mandos', picked: ['comedor-cartera'], inventory: ['comedor-cartera'] })
@@ -150,7 +150,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('provides - picks items if is a pickable action and disposes old one', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: 'cartera' })
       .withData({ roomId: 'pasillo-norte', picked: ['comedor-cartera'], inventory: ['comedor-cartera'] })
@@ -166,7 +166,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('provides - picks items if a pickable action even if I dont have it but im in the place', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: 'cartera' })
       .withData({ roomId: 'comedor', usages: { 'comedor-cartera': 1 } })
@@ -178,7 +178,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses items if they are not attached to a room (null location)', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: 'robot' })
       .withData({ roomId: 'habitacion-108' })
@@ -190,7 +190,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses items only once if marked as onlyOnce to true', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: 'cartera' })
       .withData({ roomId: 'comedor' })
@@ -206,7 +206,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('tries to use two items but fails if no usage for both', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: ['combinación', 'cartera'] })
       .withData({
@@ -224,7 +224,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('tries to use two items but fails if one not exists', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: ['noexiste', 'cartera'] })
       .withData({
@@ -241,7 +241,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('fails to use two items if were used and onlyOnce', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: ['combinacion', 'caja fuerte'] })
       .withData({
@@ -258,7 +258,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses two items', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: ['combinacion', 'caja fuerte'] })
       .withData({ roomId: 'habitacion-108', picked: ['combinacion-4815'], inventory: ['combinacion-4815'] })
@@ -278,7 +278,7 @@ describe('Ric Escape - when using', () => {
     ];
     TEST_CASES.forEach((data) => {
       it(`tells the proper description when using (case ${JSON.stringify(data.unlocked)})`, () => {
-        const request = aDfaRequestBuilder()
+        const request = aDfaRequest()
           .withIntent('use')
           .withArgs({ arg: ['ric', 'ordenador'] })
           .withData({ roomId: 'sala-mandos', unlocked: data.unlocked })
@@ -292,7 +292,7 @@ describe('Ric Escape - when using', () => {
 
     describe('consumes the objects when consumesObjects = true and conditional', () => {
       it('does not consume the objects when consumesObjets = false', () => {
-        const request = aDfaRequestBuilder()
+        const request = aDfaRequest()
           .withIntent('use')
           .withArgs({ arg: ['codigo', 'ric'] })
           .withData({ roomId: 'sala-mandos', inventory: ['codigo-1893'], unlocked: [] })
@@ -305,7 +305,7 @@ describe('Ric Escape - when using', () => {
       });
 
       it('consumes the objects when consumesObjets = true', () => {
-        const request = aDfaRequestBuilder()
+        const request = aDfaRequest()
           .withIntent('use')
           .withArgs({ arg: ['codigo', 'ric'] })
           .withData({ roomId: 'sala-mandos', inventory: ['codigo-1893'], unlocked: ['ricpending'] })
@@ -320,7 +320,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('ends the game when is ending scene and adds time', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: ['ric', 'ordenador'] })
       .withData({ roomId: 'sala-mandos', unlocked: ['ricmodified'] })
@@ -334,7 +334,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('ends the game when is ending scene and adds time in English', () => {
-    const request = aDfaRequestBuilder()
+    const request = aDfaRequest()
       .withIntent('use')
       .withArgs({ arg: ['ric', 'computer'] })
       .withData({ roomId: 'sala-mandos', unlocked: ['ricmodified'] })

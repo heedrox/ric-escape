@@ -11,5 +11,5 @@ const actionsOnGoogleMock = require('./dialogflowapp-mock');
 
 actionsOnGoogle.DialogflowApp = actionsOnGoogleMock.DialogflowAppMock;
 
-global.aDfaRequestBuilder = actionsOnGoogleMock.aDfaRequestBuilder;
+global.aDfaRequest = actionsOnGoogleMock.aDfaRequest;
 global.getDfaApp = actionsOnGoogleMock.getDfaApp;

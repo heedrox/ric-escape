@@ -28,7 +28,7 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
   const scure = buildScureFor(ricEscapeData[getLanguage(appInit)]);
   const app = initialize(scure, appInit);
 
-  console.log(`Intent: ${app.data.numCommands} / ${app.getIntent()} / ${getLanguage(app) === 'en' ? 'en' : 'es'}`);
+  console.log(`Intent: ${app.data.numCommands} / ${app.getIntent()} / ${getLanguage(app) === 'en' ? 'en' : 'es'} / `);
 
   if (isTimeOver(app.data)) {
     cleanData(app);
