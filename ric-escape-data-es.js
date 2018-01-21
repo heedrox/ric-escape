@@ -39,6 +39,8 @@ exports.data = {
     'inventory-nothing': 'No llevo nada encima. ¿Qué quieres que haga?',
     bye: 'Vale. Será un placer morir contigo. Nos vemos en la otra vida, hermano. Adiós.',
     'end-timeover': 'Ya no hay tiempo. Vamos a estrellarnos. Ha sido un placer trabajar junto a ti. Te veo en la otra vida, hermano.',
+    'changed-language': 'Ok, a partir de ahora hablaré en {lang}. ¿Qué quieres que haga?',
+    'changed-language-unknown': 'No sé hablar el idioma {lang}. Solo sé hablar inglés y español. ¿Qué quieres hacer?',
   },
   init: {
     roomId: 'sala-mandos',

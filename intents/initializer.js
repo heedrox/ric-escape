@@ -19,19 +19,16 @@ const increaseNumCommand = (app) => {
   return newApp;
 };
 
-const updateLanguage = (app) => {
-  app.data.language = getLanguage(app);
+const updateLanguage = (app, request) => {
+  app.data.language = getLanguage(app, request);
   return app;
 };
 
-const isWelcomeRequest = request => request && request.body && request.body.result
-  && request.body.result.resolvedQuery && (request.body.result.resolvedQuery.indexOf('_WELCOME') > 0);
-
-const substringBefore = (str, needle) => str.substring(0, str.indexOf(needle));
+const hasSource = request => request && request.body && request.body.originalRequest && request.body.originalRequest.source;
 
 const updatePlatform = (app, request) => {
-  if (isWelcomeRequest(request)) {
-    app.data.platform = substringBefore(request.body.result.resolvedQuery, '_WELCOME');
+  if (hasSource(request)) {
+    app.data.platform = request.body.originalRequest.source;
   }
   return app;
 };
@@ -42,7 +39,7 @@ const initialize = (scure, app, request) => {
   newApp = initializeStartTime(newApp);
   newApp = initializeDefaultRoom(scure, newApp);
   newApp = increaseNumCommand(newApp);
-  newApp = updateLanguage(newApp);
+  newApp = updateLanguage(newApp, request);
   newApp = updatePlatform(newApp, request);
   return newApp;
 };

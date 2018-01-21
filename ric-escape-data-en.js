@@ -39,6 +39,9 @@ exports.data = {
     'inventory-nothing': 'I am carrying nothing. What next?',
     bye: 'Ok. See you in another life. Bye! I really hope you enjoyed this game. If you did not, please do contact heedrox@gmail.com to let him know what you did not, pretty please. He did this so you really had fun. He would love to know from you and get some feedback, really.',
     'end-timeover': 'There is no time left. We will die. It has been a pleasure to work with you. See you in another life, brother. ',
+    'changed-language': 'Ok, I will speak in {lang} from now on. What next?',
+    'changed-language-unknown': 'I do not know how to speak {lang}. I only can talk English and Spanish. What next?',
+
   },
   init: {
     roomId: 'sala-mandos',
