@@ -24,7 +24,7 @@ const welcome = require('./intents/others').welcome;
 const language = require('./intents/language').language;
 const bye = require('./intents/others').bye;
 
-exports.ricEscape = functions.https.onRequest((request, response) => {
+exports.ricEscapeDevel = functions.https.onRequest((request, response) => {
   const appInit = new DialogflowApp({ request, response });
   const scure = buildScureFor(ricEscapeData[getLanguage(appInit, request)]);
   const app = initialize(scure, appInit, request);
