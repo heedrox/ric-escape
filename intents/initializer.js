@@ -25,7 +25,7 @@ const updateLanguage = (app) => {
 };
 
 const isWelcomeRequest = request => request && request.body && request.body.result
-  && request.body.result.resolvedQuery && request.body.result.resolvedQuery.indexOf('_WECOME');
+  && request.body.result.resolvedQuery && (request.body.result.resolvedQuery.indexOf('_WELCOME') > 0);
 
 const substringBefore = (str, needle) => str.substring(0, str.indexOf(needle));
 
