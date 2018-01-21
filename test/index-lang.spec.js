@@ -82,7 +82,7 @@ describe('Ric Escape - handles language', () => {
     ricEscape.ricEscape(request);
 
     expect(getDfaApp().data.language).to.equal('es');
-    expect(getDfaApp().lastAsk).to.contains('hablaré en español');
+    expect(getDfaApp().lastAsk).to.contains('hablaré en espanol');
     expect(getDfaApp().data.numCommands).to.equal(10);
   });
 });
