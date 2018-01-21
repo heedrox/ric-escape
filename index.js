@@ -26,12 +26,12 @@ const bye = require('./intents/others').bye;
 
 exports.ricEscape = functions.https.onRequest((request, response) => {
   const appInit = new DialogflowApp({ request, response });
-  const scure = buildScureFor(ricEscapeData[getLanguage(appInit)]);
+  const scure = buildScureFor(ricEscapeData[getLanguage(appInit, request)]);
   const app = initialize(scure, appInit, request);
 
   // console.log(`Body: ${JSON.stringify(request.body)}`);
   // console.log(`Headers: ${JSON.stringify(request.headers)}`);
-  console.log(`Intent: ${app.data.numCommands} / ${app.getIntent()} / ${getLanguage(app) === 'en' ? 'en' : 'es'} / Platform: ${app.data.platform} / `);
+  console.log(`Intent: ${app.data.numCommands} / ${app.getIntent()} / ${getLanguage(app, request) === 'en' ? 'en' : 'es'} / Platform: ${app.data.platform} / `);
 
   if (isTimeOver(app.data)) {
     cleanData(app);
