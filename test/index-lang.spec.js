@@ -13,7 +13,7 @@ describe('Ric Escape - handles language', () => {
     expect(getDfaApp().lastAsk).to.contains('From here I can go');
   });
 
-  it('can change language', () => {
+  xit('can change language', () => {
     const request = aDfaRequest()
       .withIntent('language')
       .withArgs({ arg: 'english' })
@@ -27,7 +27,7 @@ describe('Ric Escape - handles language', () => {
     expect(getDfaApp().lastAsk).to.contains('I will speak in english');
   });
 
-  it('says cannot change language when language unknown', () => {
+  xit('says cannot change language when language unknown', () => {
     const request = aDfaRequest()
       .withIntent('language')
       .withArgs({ arg: 'notknownlang' })
@@ -52,5 +52,37 @@ describe('Ric Escape - handles language', () => {
 
     expect(getDfaApp().data.language).to.equal('en');
     expect(getDfaApp().lastAsk).to.contains('I am at the control');
+  });
+
+  it('changes language when rawinput comes with english', () => {
+    const request = aDfaRequest()
+      .withIntent('look')
+      .withArgs({ arg: null })
+      .withRawInput('talk in english')
+      .withLocale('es')
+      .withData({ language: 'es', numCommands: 10, roomId: 'sala-mandos' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().data.language).to.equal('en');
+    expect(getDfaApp().lastAsk).to.contains('I will speak in english');
+    expect(getDfaApp().data.numCommands).to.equal(10);
+  });
+
+  it('changes language when rawinput comes with spanish', () => {
+    const request = aDfaRequest()
+      .withIntent('look')
+      .withArgs({ arg: null })
+      .withRawInput('hablar en español')
+      .withLocale('en')
+      .withData({ language: 'en', numCommands: 10, roomId: 'sala-mandos' })
+      .build();
+
+    ricEscape.ricEscape(request);
+
+    expect(getDfaApp().data.language).to.equal('es');
+    expect(getDfaApp().lastAsk).to.contains('hablaré en espanol');
+    expect(getDfaApp().data.numCommands).to.equal(10);
   });
 });

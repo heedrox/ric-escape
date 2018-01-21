@@ -7,11 +7,9 @@ const ricEscapeData = require('../ric-escape-data').data;
 const VALID_LANGUAGES = {
   'english': 'en',
   'ingles': 'en',
-  'inglés': 'en',
   'spanish': 'es',
   'espanol': 'es',
   'castellano': 'es',
-  'español': 'es',
 };
 
 const getLanguageBasedOnArg = (lang) => {
@@ -20,8 +18,7 @@ const getLanguageBasedOnArg = (lang) => {
   return VALID_LANGUAGES[baseLang];
 };
 
-const language = scure => (app) => {
-  const lang = getArgument(app, 'arg');
+const processChangeLanguage = (lang, app, scure) => {
   const locale = getLanguageBasedOnArg(lang);
   if (locale) {
     app.data.language = locale;
@@ -31,6 +28,28 @@ const language = scure => (app) => {
   } else {
     app.ask(scure.sentences.get('changed-language-unknown', { lang }));
   }
+  return true;
 };
 
-exports.language = language;
+const language = scure => (app) => {
+  const lang = getArgument(app, 'arg');
+  processChangeLanguage(lang, app, scure);
+};
+
+const getLanguageFromInput = (input) => {
+  const rawInput = baseChars(input);
+  const langs = Object.keys(VALID_LANGUAGES);
+  const words = rawInput.split(' ');
+  const lang = words.find(w => langs.indexOf(w) >= 0);
+  return lang;
+};
+
+const checkAndChangeLangageForInput = (scure, app) => {
+  const lang = getLanguageFromInput(app.getRawInput());
+  return lang ? processChangeLanguage(lang, app, scure) : false;
+};
+
+// exports.language = language;
+exports.checkAndChangeLanguage = (scure, app) =>
+  (app.getRawInput() ? checkAndChangeLangageForInput(scure, app) : false);
+
