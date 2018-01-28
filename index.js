@@ -24,7 +24,11 @@ const welcome = require('./intents/others').welcome;
 const checkAndChangeLanguage = require('./intents/language').checkAndChangeLanguage;
 const bye = require('./intents/others').bye;
 
-exports.ricEscape = functions.https.onRequest((request, response) => {
+const facebookBot = require('./facebook/facebook').facebookBot;
+const webhookGet = require('./facebook/facebook').webhookGet;
+const webhookPost = require('./facebook/facebook').webhookPost;
+
+const ricEscape = (request, response) => {
   const appInit = new DialogflowApp({ request, response });
   const scure = buildScureFor(ricEscapeData[getLanguage(appInit, request)]);
   const app = initialize(scure, appInit, request);
@@ -62,4 +66,13 @@ exports.ricEscape = functions.https.onRequest((request, response) => {
   actionMap.set('_exit._exit-yes', bye(scure));
 
   app.handleRequest(actionMap);
-});
+};
+
+const facebookBridge = (req, resp) => {
+  if (req.method.toUpperCase() === 'GET') { webhookGet(req, resp); }
+  if (req.method.toUpperCase() === 'POST') { webhookPost(req, resp); }
+};
+
+facebookBot.doSubscribeRequest();
+exports.facebookBridge = functions.https.onRequest(facebookBridge);
+exports.ricEscape = functions.https.onRequest(ricEscape);
