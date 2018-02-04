@@ -590,7 +590,7 @@ const FB_VERIFY_TOKEN = fbConfig.FB_VERIFY_TOKEN;
 const FB_PAGE_ACCESS_TOKEN = fbConfig.FB_PAGE_ACCESS_TOKEN;
 
 const getLanguage = (locale) => {
-  console.log('Our locale', locale);
+  console.log('User locale', locale);
   if (!locale) return DEFAULT_APIAI_LANG;
   const lang = locale.indexOf('_') > 0 ? locale.substring(0, locale.indexOf('_')) : locale;
   return ACCEPTED_LANGUAGES.indexOf(lang) >= 0 ? lang : DEFAULT_APIAI_LANG;
@@ -815,21 +815,21 @@ class FacebookBot {
 
     return new Promise((resolve, reject) => {
       async.eachSeries(facebookMessages, (msg, callback) => {
-          this.sendFBSenderAction(sender, 'typing_on')
-            .then(() => this.sleep(this.messagesDelay))
-            .then(() => this.sendFBMessage(sender, msg))
-            .then(() => callback())
-            .catch(callback);
-        },
-        (err) => {
-          if (err) {
-            console.error('error facebook messages', err);
-            reject(err);
-          } else {
-            console.log('Messages sent');
-            resolve();
-          }
-        });
+        this.sendFBSenderAction(sender, 'typing_on')
+          .then(() => this.sleep(this.messagesDelay))
+          .then(() => this.sendFBMessage(sender, msg))
+          .then(() => callback())
+          .catch(callback);
+      },
+      (err) => {
+        if (err) {
+          console.error('error facebook messages', err);
+          reject(err);
+        } else {
+          console.log('Messages sent');
+          resolve();
+        }
+      });
     });
   }
 
@@ -933,6 +933,7 @@ class FacebookBot {
       this.getUserLocale(sender)
         .then((locale) => {
           apiaiRequest.language = getLanguage(locale);
+          console.log('Injecting language', apiaiRequest.language);
           this.doApiAiRequest(apiaiRequest, sender);
         });
     }
@@ -944,6 +945,10 @@ class FacebookBot {
         const responseText = response.result.fulfillment.speech;
         const responseData = response.result.fulfillment.data;
         const responseMessages = response.result.fulfillment.messages;
+
+        console.log('responseText', responseText);
+        console.log('responseData', responseData);
+        console.log('responseMessages', responseMessages);
 
         if (this.isDefined(responseData) && this.isDefined(responseData.facebook)) {
           const facebookResponseData = responseData.facebook;
@@ -1062,17 +1067,17 @@ class FacebookBot {
 
   doSubscribeRequest() {
     request({
-        method: 'POST',
-        uri: `https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=${FB_PAGE_ACCESS_TOKEN}`,
-      },
-      (error, response) => {
-        if (error) {
-          console.error('Error while subscription: ', error);
-        } else {
-          console.log('Subscription result: ', response.body);
-        }
-      });
-  }
+      method: 'POST',
+      uri: `https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=${FB_PAGE_ACCESS_TOKEN}`,
+    },
+    (error, response) => {
+      if (error) {
+        console.error('Error while subscription: ', error);
+      } else {
+        console.log('Subscription result: ', response.body);
+      }
+    });
+}
 
   isDefined(obj) {
     if (typeof obj === 'undefined') {
