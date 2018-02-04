@@ -1,10 +1,8 @@
-const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const request = require('request');
 const fbConfig = require('./fbConfig').fbConfig;
 
 const FB_PAGE_ACCESS_TOKEN = fbConfig.FB_PAGE_ACCESS_TOKEN;
-admin.initializeApp(functions.config().firebase);
 
 const saveInDatabaseCache = id => userData =>
   admin.database().ref(`/facebook/user-data/${id}`).set(userData)
@@ -16,6 +14,7 @@ const getFromDatabaseCache = id =>
 
 const saveInLocalCache = (userDataLocalCache, id) => (userData) => {
   console.log('saving in local cache', userData);
+  userData.time = new Date();
   userDataLocalCache.set(id, userData);
   console.log(userDataLocalCache);
   return userData;
@@ -29,7 +28,7 @@ const doUserDataRequest = id =>
       method: 'GET',
     }, (error, response) => {
       if (error) {
-        console.log('Error sending message User Locale: ', error);
+        console.log('Error sending message User Locale: ', error)
         reject(error);
       } else if (response.body.error) {
         console.log('Error: ', response.body.error);

@@ -19,10 +19,12 @@ no-lone-blocks,no-use-before-define,camelcase */
 'use strict';
 
 const apiai = require('apiai');
-const uuid = require('uuid');
 const request = require('request');
 const async = require('async');
 const fbConfig = require('./fbConfig').fbConfig;
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+
 
 const DEFAULT_APIAI_LANG = process.env.APIAI_LANG || 'es';
 const FB_TEXT_LIMIT = 640;
@@ -37,6 +39,7 @@ const FB_VERIFY_TOKEN = fbConfig.FB_VERIFY_TOKEN;
 const FB_PAGE_ACCESS_TOKEN = fbConfig.FB_PAGE_ACCESS_TOKEN;
 
 const UserDataRepository = require('./user-data').UserDataRepository;
+const SessionDataRepository = require('./session-data').SessionDataRepository;
 
 const getLanguage = (locale) => {
   console.log('User locale', locale);
@@ -45,12 +48,20 @@ const getLanguage = (locale) => {
   return ACCEPTED_LANGUAGES.indexOf(lang) >= 0 ? lang : DEFAULT_APIAI_LANG;
 };
 
+const buildRequestData = (sessionId, data) => ({
+  sessionId,
+  originalRequest: {
+    data,
+    source: 'facebook',
+  },
+});
+
 class FacebookBot {
-  constructor(userDataRepository) {
+  constructor(userDataRepository, sessionDataRepository) {
     this.apiAiService = apiai(APIAI_ACCESS_TOKEN, { language: DEFAULT_APIAI_LANG, requestSource: 'fb' });
-    this.sessionIds = new Map();
     this.messagesDelay = 200;
     this.userDataRepository = userDataRepository;
+    this.sessionDataRepository = sessionDataRepository;
   }
 
   getUserLocale(id) {
@@ -296,60 +307,42 @@ class FacebookBot {
     return null;
   }
 
+  processEvent(sender, inputData, event, type) {
+    const buildRequest = requestData => (type === 'EVENT' ?
+      this.apiAiService.eventRequest(inputData, requestData) :
+      this.apiAiService.textRequest(inputData, requestData));
+
+    if (inputData) {
+      this.sessionDataRepository.get(sender)
+        .then((sessionId) => {
+          console.log('session id', sessionId);
+          return buildRequestData(sessionId, event);
+        })
+        .then(buildRequest)
+        .then((apiaiRequest) => {
+          this.getUserLocale(sender)
+            .then((locale) => {
+              apiaiRequest.language = getLanguage(locale);
+              console.log('Input Data', inputData);
+              console.log('Injected language into Api Ai request', apiaiRequest.language);
+              this.doApiAiRequest(apiaiRequest, sender);
+            });
+        });
+    }
+  }
+
   processFacebookEvent(event) {
     const sender = event.sender.id.toString();
     const eventObject = this.getFacebookEvent(event);
 
-    if (eventObject) {
-      // Handle a text message from this sender
-      if (!this.sessionIds.has(sender)) {
-        this.sessionIds.set(sender, uuid.v4());
-      }
-
-      const apiaiRequest = this.apiAiService.eventRequest(eventObject,
-        {
-          sessionId: this.sessionIds.get(sender),
-          originalRequest: {
-            data: event,
-            source: 'facebook',
-          },
-        });
-      this.getUserLocale(sender)
-        .then((locale) => {
-          apiaiRequest.language = getLanguage(locale);
-          this.doApiAiRequest(apiaiRequest, sender);
-        });
-    }
+    this.processEvent(sender, eventObject, event, 'EVENT');
   }
 
   processMessageEvent(event) {
     const sender = event.sender.id.toString();
     const text = this.getEventText(event);
 
-    if (text) {
-      // Handle a text message from this sender
-      if (!this.sessionIds.has(sender)) {
-        this.sessionIds.set(sender, uuid.v4());
-      }
-
-      console.log('Text', text);
-      // send user's text to api.ai service
-      const apiaiRequest = this.apiAiService.textRequest(text,
-        {
-          sessionId: this.sessionIds.get(sender),
-          originalRequest: {
-            data: event,
-            source: 'facebook',
-          },
-        });
-
-      this.getUserLocale(sender)
-        .then((locale) => {
-          apiaiRequest.language = getLanguage(locale);
-          console.log('Injecting language', apiaiRequest.language);
-          this.doApiAiRequest(apiaiRequest, sender);
-        });
-    }
+    this.processEvent(sender, text, event, 'TEXT');
   }
 
   doApiAiRequest(apiaiRequest, sender) {
@@ -583,9 +576,14 @@ const webhookPost = facebookBot => (req, res) => {
   }
 };
 
+console.log(admin.initializeApp);
+admin.initializeApp(functions.config().firebase);
+
+const sessionDataRepository = new SessionDataRepository();
 const userDataRepository = new UserDataRepository();
 
-const facebookBot = new FacebookBot(userDataRepository);
+const facebookBot = new FacebookBot(userDataRepository, sessionDataRepository);
+facebookBot.doSubscribeRequest();
 
 exports.facebookBot = facebookBot;
 exports.webhookGet = webhookGet(facebookBot);
