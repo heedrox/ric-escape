@@ -36,6 +36,8 @@ const APIAI_ACCESS_TOKEN = fbConfig.APIAI_ACCESS_TOKEN;
 const FB_VERIFY_TOKEN = fbConfig.FB_VERIFY_TOKEN;
 const FB_PAGE_ACCESS_TOKEN = fbConfig.FB_PAGE_ACCESS_TOKEN;
 
+const UserDataRepository = require('./user-data').UserDataRepository;
+
 const getLanguage = (locale) => {
   console.log('User locale', locale);
   if (!locale) return DEFAULT_APIAI_LANG;
@@ -44,53 +46,17 @@ const getLanguage = (locale) => {
 };
 
 class FacebookBot {
-  constructor() {
+  constructor(userDataRepository) {
     this.apiAiService = apiai(APIAI_ACCESS_TOKEN, { language: DEFAULT_APIAI_LANG, requestSource: 'fb' });
     this.sessionIds = new Map();
-    this.userData = new Map();
     this.messagesDelay = 200;
+    this.userDataRepository = userDataRepository;
   }
 
   getUserLocale(id) {
-    return this.getUserData(id)
+    return this.userDataRepository.getUserData(id)
       .then(data => data.locale);
   }
-
-  getUserData(id) {
-    const saveAndResolve = (userData) => {
-      this.userData.set(id, userData);
-      return userData;
-    };
-
-    if (this.userData.has(id)) {
-      // console.log('Getting from cache user data', this.userData.get(id));
-      return Promise.resolve(this.userData.get(id));
-    }
-    return this.doUserDataRequest(id)
-      .then(saveAndResolve)
-      .catch(err => Promise.reject(err));
-  }
-
-  doUserDataRequest(id) {
-    return new Promise((resolve, reject) => {
-      request({
-        url: `https://graph.facebook.com/v2.6/${id}`,
-        qs: { fields: 'locale,first_name,last_name', access_token: FB_PAGE_ACCESS_TOKEN },
-        method: 'GET',
-      }, (error, response) => {
-        if (error) {
-          console.log('Error sending message User Locale: ', error);
-          reject(error);
-        } else if (response.body.error) {
-          console.log('Error: ', response.body.error);
-          reject(new Error(response.body.error));
-        }
-        console.log('Received user data from fb', response.body);
-        resolve(JSON.parse(response.body));
-      });
-    });
-  }
-
 
   doDataResponse(sender, facebookResponseData) {
     if (!Array.isArray(facebookResponseData)) {
@@ -524,7 +490,7 @@ class FacebookBot {
         console.log('Subscription result: ', response.body);
       }
     });
-}
+  }
 
   isDefined(obj) {
     if (typeof obj === 'undefined') {
@@ -546,10 +512,7 @@ class FacebookBot {
 
 }
 
-
-const facebookBot = new FacebookBot();
-
-const webhookGet = (req, res) => {
+const webhookGet = facebookBot => (req, res) => {
   if (req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
     res.send(req.query['hub.challenge']);
 
@@ -562,7 +525,7 @@ const webhookGet = (req, res) => {
 };
 
 
-const webhookPost = (req, res) => {
+const webhookPost = facebookBot => (req, res) => {
   try {
     const data = req.body;
     console.log('req body', JSON.stringify(data));
@@ -620,6 +583,10 @@ const webhookPost = (req, res) => {
   }
 };
 
+const userDataRepository = new UserDataRepository();
+
+const facebookBot = new FacebookBot(userDataRepository);
+
 exports.facebookBot = facebookBot;
-exports.webhookGet = webhookGet;
-exports.webhookPost = webhookPost;
+exports.webhookGet = webhookGet(facebookBot);
+exports.webhookPost = webhookPost(facebookBot);

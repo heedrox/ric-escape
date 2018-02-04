@@ -31,7 +31,7 @@
     "actions-on-google": "^1.6.1",
     "apiai": "^4.0.3",
     "async": "^2.6.0",
-    "firebase-admin": "~5.5.0",
+    "firebase-admin": "^5.5.1",
     "firebase-functions": "^0.7.5",
     "pluralize": "^7.0.0",
     "request": "^2.83.0",
