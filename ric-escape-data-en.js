@@ -16,7 +16,7 @@ const theEndingScene = description => ({ isEndingScene: true, description });
 exports.data = {
   sentences: {
     help: 'You can ask me to: Look, Use, Walk, Pick up and Inventory. Here is a map also. We have {time} left to die. What do you want me to do?',
-    'help-no-screen': 'You can ask me to: Look, Use, Walk, Pick up and Inventory. We have {time} left to die. What do you want me to do?',
+    'help-no-screen': 'You can ask me to: Look, Use, Walk, Pick up and Inventory. Here is a map: Here is a map: https://www.ric-escape.com/ric-escape-map.jpg. We have {time} left to die. What do you want me to do?',
     fallback: 'I don\'t understand. Say Help if you need help. We have {time} left to die. What do you want me to do?',
     destinations: 'From here I can go to: {destinations}. What next?',
     'destination-unknown': 'I do not know how to go to {destination}. What next?',
@@ -76,7 +76,7 @@ exports.data = {
     anItem('ric', 'RIC', ['yourself', 'you', 'rick', 'robot', 'robot ric', 'robot rick', 'rick the robot', 'ric the robot', 'rick el robot', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'I am RIC, your Remote Interface to Consciousness. Through me you can interact with this ship, while you are laying on your bed. What next?', null, false),
     anItem('sala-mandos-ventanas', 'windows', ['window', 'window to the outside', 'outside windows', 'windows to outside', 'windows to the outside', 'outside', 'outside the window'], 'These are the windows to the ouside. You can see planets and stars from here, and one of those stars is really close. What next?', 'sala-mandos', false),
     anItem('sala-mandos-ordenador', 'Navigation computer', ['the computer', 'computer', 'navigation', 'control computer', 'control'], 'It is the navigation computer. If we do nothing, we will collide into that star. What next?', 'sala-mandos', false),
-    anItem('sala-mandos-diario', 'Onboard diary', ['the diary', 'diary', 'theory'], 'It is the onboard diary. If you want me to interact with it, say "Use diary". What next?', 'sala-mandos', false),
+    anItem('sala-mandos-diario', 'Onboard diary', ['on board diary', 'the diary', 'diary', 'theory'], 'It is the onboard diary. If you want me to interact with it, say "Use diary". What next?', 'sala-mandos', false),
     anItem('pasnor-pared', 'Walls', ['walls on north hall', 'Walls on halls', 'wall', 'wall on the hall'], 'These are the walls on the hall. Nothing out of the ordinary. What next?', 'pasillo-norte', false),
     anItem('pasnor-muebles', 'Furniture', ['furniture on the halls', 'furniture on the hall', 'furniture on hall'], 'There is some furniture. Everything is too complex and futuristic for you. What next?', 'pasillo-norte', false),
     anItem('pasnor-televisor', 'TVs', ['televisions', 'TV', 'tvs', 'television'], 'There is a television that shows numbers. I do not know how to read it, but I do not think it is important. What next?', 'pasillo-norte', false),
