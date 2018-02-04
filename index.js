@@ -33,7 +33,7 @@ const ricEscape = (request, response) => {
   const scure = buildScureFor(ricEscapeData[getLanguage(appInit, request)]);
   const app = initialize(scure, appInit, request);
 
-  // console.log(`Body: ${JSON.stringify(request.body)}`);
+  console.log(`Body: ${JSON.stringify(request.body)}`);
   // console.log(`Headers: ${JSON.stringify(request.headers)}`);
   console.log(`Intent: ${app.data.numCommands} / ${app.getIntent()} / ${getLanguage(app, request) === 'en' ? 'en' : 'es'} / Platform: ${app.data.platform} / `);
 
