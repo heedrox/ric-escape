@@ -46,9 +46,9 @@ exports.data = {
   init: {
     roomId: 'sala-mandos',
     welcome: [
-      'Hello! I am RIC. I really hope we get some fun together! What do you want me to do?',
-      'Hello! I am RIC, your Remote Interface to Consciousness, lets have some fun! But, you are awake? You should not be. Let me find out what happened. You are slept in your room. I see that a failure in the system woke you up. Well, I guess nothing matters now, we will die. What do you want me to do?',
-      'After the hibernation process, I understand you do not remember. This spaceship is going towards that star, and will collide in 35 minutes. Why? It does not matter anymore. Who is responsible of this? It does not matter anymore. In 35 minutes, nothing will matter. You can ask me to do anything, as you created me to obbey. But everything is in vain. You and the 2000 passengers in this ship will die in 35 minutes. Say "Help" if you want me to do anything.',
+      'DEV Hello! I am RIC. I really hope we get some fun together! What do you want me to do?',
+      'DEV Hello! I am RIC, your Remote Interface to Consciousness, lets have some fun! But, you are awake? You should not be. Let me find out what happened. You are slept in your room. I see that a failure in the system woke you up. Well, I guess nothing matters now, we will die. What do you want me to do?',
+      'DEV After the hibernation process, I understand you do not remember. This spaceship is going towards that star, and will collide in 35 minutes. Why? It does not matter anymore. Who is responsible of this? It does not matter anymore. In 35 minutes, nothing will matter. You can ask me to do anything, as you created me to obbey. But everything is in vain. You and the 2000 passengers in this ship will die in 35 minutes. Say "Help" if you want me to do anything.',
     ],
   },
   rooms: [

@@ -45,8 +45,8 @@ exports.data = {
   init: {
     roomId: 'sala-mandos',
     welcome: [
-      '¡Hola! Soy RIC. ¿Qué quieres que haga?',
-      '¡Hola! Soy RIC, tu Remoto Interfaz de Conciencia. ¿Oh, Estás despierto? No deberías estarlo... Déjame que investigue qué ha pasado... No puedes ver, no puedes andar, no puedes interactuar con tu entorno porque estás dormido en tu habitación... Vaya, veo que un fallo en el sistema te ha despertado. Bueno, supongo que ya da igual, porque vamos a morir. ¿Qué quieres que haga?',
+      'DEVEL ¡Hola! Soy RIC. ¿Qué quieres que haga?',
+      'DEVEL ¡Hola! Soy RIC, tu Remoto Interfaz de Conciencia. ¿Oh, Estás despierto? No deberías estarlo... Déjame que investigue qué ha pasado... No puedes ver, no puedes andar, no puedes interactuar con tu entorno porque estás dormido en tu habitación... Vaya, veo que un fallo en el sistema te ha despertado. Bueno, supongo que ya da igual, porque vamos a morir. ¿Qué quieres que haga?',
       'Tras el proceso biológico de hibernación, es normal que no te acuerdes. La nave va rumbo a una estrella con la que colisionará dentro de 35 minutos. ¿Por qué? Ya no importa. ¿Quién es responsable de esto? Ya no importa. Dentro de 35 minutos nada importará. Si quieres, puedes darme órdenes, ya que me creaste para obedecerte. Pero ya todo es en vano. Tú y los 2000 pasajeros de esta nave, debéis morir dentro de 35 minutos. Di "Ayuda" para lanzarme órdenes.',
     ],
   },

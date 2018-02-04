@@ -3,3 +3,4 @@ coverage
 .idea
 firebase-debug.log
 npm-debug.log
+/facebook/fbConfig.js
