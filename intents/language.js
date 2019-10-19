@@ -2,7 +2,7 @@
 const baseChars = require('../lib/common').baseChars;
 const getArgument = require('../lib/common').getArgument;
 const buildScureFor = require('../scure/scure').buildScureFor;
-const ricEscapeData = require('../ric-escape-data').data;
+const ricEscapeData = require('../app/data/ric-escape-data').data;
 
 const VALID_LANGUAGES = {
   'english': 'en',

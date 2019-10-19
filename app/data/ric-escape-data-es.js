@@ -1,17 +1,4 @@
-const aRoom = (id, name, synonyms, description) =>
-  ({ id, name, synonyms, description });
-const anItem = (id, name, synonyms, description, location, pickable, pickingResponse) =>
-  ({ id, name, synonyms, description, location, pickable, pickingResponse });
-const anUsage = (items, response, onlyOnce) =>
-  ({ items, response, onlyOnce });
-const anUnlockingAction = (response, lock) => ({ isUnlockingAction: true, response, lock });
-const aPickingAction = (response, itemId) => ({ isPickingAction: true, response, itemId });
-const aConditionalResponse = conditions => ({ isConditional: true, conditions });
-const aLockedDestination = (roomId, lock) => ({ isLockedDestination: true, roomId, lock });
-const aCondDesc = (condition, description) => ({ conditional: true, condition, description });
-const aCondDescUsage = (consumesObjects, condition, description) =>
-  ({ conditional: true, consumesObjects, condition, description });
-const theEndingScene = description => ({ isEndingScene: true, description });
+const { theEndingScene, anUnlockingAction, aPickingAction, aRoom, anItem, aLockedDestination, aCondDescUsage, aCondDesc, anUsage, aConditionalResponse } = require('scure').dsl;
 
 exports.data = {
   sentences: {
@@ -41,8 +28,10 @@ exports.data = {
     'end-timeover': 'Ya no hay tiempo. Vamos a estrellarnos. Ha sido un placer trabajar junto a ti. Te veo en la otra vida, hermano.',
     'changed-language': 'Ok, a partir de ahora hablaré en {lang}. ¿Qué quieres que haga?',
     'changed-language-unknown': 'No sé hablar el idioma {lang}. Solo sé hablar inglés y español. ¿Qué quieres hacer?',
+    'final-question': '¿Qué hacemos ahora?',
   },
   init: {
+    totalMinutes: 35,
     roomId: 'sala-mandos',
     welcome: [
       '¡Hola! Soy RIC. ¿Qué quieres que haga?',

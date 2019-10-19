@@ -1,13 +1,12 @@
 /* eslint-disable no-console */
-require('./common.js');
-const ricEscape = require('../index.js');
-
-const c = (intent, arg) => ({ intent, arg });
+const c = require('scure-dialogflow').sdk.dsl.aCommand;
+const { runWalkthrough } = require('scure-dialogflow').sdk;
+const { data } = require('../app/data/ric-escape-data-es');
 
 const commands = [
-  c('input.welcome', ''),
-  c('input.unknown', ''),
-  c('input.unknown', ''),
+  c('_welcome', ''),
+  c('_fallback', ''),
+  c('_fallback', ''),
   c('look', ''),
   c('use', ['ordenador', 'robot']),
   c('look', 'diario de abordo'),
@@ -76,24 +75,10 @@ const commands = [
   c('use', ['robot', 'ordenador']),
 ];
 
-commands.forEach((command) => {
-  console.log('\x1b[33mcommand', command, '\x1b[0m');
-  const request = aDfaRequest()
-    .withIntent(command.intent)
-    .withArgs({ arg: command.arg })
-    .withData(getDfaApp() ? getDfaApp().data : null)
-    .build();
-
-  ricEscape.ricEscape(request);
-
-  if (getDfaApp().lastAsk) {
-    console.log('RIC says: \x1b[31m', getDfaApp().lastAsk, '\x1b[0m');
-    console.log('RICs data', getDfaApp().data);
-  } else {
-    console.log('\x1b[41m **** ENDING SCENE ***** \x1b[0m');
-    console.log('RIC says: \x1b[31m', getDfaApp().lastTell, '\x1b[0m');
-    console.log('RICs data', getDfaApp().data);
-    console.log('\x1b[41m **** ENDING SCENE ***** \x1b[0m');
-  }
-});
+try {
+  runWalkthrough(data, commands);
+} catch (ex) {
+  console.log('error', ex);
+  throw ex;
+}
 
